@@ -13,8 +13,11 @@ public class LevelManager : Singleton<LevelManager> {
 
     public List<GameObject> Tiles { get; private set; }
     public List<GameObject> StartTiles { get; private set; }
+    public List<GameObject> WallTiles { get; private set; }
+
     public List<GameObject> Agents { get; private set; }
     public List<GameObject> Bullets { get; private set; } 
+
 
     private int[,] map;
 
@@ -43,7 +46,8 @@ public class LevelManager : Singleton<LevelManager> {
         }
     }
 
-   
+  
+
 
     // Use this for initialization
     void Start () {
@@ -64,6 +68,7 @@ public class LevelManager : Singleton<LevelManager> {
         readMap();
         Tiles = new List<GameObject>();
         StartTiles = new List<GameObject>();
+        WallTiles = new List<GameObject>();
         Agents = new List<GameObject>();
     }
 
@@ -111,7 +116,7 @@ public class LevelManager : Singleton<LevelManager> {
         newTile.transform.position = tilePosition;
 
         // differentiate playing field-stadium
-        if (type == 0 || type == 3)
+        if (type == 0 || type == 2)
         {
             Tiles.Add(newTile);
         }
@@ -120,6 +125,11 @@ public class LevelManager : Singleton<LevelManager> {
         {
             StartTiles.Add(newTile);
         }
+
+        if (type == 3)
+        {
+            WallTiles.Add(newTile);
+        }
     }
 
     // Placeholder for agent spawning
@@ -127,9 +137,11 @@ public class LevelManager : Singleton<LevelManager> {
     {
         for (int i = 0; i< 2; i++) //StartTiles.Count
         {
-            GameObject newAgent = Instantiate(agent);
+
+            GameObject newAgent = ObjectManager.spawnAgent(agent, new AgentAttributes());
             newAgent.name = "Agent_" + i;
             newAgent.transform.position = StartTiles[i].transform.position;
+            
             Agents.Add(newAgent);
         }
     }
