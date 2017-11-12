@@ -21,11 +21,12 @@ GameObject:
   - component: {fileID: 4519274676392974}
   - component: {fileID: 212243699774539334}
   - component: {fileID: 114217478183777518}
+  - component: {fileID: 114446100032480438}
   - component: {fileID: 60843526927369454}
   - component: {fileID: 50557470280704244}
   m_Layer: 0
   m_Name: Agent
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +62,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!60 &60843526927369454
 PolygonCollider2D:
@@ -77,7 +78,7 @@ PolygonCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.25, y: 0.25, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
@@ -104,7 +105,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962b4dd83baa260439d47695158ed581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+--- !u!114 &114446100032480438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1379835529334146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491a48aa14c2da748a6ea2b1c07c13fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 50954769120210032, guid: 1ff0dc791c1aff641b1f934b6ebc3a98, type: 2}
 --- !u!212 &212243699774539334
 SpriteRenderer:
   m_ObjectHideFlags: 1

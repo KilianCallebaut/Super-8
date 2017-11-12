@@ -5,13 +5,9 @@ using UnityEngine;
 public class Agent : MonoBehaviour {
 
     //Agent's specifics
-    [SerializeField]
-    private float speed;
-
-    [SerializeField]
-    private float reachOfVision;
-
-    private float widthOfVision = 10.0f;
+    private float speed = 4.0f;
+    private float reachOfVision = 5.0f;
+    private float widthOfVision = 50.0f;
     private Gun gun;
 
     // Agent's temporals
@@ -53,15 +49,26 @@ public class Agent : MonoBehaviour {
         // See enemies
         foreach (GameObject a in LevelManager.Instance.Agents)
         {
-            if(inFieldOfVision(a) && !seenOtherAgents.Contains(a))
+            if (inFieldOfVision(a) && !seenOtherAgents.Contains(a))
             {
                 seenOtherAgents.Add(a);
-            } else if (!inFieldOfVision(a) && seenOtherAgents.Contains(a))
+            }
+            else if (!inFieldOfVision(a) && seenOtherAgents.Contains(a))
             {
                 seenOtherAgents.Remove(a);
             }
         }
 
+        // Delete killed agents
+        seenOtherAgents.RemoveAll(delegate (GameObject o) { return o == null; });
+        
+        // For debugging purposes, shows field of vision
+        var forwardpoint = (direction * reachOfVision);
+        Debug.DrawLine(transform.position, (direction * reachOfVision) + transform.position, Color.red);
+        var rotatedforwardpoint = Quaternion.Euler(0, 0, widthOfVision) * forwardpoint + transform.position;
+        Debug.DrawLine(transform.position, rotatedforwardpoint);
+        var rotatedforwardpoint2 = Quaternion.Euler(0, 0, -widthOfVision) * forwardpoint + transform.position;
+        Debug.DrawLine(transform.position, rotatedforwardpoint2);
 
     }
 
@@ -72,7 +79,7 @@ public class Agent : MonoBehaviour {
         float distanceToObject = (objectPosition - transform.position).magnitude;
         Vector3 directionToObject = (objectPosition - transform.position)/distanceToObject;
 
-        if (distanceToObject < reachOfVision && Vector3.Angle(directionToObject, direction) < widthOfVision)
+        if (distanceToObject < reachOfVision && Vector3.Angle(directionToObject, direction) < widthOfVision && Vector3.Angle(directionToObject, direction) > -widthOfVision)
         {
             return true;
         }
@@ -98,10 +105,11 @@ public class Agent : MonoBehaviour {
     // Placeholder for collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Bullet" && !collision.gameObject.name.Contains(gameObject.name))
+        if (collision.tag == "Bullet" )
         {
             die();
         }
+
         moveToRandomDestination();
     }
 
@@ -128,9 +136,13 @@ public class Agent : MonoBehaviour {
     // Placeholder for shooting
     private void shoot(GameObject enemy)
     {
-        gun.shoot(enemy.transform.position);
+        if (enemy != null)
+        {
+            gun.shoot(enemy.transform.position);
+        } 
     }
 
+    // Placeholder for dying
     private void die()
     {
         LevelManager.Instance.DeleteAgent(gameObject);
