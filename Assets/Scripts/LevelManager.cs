@@ -128,7 +128,7 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
-        for (int i = 0; i<StartTiles.Count; i++)
+        for (int i = 0; i<2 ; i++) //StartTiles.Count
         {
             GameObject newAgent = Instantiate(agent);
             newAgent.transform.position = StartTiles[i].transform.position;
