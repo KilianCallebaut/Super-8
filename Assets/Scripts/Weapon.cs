@@ -75,7 +75,10 @@ public class Weapon : MonoBehaviour {
 		volleysUntilStopShooting = 1;
 		startShooting ();
 	}
-
+	public void shootXTimes(int x) {
+		volleysUntilStopShooting = x;
+		startShooting ();
+	}
 
 	public void setShootingDirection(float dir) {
 		shotDirection = dir;
