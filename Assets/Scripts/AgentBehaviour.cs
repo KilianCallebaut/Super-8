@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
+public abstract class AgentBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +13,6 @@ public class NewBehaviourScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    abstract public void Think();
 }

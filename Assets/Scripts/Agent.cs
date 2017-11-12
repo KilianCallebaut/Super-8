@@ -6,20 +6,20 @@ public class Agent : MonoBehaviour {
 
     //Agent's specifics
 
-
     public AgentAttributes Attributes { get; set; }
+    public AgentBehaviour Behaviour { get; set; }
 
     private Gun gun;
 
-    // Agent's Decisions
-    private Vector3 destination;
-    private Vector3 lookingDestination;
-    private GameObject target;
+    // Agent's goals
+    public Vector3 Destination { get; set; }
+    public Vector3 LookingDestination { get; set; }
+    public GameObject Target { get; set; }
 
     // Percepts
-    private List<GameObject> seenOtherAgents;
-    private Vector3 direction;
-    private Vector3 visionDirection;
+    public List<GameObject> seenOtherAgents { get; private set; }
+    public Vector3 direction { get; private set; }
+    public Vector3 visionDirection { get; private set; }
 
     // Agent info
     private int team;
@@ -30,7 +30,7 @@ public class Agent : MonoBehaviour {
     void Start() {
         initialize();
         See();
-        Think();
+        Behaviour.Think();
     }
 
     private void initialize()
@@ -38,22 +38,23 @@ public class Agent : MonoBehaviour {
         seenOtherAgents = new List<GameObject>();
         gun = GetComponent<Gun>();
         attributes = new AgentAttributes();
+        Behaviour = gameObject.AddComponent<AgentStandardBehaviour>();
     }
 
 
     // Update is called once per frame
     void Update() {
         See();
-        Think();
+        Behaviour.Think();
         Act();
     }
 
     private void See()
     {
         // update direction 
-        if (destination != transform.position)
+        if (Destination != transform.position)
         { 
-            var heading = (destination - transform.position);
+            var heading = (Destination - transform.position);
             direction = heading / heading.magnitude;
         }
 
@@ -61,7 +62,7 @@ public class Agent : MonoBehaviour {
         // update visionDirection 
         if (visionDirection == Vector3.zero)
         {
-            var seeing = (lookingDestination - transform.position);
+            var seeing = (LookingDestination - transform.position);
             visionDirection = seeing / seeing.magnitude;
         }
 
@@ -79,22 +80,13 @@ public class Agent : MonoBehaviour {
         Debug.DrawLine(transform.position, rotatedforwardpoint);
         var rotatedforwardpoint2 = Quaternion.Euler(0, 0, - Attributes.widthOfVision) * forwardpoint + transform.position;
         Debug.DrawLine(transform.position, rotatedforwardpoint2);
-        Debug.DrawLine(transform.position, destination, Color.blue);
+        Debug.DrawLine(transform.position, Destination, Color.blue);
 
     }
 
   
 
-    private void Think()
-    {
-        // Placeholder for pathfinding
-        if (destination == transform.position || destination == Vector3.zero)
-        {
-            MoveToRandomDestination();
-        }
-
-        Target();
-    }
+   
 
     private void Act()
     {
@@ -150,70 +142,28 @@ public class Agent : MonoBehaviour {
             Die();
         }
 
-        MoveToRandomDestination();
+        Stop();
     }
 
-    // Decisions
-    // Placeholder for pathfinding
-    private void MoveToRandomDestination()
-    {
-        int index = Random.Range(0, LevelManager.Instance.Tiles.Count);
+    
 
-        GameObject tile = (GameObject)LevelManager.Instance.Tiles[index];
-        destination = tile.transform.position;
-    }
-
-    // Placeholder for targetting
-    private void Target()
-    {
-        if (target == null && seenOtherAgents.Count == 0 && destination != transform.position)
-        {
-            lookingDestination = destination;
-        }
-        if (target == null && seenOtherAgents.Count > 0 )
-        {
-            target = seenOtherAgents[0];
-            foreach (GameObject a in seenOtherAgents)
-            {
-                if (Vector3.Distance(transform.position, a.transform.position) < Vector3.Distance(transform.position, target.transform.position))
-                {
-                    target = a;
-                }
-            }
-        }
-        if (target != null && !seenOtherAgents.Contains(target))
-        {
-            target = null;
-        }
-        if ( target != null)
-        {
-            lookingDestination = target.transform.position;
-        }
-
-    }
-
-    // Placeholder for chasing
-    private void Chase()
-    {
-
-    }
 
     //Actions
     // Placeholder for movement
     private void MoveToDirection()
     {
-        if (transform.position != destination) { 
-            transform.position = Vector2.MoveTowards(transform.position, destination, Attributes.speed * Time.deltaTime);
+        if (transform.position != Destination) { 
+            transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
         }
     }
     
     // Placeholder for shooting
     private void Shoot()
     {
-        if (target != null)
+        if (Target != null)
         {
-            float offSet = Mathf.Pow(Vector3.Distance(transform.position, target.transform.position), 2.0f) / Attributes.accuracy;
-            Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + target.transform.position;
+            float offSet = Mathf.Pow(Vector3.Distance(transform.position, Target.transform.position), 2.0f) / Attributes.accuracy;
+            Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + Target.transform.position;
             gun.Shoot(shootingLocation);
 
            
@@ -231,19 +181,25 @@ public class Agent : MonoBehaviour {
     private void RotateToDirection()
     {
 
-        if (lookingDestination != transform.position)
+        if (LookingDestination != transform.position)
         {
-            var targetting = (lookingDestination - transform.position);
-            var targetDirection = targetting / targetting.magnitude;
+            var Targetting = (LookingDestination - transform.position);
+            var TargetDirection = Targetting / Targetting.magnitude;
 
-            if (visionDirection != targetDirection)
+            if (visionDirection != TargetDirection)
             {
-                visionDirection = Vector3.RotateTowards(visionDirection, targetDirection, Attributes.agility * Time.deltaTime, 0.0f);
+                visionDirection = Vector3.RotateTowards(visionDirection, TargetDirection, Attributes.agility * Time.deltaTime, 0.0f);
 
             }
         }
 
         
+    }
+
+    // Placeholder for stopping
+    private void Stop()
+    {
+        Destination = transform.position;
     }
 
    
