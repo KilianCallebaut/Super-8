@@ -125,7 +125,7 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
-        for (int i = 0; i< 4; i++) //StartTiles.Count
+        for (int i = 0; i< 2; i++) //StartTiles.Count
         {
             GameObject newAgent = Instantiate(agent);
             newAgent.name = "Agent_" + i;
