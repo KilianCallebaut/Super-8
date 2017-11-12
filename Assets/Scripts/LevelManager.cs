@@ -43,10 +43,7 @@ public class LevelManager : Singleton<LevelManager> {
         }
     }
 
-    public void addBullet(Bullet bullet)
-    {
-
-    }
+   
 
     // Use this for initialization
     void Start () {
@@ -59,7 +56,7 @@ public class LevelManager : Singleton<LevelManager> {
 
     // Update is called once per frame
     void Update () {
-		
+	
 	}
 
     // For initialization
@@ -131,9 +128,18 @@ public class LevelManager : Singleton<LevelManager> {
         for (int i = 0; i<2 ; i++) //StartTiles.Count
         {
             GameObject newAgent = Instantiate(agent);
+            newAgent.name = "Agent_" + i;
             newAgent.transform.position = StartTiles[i].transform.position;
             Agents.Add(newAgent);
         }
+    }
+
+    // Placeholder for agent death
+    public void DeleteAgent(GameObject deletedAgent)
+    {
+        Destroy(deletedAgent);
+        Agents.Remove(deletedAgent);
+
     }
 
 

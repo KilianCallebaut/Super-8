@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour {
 
+    //Agent's specifics
     [SerializeField]
     private float speed;
 
     [SerializeField]
     private float reachOfVision;
 
-    [SerializeField]
-    private Rigidbody2D bullet;
+    private float widthOfVision = 10.0f;
+    private Gun gun;
 
+    // Agent's temporals
     private Vector3 destination;
 
     // Percepts
@@ -32,6 +34,7 @@ public class Agent : MonoBehaviour {
     private void initialize()
     {
         seenOtherAgents = new List<GameObject>();
+        gun = GetComponent<Gun>();
     }
 
     // Update is called once per frame
@@ -69,7 +72,7 @@ public class Agent : MonoBehaviour {
         float distanceToObject = (objectPosition - transform.position).magnitude;
         Vector3 directionToObject = (objectPosition - transform.position)/distanceToObject;
 
-        if (distanceToObject < reachOfVision && Vector3.Angle(directionToObject, direction) < 10.0f)
+        if (distanceToObject < reachOfVision && Vector3.Angle(directionToObject, direction) < widthOfVision)
         {
             return true;
         }
@@ -78,9 +81,16 @@ public class Agent : MonoBehaviour {
 
     private void think()
     {
+        // Placeholder for pathfinding
         if (destination == transform.position || destination == Vector3.zero)
         {
             moveToRandomDestination();
+        }
+
+        // Placeholder for targetting
+        if (seenOtherAgents.Count > 0)
+        {
+            shoot(seenOtherAgents[0]);
         }
     }
 
@@ -88,6 +98,10 @@ public class Agent : MonoBehaviour {
     // Placeholder for collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Bullet" && !collision.gameObject.name.Contains(gameObject.name))
+        {
+            die();
+        }
         moveToRandomDestination();
     }
 
@@ -112,10 +126,13 @@ public class Agent : MonoBehaviour {
     }
     
     // Placeholder for shooting
-    private void shoot()
+    private void shoot(GameObject enemy)
     {
-        Rigidbody2D newBullet = Instantiate(bullet);
-        newBullet.transform.position = transform.position;
-        newBullet.velocity =  direction * Bullet.Speed;
+        gun.shoot(enemy.transform.position);
+    }
+
+    private void die()
+    {
+        LevelManager.Instance.DeleteAgent(gameObject);
     }
 }
