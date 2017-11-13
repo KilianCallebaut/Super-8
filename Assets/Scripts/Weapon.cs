@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
 	private int volleysUntilStopShooting = -1;//-1 means don't stop
 
 	//projectile stuff
-	public AbstractProjectile projectileType = null;
+	public GameObject projectileType = null;
 	public float projectileSpawnDistanceFromCenter = 0.0f;
 	public Vector3 center = new Vector3(0.0f,0.0f,0.0f);
 	private float shotDirection = 0.0f;
@@ -47,7 +47,6 @@ public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 
 	public void startShooting() {
@@ -104,12 +103,20 @@ public class Weapon : MonoBehaviour {
 			//TODO: calculate spread
 			float actualSpread = calculateSpread(i, projectilesPerShot);
 			Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
-			Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity).initialUpdate(dTime, this.gameObject,direction);
+			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity);
+			AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
+			if (a != null) {
+				a.initialUpdate (dTime, this.gameObject, direction);
+			} else {
+				Debug.Log ("Non-projectile projectile fired");
+			}
 		}
 	}
 
+
 	public float calculateSpread(int index, int max) {
 		float ret = 0.0f;
+		float mean = 0.0f;
 		switch (spreadMode) {
 		case SPREAD_MODE_EVEN:
 				ret = spread / 2;
@@ -118,9 +125,14 @@ public class Weapon : MonoBehaviour {
 				break;
 			case SPREAD_MODE_RANDOM_EQUAL:
 				//generate random number between -spread and spread
+				ret = Random.value * spread * 2.0f - spread;
 				break;
 			case SPREAD_MODE_RANDOM_NORMAL:
 				//use normal distribution with spread distribution
+				float u1 = 1.0-Random.value; //uniform(0,1] random doubles
+				float u2 = 1.0-Random.value;
+				float randStdNormal = Mathf.Sqrt(-2.0 * Mathf.Log(u1)) * Mathf.Sin(2.0 * Mathf.PI * u2); //random normal(0,1)
+				ret = mean + spread * randStdNormal; //random normal(mean,stdDev^2)
 				break;
 			default:
 				break;

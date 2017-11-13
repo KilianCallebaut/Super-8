@@ -16,12 +16,22 @@ public abstract class AbstractProjectile : MonoBehaviour {
 	public void initialUpdate(float dTime, GameObject doNotCollideWith, Vector3 direction) {
 		dir.x = direction.x;
 		dir.y = direction.y;
+		dir.z = 0.0f;
 		ignoreCollisionsWith = doNotCollideWith;
-		transform.Translate (dir * vel * dTime);
+		bulletUpdate (dTime);
+	}
+
+	protected abstract void onCollision (GameObject g);
+	protected abstract void bulletUpdate (float dTime);
+
+	void OnCollisionEnter(Collision c) {
+		if (c.gameObject == ignoreCollisionsWith)
+			return;
+		onCollision (c.gameObject);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (dir * vel * UnityEngine.Time.deltaTime);
+		bulletUpdate (UnityEngine.Time.deltaTime);
 	}
 }
