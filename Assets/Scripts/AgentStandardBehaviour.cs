@@ -42,37 +42,38 @@ public class AgentStandardBehaviour : AgentBehaviour {
     // Placeholder for Targetting
     private void Targetting()
     {
-        if (agent.Target == null && agent.seenOtherAgents.Count == 0 && agent.Destination != transform.position)
+        if (agent.TargetAgent == null && agent.seenOtherAgents.Count == 0 && agent.Destination != transform.position)
         {
             agent.LookingDestination = agent.Destination;
         }
-        if (agent.Target == null && agent.seenOtherAgents.Count > 0)
+        if (agent.TargetAgent == null && agent.seenOtherAgents.Count > 0)
         {
-            agent.Target = agent.seenOtherAgents[0];
+            agent.TargetAgent = new Target(agent.seenOtherAgents[0], Time.time);
             foreach (GameObject a in agent.seenOtherAgents)
             {
-                if (Vector3.Distance(transform.position, a.transform.position) < Vector3.Distance(transform.position, agent.Target.transform.position))
+                if (Vector3.Distance(transform.position, a.transform.position) < Vector3.Distance(transform.position, agent.TargetAgent.position))
                 {
-                    agent.Target = a;
+                    agent.TargetAgent = new Target(a, Time.time);
                 }
             }
         }
-        if (agent.Target != null && !agent.seenOtherAgents.Contains(agent.Target))
+        if (agent.TargetAgent != null && !agent.seenOtherAgents.Contains(agent.TargetAgent.enemy))
         {
-            agent.Target = null;
+            agent.TargetAgent = null;
         }
-        if (agent.Target != null)
+        if (agent.TargetAgent != null)
         {
-            agent.LookingDestination = agent.Target.transform.position;
+            agent.LookingDestination = agent.TargetAgent.position;
         }
 
     }
 
+    // Chasing placeholder
     private void Chasing()
     {
-        if (agent.Target != null)
+        if (agent.TargetAgent != null)
         {
-            agent.Destination = agent.Target.transform.position;
+            agent.Destination = agent.TargetAgent.position;
         } 
     }
 }

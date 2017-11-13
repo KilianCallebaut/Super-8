@@ -14,7 +14,7 @@ public class Agent : MonoBehaviour {
     // Agent's goals
     public Vector3 Destination { get; set; }
     public Vector3 LookingDestination { get; set; }
-    public GameObject Target { get; set; }
+    public Target TargetAgent { get; set; }
 
     // Percepts
     public List<GameObject> seenOtherAgents { get; private set; }
@@ -66,9 +66,11 @@ public class Agent : MonoBehaviour {
             visionDirection = seeing / seeing.magnitude;
         }
 
-
         // See enemies
         Spotting();
+
+        // Aim at target
+        Aiming();
 
         // Delete killed agents
         seenOtherAgents.RemoveAll(delegate (GameObject o) { return o == null; });
@@ -83,10 +85,6 @@ public class Agent : MonoBehaviour {
         Debug.DrawLine(transform.position, Destination, Color.blue);
 
     }
-
-  
-
-   
 
     private void Act()
     {
@@ -109,6 +107,10 @@ public class Agent : MonoBehaviour {
                 seenOtherAgents.Remove(a);
             }
         }
+    }
+
+    private void Aiming()
+    {
     }
 
     // Defines if something is seen or not
@@ -160,12 +162,12 @@ public class Agent : MonoBehaviour {
     // Placeholder for shooting
     private void Shoot()
     {
-        if (Target != null)
+        if (TargetAgent != null)
         {
-            float offSet = Mathf.Pow(Vector3.Distance(transform.position, Target.transform.position), 2.0f) / Attributes.accuracy;
-            Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + Target.transform.position;
+            float offSet = Mathf.Pow(Vector3.Distance(transform.position, TargetAgent.enemy.transform.position), 2.0f) / Attributes.accuracy;
+            Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.enemy.transform.position;
             gun.Shoot(shootingLocation);
-
+            TargetAgent.aimTime = Time.time;
            
         }
     }

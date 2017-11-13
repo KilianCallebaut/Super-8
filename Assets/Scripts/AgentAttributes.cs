@@ -29,7 +29,7 @@ public class AgentAttributes {
     public AgentAttributes()
     {
         this.speed = 2.0f;
-        this.reachOfVision = 5.0f;
+        this.reachOfVision = 10.0f;
         this.widthOfVision = 50.0f;
         this.reflex = 1.0f / 2.0f;
         this.agility = 2.0f;
