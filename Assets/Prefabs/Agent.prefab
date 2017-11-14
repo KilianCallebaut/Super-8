@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4519274676392974}
   - component: {fileID: 212243699774539334}
   - component: {fileID: 114446100032480438}
-  - component: {fileID: 60843526927369454}
   - component: {fileID: 50557470280704244}
+  - component: {fileID: 60666657074730186}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Agent
@@ -63,7 +63,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &60843526927369454
+--- !u!60 &60666657074730186
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -87,12 +87,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.08888888, y: -0.48333335}
-      - {x: -0.08333331, y: 0.1317932}
-      - {x: -0.5, y: 0.5}
-      - {x: 0.5, y: 0.5}
-      - {x: 0.099897265, y: 0.1224311}
-      - {x: 0.105555594, y: -0.5}
+    - - {x: -0.25, y: -0.5}
+      - {x: -0.25, y: 0}
+      - {x: -0.5, y: 0.25}
+      - {x: 0, y: 0.5}
+      - {x: 0.5, y: 0.25}
+      - {x: 0.25, y: 0}
+      - {x: 0.25, y: -0.5}
 --- !u!114 &114446100032480438
 MonoBehaviour:
   m_ObjectHideFlags: 1
