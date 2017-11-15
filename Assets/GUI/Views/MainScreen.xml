@@ -1,11 +1,11 @@
-<MainScreenView xmlns="MarkLight">
+<MainScreen xmlns="MarkLight">
   <UserInterface>
-    <Region Width="25%" Alignment="Left" BackgroundColor="#ff00cc">
-      <PlayerListView />
+    <Region Width="25%" Alignment="Left">
+      <PlayerList />
     </Region>
     <Region Width="75%" Alignment="Right">
       <!-- content area -->
     </Region>
   </UserInterface>
   <EventSystem />
-</MainScreenView>
+</MainScreen>

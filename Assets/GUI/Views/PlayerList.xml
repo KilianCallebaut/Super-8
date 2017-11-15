@@ -1,4 +1,4 @@
-<PlayerListView xmlns="MarkLight">
+<PlayerList xmlns="MarkLight">
   <List Alignment="Left">
     <ListItem Alignment="Left">
       <Label Text="Shooter" />'
@@ -7,4 +7,4 @@
       <Label Text="Shooter" />'
     </ListItem>
   </List>
-</PlayerListView>
+</PlayerList>

@@ -1153,8 +1153,8 @@
     <xs:anyAttribute processContents="skip" />
   </xs:complexType>
 
-  <xs:element name="PlayerListView" type="PlayerListView" />
-  <xs:complexType name="PlayerListView">
+  <xs:element name="PlayerList" type="PlayerList" />
+  <xs:complexType name="PlayerList">
     <xs:sequence>
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
@@ -1164,8 +1164,37 @@
     <xs:attribute name="Theme" type="xs:string" />
     <xs:attribute name="BaseDirectory" type="xs:string" />
     <xs:attribute name="UnitSize" type="xs:string" />
+    <xs:attribute name="LayoutRoot" type="xs:string" />
     <xs:attribute name="IsInitialized" type="xs:string" />
     <xs:attribute name="runInEditMode" type="xs:string" />
+    <xs:attribute name="Width" type="xs:string" />
+    <xs:attribute name="Height" type="xs:string" />
+    <xs:attribute name="OverrideWidth" type="xs:string" />
+    <xs:attribute name="OverrideHeight" type="xs:string" />
+    <xs:attribute name="Alignment" type="EnumElementAlignment" />
+    <xs:attribute name="Margin" type="xs:string" />
+    <xs:attribute name="Offset" type="xs:string" />
+    <xs:attribute name="OffsetFromParent" type="xs:string" />
+    <xs:attribute name="Pivot" type="xs:string" />
+    <xs:attribute name="RaycastBlockMode" type="EnumRaycastBlockMode" />
+    <xs:attribute name="Alpha" type="xs:string" />
+    <xs:attribute name="IsVisible" type="xs:string" />
+    <xs:attribute name="SortIndex" type="xs:string" />
+    <xs:attribute name="UpdateRectTransform" type="xs:string" />
+    <xs:attribute name="UpdateBackground" type="xs:string" />
+    <xs:attribute name="BackgroundImageEventAlphaThreshold" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillAmount" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillCenter" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillClockwise" type="xs:string" />
+    <xs:attribute name="BackgroundImageFillMethod" type="EnumFillMethod" />
+    <xs:attribute name="BackgroundImageFillOrigin" type="xs:string" />
+    <xs:attribute name="BackgroundImageOverrideSprite" type="xs:string" />
+    <xs:attribute name="BackgroundImagePreserveAspect" type="xs:string" />
+    <xs:attribute name="BackgroundImage" type="xs:string" />
+    <xs:attribute name="BackgroundImageType" type="EnumType" />
+    <xs:attribute name="BackgroundMaterial" type="xs:string" />
+    <xs:attribute name="BackgroundImageMaskable" type="xs:string" />
+    <xs:attribute name="BackgroundColor" type="xs:string" />
     <xs:attribute name="State" type="xs:string" />
     <xs:attribute name="IsActive" type="xs:string" />
     <xs:attribute name="HideFlags" type="EnumHideFlags" />
@@ -1255,8 +1284,8 @@
     <xs:anyAttribute processContents="skip" />
   </xs:complexType>
 
-  <xs:element name="MainScreenView" type="MainScreenView" />
-  <xs:complexType name="MainScreenView">
+  <xs:element name="MainScreen" type="MainScreen" />
+  <xs:complexType name="MainScreen">
     <xs:sequence>
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
@@ -1301,8 +1330,8 @@
     <xs:anyAttribute processContents="skip" />
   </xs:complexType>
 
-  <xs:element name="PlayerListItemView" type="PlayerListItemView" />
-  <xs:complexType name="PlayerListItemView">
+  <xs:element name="PlayerListItem" type="PlayerListItem" />
+  <xs:complexType name="PlayerListItem">
     <xs:sequence>
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
@@ -1347,8 +1376,8 @@
     <xs:anyAttribute processContents="skip" />
   </xs:complexType>
 
-  <xs:element name="PlayerPanelView" type="PlayerPanelView" />
-  <xs:complexType name="PlayerPanelView">
+  <xs:element name="PlayerPanel" type="PlayerPanel" />
+  <xs:complexType name="PlayerPanel">
     <xs:sequence>
       <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
