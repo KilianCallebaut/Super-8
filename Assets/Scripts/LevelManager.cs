@@ -126,7 +126,7 @@ public class LevelManager : Singleton<LevelManager> {
 
         if (type == 2)
         {
-            if (y > -MaxYTiles / 2)
+            if (y > MaxYTiles / 2)
                 StartTilesTeam1.Add(newTile);
             else
                 StartTilesTeam2.Add(newTile);
@@ -141,7 +141,7 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
-        for (int i = 0; i< 2; i++) //
+        for (int i = 0; i< StartTilesTeam1.Count; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));

@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 99dd5aafa00783147b4dad436c4e064f
 folderAsset: yes
 timeCreated: 1510399603
+=======
+guid: 689c5cea73738f740977dba1b1c99d3c
+folderAsset: yes
+timeCreated: 1510527073
+>>>>>>> Basicmechanics
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
