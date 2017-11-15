@@ -12,10 +12,11 @@ public class LevelManager : Singleton<LevelManager> {
     private GameObject agent;
 
     public List<GameObject> Tiles { get; private set; }
-    public List<GameObject> StartTiles { get; private set; }
+    public List<GameObject> StartTilesTeam1 { get; private set; }
+    public List<GameObject> StartTilesTeam2 { get; private set; }
     public List<GameObject> WallTiles { get; private set; }
 
-    public List<GameObject> Agents { get; private set; }
+    public List<Agent> Agents { get; private set; }
     public List<GameObject> Bullets { get; private set; } 
 
 
@@ -67,9 +68,11 @@ public class LevelManager : Singleton<LevelManager> {
     private void initialize() {
         readMap();
         Tiles = new List<GameObject>();
-        StartTiles = new List<GameObject>();
+        StartTilesTeam1 = new List<GameObject>();
+        StartTilesTeam2 = new List<GameObject>();
+
         WallTiles = new List<GameObject>();
-        Agents = new List<GameObject>();
+        Agents = new List<Agent>();
     }
 
     // Placeholder for reading file from map
@@ -123,7 +126,10 @@ public class LevelManager : Singleton<LevelManager> {
 
         if (type == 2)
         {
-            StartTiles.Add(newTile);
+            if (y > -MaxYTiles / 2)
+                StartTilesTeam1.Add(newTile);
+            else
+                StartTilesTeam2.Add(newTile);
         }
 
         if (type == 3)
@@ -135,21 +141,31 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
-        for (int i = 0; i< 2; i++) //StartTiles.Count
+        for (int i = 0; i< 2; i++) //
         {
 
-            GameObject newAgent = ObjectManager.spawnAgent(agent, new AgentAttributes());
-            newAgent.name = "Agent_" + i;
-            newAgent.transform.position = StartTiles[i].transform.position;
-            
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
+            newAgent.name = "Agent_" + i + "_Team1";
+            newAgent.transform.position = StartTilesTeam1[i].transform.position;
+            newAgent.Team = 1;
+            Agents.Add(newAgent);
+        }
+
+        for (int i = 0; i < StartTilesTeam2.Count; i++) //
+        {
+
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
+            newAgent.name = "Agent_" + i + "_Team2";
+            newAgent.transform.position = StartTilesTeam2[i].transform.position;
+            newAgent.Team = 2;
             Agents.Add(newAgent);
         }
     }
 
     // Placeholder for agent death
-    public void DeleteAgent(GameObject deletedAgent)
+    public void DeleteAgent(Agent deletedAgent)
     {
-        Destroy(deletedAgent);
+        Destroy(deletedAgent.gameObject);
         Agents.Remove(deletedAgent);
 
     }

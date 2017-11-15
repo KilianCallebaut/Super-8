@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,12 +19,15 @@ public class AgentStandardBehaviour : AgentBehaviour {
 
     public override void Think()
     {
-
+        if (agent == null)
+            agent = GetComponent<Agent>();
         // Placeholder for pathfinding
-        if (agent.Destination == transform.position || agent.Destination == Vector3.zero)
+        
+        if (agent.Destination == null || agent.Destination == transform.position)
         {
-            MoveToRandomDestination();
+                MoveToRandomDestination();
         }
+        
 
         Targetting();
         Chasing();
@@ -33,7 +37,7 @@ public class AgentStandardBehaviour : AgentBehaviour {
     // Placeholder for pathfinding
     private void MoveToRandomDestination()
     {
-        int index = Random.Range(0, LevelManager.Instance.Tiles.Count);
+        int index = UnityEngine.Random.Range(0, LevelManager.Instance.Tiles.Count);
 
         GameObject tile = (GameObject)LevelManager.Instance.Tiles[index];
         agent.Destination = tile.transform.position;
@@ -49,21 +53,18 @@ public class AgentStandardBehaviour : AgentBehaviour {
         if (agent.TargetAgent == null && agent.seenOtherAgents.Count > 0)
         {
             agent.TargetAgent = new Target(agent.seenOtherAgents[0], Time.time);
-            foreach (GameObject a in agent.seenOtherAgents)
+            foreach (OtherAgent a in agent.seenOtherAgents)
             {
-                if (Vector3.Distance(transform.position, a.transform.position) < Vector3.Distance(transform.position, agent.TargetAgent.position))
+                if (Vector3.Distance(transform.position, a.Position) < Vector3.Distance(transform.position, agent.TargetAgent.LastPosition))
                 {
                     agent.TargetAgent = new Target(a, Time.time);
                 }
             }
         }
-        if (agent.TargetAgent != null && !agent.seenOtherAgents.Contains(agent.TargetAgent.enemy))
-        {
-            agent.TargetAgent = null;
-        }
+        
         if (agent.TargetAgent != null)
         {
-            agent.LookingDestination = agent.TargetAgent.position;
+            agent.LookingDestination = agent.TargetAgent.LastPosition;
         }
 
     }
@@ -73,7 +74,7 @@ public class AgentStandardBehaviour : AgentBehaviour {
     {
         if (agent.TargetAgent != null)
         {
-            agent.Destination = agent.TargetAgent.position;
+            agent.Destination = agent.TargetAgent.LastPosition;
         } 
     }
 }

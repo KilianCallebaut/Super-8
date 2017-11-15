@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour {
             coolDown = false;
         }
 
-        if (!coolDown)
+        if (!coolDown && target != transform.position)
         {
             
             Rigidbody2D newBullet = Instantiate(bullet);
@@ -49,7 +49,7 @@ public class Gun : MonoBehaviour {
             var direction = heading / heading.magnitude;
 
             newBullet.velocity = direction * bulletSpeed;
-
+           
             coolDown = true;
             lastShot = Time.time;
 

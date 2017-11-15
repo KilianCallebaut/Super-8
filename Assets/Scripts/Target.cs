@@ -4,29 +4,36 @@ using UnityEngine;
 
 public class Target  {
 
-    public GameObject enemy { get; private set; }
-    public float aimTime { get; set; }
+    public OtherAgent Enemy { get; private set; }
+    public float AimTime { get; set; }
+    public bool Seen { get; set; }
 
-    public Vector3 position
+    public Vector3 LastPosition
     {
         get
         {
-            return enemy.transform.position;
+            return Enemy.Position;
         }
     }
 
-    public float aimingBonus
+    public float AimOffset
     {
         get
         {
-            float offset = Time.time - aimTime;
-            return offset;
+            if (Seen)
+            {
+                float offset = Time.time - AimTime;
+                return offset;
+            }
+            AimTime = Time.time;
+            return 0.0f;
         }
     }
 
-    public Target(GameObject agent, float aimTime)
+    public Target(OtherAgent agent, float aimTime)
     {
-        this.enemy = agent;
-        this.aimTime = aimTime;
+        this.Enemy = agent;
+        this.AimTime = aimTime;
+        this.Seen = false;
     }
 }

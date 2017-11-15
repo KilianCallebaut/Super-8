@@ -19,7 +19,7 @@ public class WaterTile : Tile
     /// <summary>
     /// Refreshes this tile when something changes
     /// </summary>
-    /// <param name="position">The tiles position in the grid</param>
+    /// <param name="position">The tiles lastPosition in the grid</param>
     /// <param name="tilemap">A reference to the tilemap that this tile belongs to.</param>
     public override void RefreshTile(Vector3Int position, ITilemap tilemap)
     {
@@ -27,7 +27,7 @@ public class WaterTile : Tile
         {
             for (int x = -1; x <= 1; x++)
             {
-                //We store the position of the neighbour 
+                //We store the lastPosition of the neighbour 
                 Vector3Int nPos = new Vector3Int(position.x + x, position.y + y, position.z);
 
                 if ( HasWater(tilemap, nPos)) //If the neighbour has water on it

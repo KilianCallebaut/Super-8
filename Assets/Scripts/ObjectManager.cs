@@ -16,12 +16,12 @@ public class ObjectManager : MonoBehaviour {
 		
 	}
 
-    public static GameObject spawnAgent(GameObject agent, AgentAttributes attributes)
+    public static Agent spawnAgent( AgentAttributes attributes)
     {
-        var agentSpawn = Instantiate(agent);
+        var agentSpawn = Instantiate(attributes.agentPrefab);
         Agent agentScript = agentSpawn.AddComponent<Agent>() as Agent;
      
         agentScript.Attributes = attributes;
-        return agentSpawn;
+        return agentScript;
     }
 }
