@@ -204,86 +204,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 94761990}
     ViewFieldPath: Item
@@ -300,11 +317,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 94761990}
     ViewFieldPath: IsDestroyed
@@ -334,37 +353,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 399450383}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   EasingFunction: 0
   AutoReset: 0
   AutoReverse: 0
@@ -455,86 +505,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 121206190}
     ViewFieldPath: Item
@@ -551,11 +618,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 121206190}
     ViewFieldPath: IsDestroyed
@@ -585,6 +654,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 121206190}
     ViewFieldPath: Width
@@ -820,7 +914,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   Text:
     ParentView: {fileID: 121206190}
     ViewFieldPath: Text
@@ -856,7 +956,11 @@ MonoBehaviour:
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   FontStyle:
     ParentView: {fileID: 121206190}
     ViewFieldPath: FontStyle
@@ -911,7 +1015,11 @@ MonoBehaviour:
     ViewFieldPath: ShadowColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ShadowDistance:
     ParentView: {fileID: 121206190}
     ViewFieldPath: ShadowDistance
@@ -923,7 +1031,11 @@ MonoBehaviour:
     ViewFieldPath: OutlineColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   OutlineDistance:
     ParentView: {fileID: 121206190}
     ViewFieldPath: OutlineDistance
@@ -1187,86 +1299,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 222577595}
     ViewFieldPath: Item
@@ -1283,11 +1412,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 222577595}
     ViewFieldPath: IsDestroyed
@@ -1315,6 +1446,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 222577595}
     ViewFieldPath: Width
@@ -1550,7 +1706,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
 --- !u!114 &222577596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1767,7 +1929,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 386455529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 114.5, y: 0, z: 0}
+  m_LocalPosition: {x: 12.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 462012846}
@@ -1874,86 +2036,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 386455533}
     ViewFieldPath: Item
@@ -1970,11 +2149,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 386455533}
     ViewFieldPath: IsDestroyed
@@ -2004,6 +2185,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 386455533}
     ViewFieldPath: Width
@@ -2239,7 +2445,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
 --- !u!1 &393999232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,86 +2556,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 393999234}
     ViewFieldPath: Item
@@ -2440,11 +2669,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 393999234}
     ViewFieldPath: IsDestroyed
@@ -2471,22 +2702,57 @@ MonoBehaviour:
     ViewActionHandlerName: ListItemMouseClick
     ParentView: {fileID: 393999234}
     SourceView: {fileID: 393999234}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseEnter
     ViewActionHandlerName: ListItemMouseEnter
     ParentView: {fileID: 393999234}
     SourceView: {fileID: 393999234}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseExit
     ViewActionHandlerName: ListItemMouseExit
     ParentView: {fileID: 393999234}
     SourceView: {fileID: 393999234}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseDown
     ViewActionHandlerName: ListItemMouseDown
     ParentView: {fileID: 393999234}
     SourceView: {fileID: 393999234}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseUp
     ViewActionHandlerName: ListItemMouseUp
     ParentView: {fileID: 393999234}
     SourceView: {fileID: 393999234}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   ViewFieldStateValues: []
   SetViewFieldNames:
   - Alignment
@@ -2496,6 +2762,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 393999234}
     ViewFieldPath: Width
@@ -2731,7 +3022,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   Text:
     ParentView: {fileID: 393999234}
     ViewFieldPath: Text
@@ -2767,7 +3064,11 @@ MonoBehaviour:
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   FontStyle:
     ParentView: {fileID: 393999234}
     ViewFieldPath: FontStyle
@@ -2829,7 +3130,11 @@ MonoBehaviour:
     ViewFieldPath: ShadowColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ShadowDistance:
     ParentView: {fileID: 393999234}
     ViewFieldPath: ShadowDistance
@@ -2841,7 +3146,11 @@ MonoBehaviour:
     ViewFieldPath: OutlineColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   OutlineDistance:
     ParentView: {fileID: 393999234}
     ViewFieldPath: OutlineDistance
@@ -3119,86 +3428,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 399450383}
     ViewFieldPath: Item
@@ -3215,11 +3541,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 399450383}
     ViewFieldPath: IsDestroyed
@@ -3246,22 +3574,57 @@ MonoBehaviour:
     ViewActionHandlerName: ListItemMouseClick
     ParentView: {fileID: 399450383}
     SourceView: {fileID: 399450383}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseEnter
     ViewActionHandlerName: ListItemMouseEnter
     ParentView: {fileID: 399450383}
     SourceView: {fileID: 399450383}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseExit
     ViewActionHandlerName: ListItemMouseExit
     ParentView: {fileID: 399450383}
     SourceView: {fileID: 399450383}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseDown
     ViewActionHandlerName: ListItemMouseDown
     ParentView: {fileID: 399450383}
     SourceView: {fileID: 399450383}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   - ViewActionFieldName: MouseUp
     ViewActionHandlerName: ListItemMouseUp
     ParentView: {fileID: 399450383}
     SourceView: {fileID: 399450383}
+    _initialized: 0
+    _hasActionDataParameter: 0
+    _actionDataParameterIndex: 0
+    _hasEventDataParemeter: 0
+    _eventDataParameterIndex: 0
+    _hasCustomDataParameter: 0
+    _customDataParameterIndex: 0
   ViewFieldStateValues: []
   SetViewFieldNames:
   - LayoutParent
@@ -3270,6 +3633,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 399450383}
     ViewFieldPath: Width
@@ -3505,7 +3893,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   Text:
     ParentView: {fileID: 399450383}
     ViewFieldPath: Text
@@ -3541,7 +3935,11 @@ MonoBehaviour:
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   FontStyle:
     ParentView: {fileID: 399450383}
     ViewFieldPath: FontStyle
@@ -3603,7 +4001,11 @@ MonoBehaviour:
     ViewFieldPath: ShadowColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ShadowDistance:
     ParentView: {fileID: 399450383}
     ViewFieldPath: ShadowDistance
@@ -3615,7 +4017,11 @@ MonoBehaviour:
     ViewFieldPath: OutlineColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   OutlineDistance:
     ParentView: {fileID: 399450383}
     ViewFieldPath: OutlineDistance
@@ -3815,7 +4221,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 462012845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 70.64032, y: -2.0300903, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1403445163}
@@ -3891,86 +4297,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 462012847}
     ViewFieldPath: Item
@@ -3987,11 +4410,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 462012847}
     ViewFieldPath: IsDestroyed
@@ -4019,6 +4444,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 462012847}
     ViewFieldPath: Width
@@ -4254,7 +4704,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   RenderMode:
     ParentView: {fileID: 462012847}
     ViewFieldPath: RenderMode
@@ -4509,86 +4965,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 571415935}
     ViewFieldPath: Item
@@ -4605,11 +5078,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 571415935}
     ViewFieldPath: IsDestroyed
@@ -4639,37 +5114,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 399450383}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   EasingFunction: 0
   AutoReset: 0
   AutoReverse: 0
@@ -4751,6 +5257,101 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 1998302127}
   m_GameObject: {fileID: 584353082}
+--- !u!1 &611693805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 611693809}
+  - component: {fileID: 611693808}
+  - component: {fileID: 611693807}
+  - component: {fileID: 611693806}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &611693806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611693805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &611693807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611693805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &611693808
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611693805}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &611693809
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611693805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 458, y: 154, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1786939065}
+  - {fileID: 1043417542}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &691574220
 GameObject:
   m_ObjectHideFlags: 0
@@ -4766,7 +5367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &691574221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4830,86 +5431,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 0}
     ViewFieldPath: 
@@ -4926,11 +5544,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: 
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 0}
     ViewFieldPath: 
@@ -4958,6 +5578,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 0, y: 0, z: 0}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   ViewTypeDataList:
   - ViewTypeName: ContentPlaceholder
     ViewNameAliases:
@@ -29175,86 +29820,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 692329836}
     ViewFieldPath: Item
@@ -29271,11 +29933,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 692329836}
     ViewFieldPath: IsDestroyed
@@ -29303,6 +29967,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
 --- !u!4 &692329837
 Transform:
   m_ObjectHideFlags: 0
@@ -29456,86 +30145,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 764846547}
     ViewFieldPath: Item
@@ -29552,11 +30258,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 764846547}
     ViewFieldPath: IsDestroyed
@@ -29585,6 +30293,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 764846547}
     ViewFieldPath: Width
@@ -29820,7 +30553,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   Text:
     ParentView: {fileID: 764846547}
     ViewFieldPath: Text
@@ -29856,7 +30595,11 @@ MonoBehaviour:
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   FontStyle:
     ParentView: {fileID: 764846547}
     ViewFieldPath: FontStyle
@@ -29911,7 +30654,11 @@ MonoBehaviour:
     ViewFieldPath: ShadowColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ShadowDistance:
     ParentView: {fileID: 764846547}
     ViewFieldPath: ShadowDistance
@@ -29923,7 +30670,11 @@ MonoBehaviour:
     ViewFieldPath: OutlineColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   OutlineDistance:
     ParentView: {fileID: 764846547}
     ViewFieldPath: OutlineDistance
@@ -30029,86 +30780,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 770456238}
     ViewFieldPath: Item
@@ -30125,11 +30893,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 770456238}
     ViewFieldPath: IsDestroyed
@@ -30159,37 +30929,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 393999234}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   From: Highlighted
   To: Default
 --- !u!1 &904687111
@@ -30284,86 +31085,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 904687113}
     ViewFieldPath: Item
@@ -30380,11 +31198,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 904687113}
     ViewFieldPath: IsDestroyed
@@ -30414,37 +31234,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 393999234}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   EasingFunction: 0
   AutoReset: 0
   AutoReverse: 0
@@ -30454,6 +31305,240 @@ MonoBehaviour:
   StartOffset: 0
   FromStringValue: 
   ToStringValue: 
+--- !u!1 &1004293070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1004293071}
+  - component: {fileID: 1004293075}
+  - component: {fileID: 1004293074}
+  - component: {fileID: 1004293073}
+  - component: {fileID: 1004293072}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1004293071
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1004293070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2000122, y: 125.0725, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1043417542}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.20000526, y: 0}
+  m_SizeDelta: {x: -0.4, y: 94.981}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1004293072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1004293070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &1004293073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1004293070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 0
+--- !u!114 &1004293074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1004293070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1004293075
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1004293070}
+--- !u!1 &1043417541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1043417542}
+  - component: {fileID: 1043417546}
+  - component: {fileID: 1043417545}
+  - component: {fileID: 1043417544}
+  - component: {fileID: 1043417547}
+  - component: {fileID: 1043417543}
+  m_Layer: 5
+  m_Name: ShooterList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1043417542
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043417541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -323.75, y: -28.927986, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1004293071}
+  m_Father: {fileID: 611693809}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134.25, y: -28.928}
+  m_SizeDelta: {x: 268.31, y: -57.855}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1043417543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043417541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &1043417544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043417541}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1367256648, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 0}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 1004293071}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1043417545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043417541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1043417546
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043417541}
+--- !u!114 &1043417547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043417541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f393eb97f9212ac4d9805ffdcc67d985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShooterList: {fileID: 1004293070}
+  ShooterPrefab: {fileID: 1080569750953938, guid: b79afedc8dc79624ba0009518b50e900,
+    type: 2}
 --- !u!1 &1080184382
 GameObject:
   m_ObjectHideFlags: 0
@@ -30701,86 +31786,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1137032338}
     ViewFieldPath: Item
@@ -30797,11 +31899,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1137032338}
     ViewFieldPath: IsDestroyed
@@ -30831,37 +31935,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 393999234}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   EasingFunction: 0
   AutoReset: 0
   AutoReverse: 0
@@ -31114,86 +32249,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1307654461}
     ViewFieldPath: Item
@@ -31210,11 +32362,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1307654461}
     ViewFieldPath: IsDestroyed
@@ -31244,37 +32398,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 399450383}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   From: Any
   To: Highlighted
 --- !u!1 &1353009237
@@ -31403,86 +32588,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1353009241}
     ViewFieldPath: Item
@@ -31499,11 +32701,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1353009241}
     ViewFieldPath: IsDestroyed
@@ -31531,6 +32735,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   FirstSelectedGameObject:
     ParentView: {fileID: 1353009241}
     ViewFieldPath: FirstSelectedGameObject
@@ -31731,86 +32960,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: Item
@@ -31827,11 +33073,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: IsDestroyed
@@ -31860,6 +33108,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: Width
@@ -32095,7 +33368,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   Text:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: Text
@@ -32131,7 +33410,11 @@ MonoBehaviour:
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   FontStyle:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: FontStyle
@@ -32186,7 +33469,11 @@ MonoBehaviour:
     ViewFieldPath: ShadowColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ShadowDistance:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: ShadowDistance
@@ -32198,7 +33485,11 @@ MonoBehaviour:
     ViewFieldPath: OutlineColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   OutlineDistance:
     ParentView: {fileID: 1362420166}
     ViewFieldPath: OutlineDistance
@@ -32298,7 +33589,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1403445162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -343.5, y: 0, z: 0}
+  m_LocalPosition: {x: -37.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 222577594}
@@ -32373,86 +33664,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1403445164}
     ViewFieldPath: Item
@@ -32469,11 +33777,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1403445164}
     ViewFieldPath: IsDestroyed
@@ -32503,6 +33813,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 1403445164}
     ViewFieldPath: Width
@@ -32738,7 +34073,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
 --- !u!114 &1403445165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32853,86 +34194,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: Item
@@ -32949,11 +34307,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: IsDestroyed
@@ -32983,6 +34343,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: Width
@@ -33218,7 +34603,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   Text:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: Text
@@ -33254,7 +34645,11 @@ MonoBehaviour:
     ViewFieldPath: FontColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   FontStyle:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: FontStyle
@@ -33309,7 +34704,11 @@ MonoBehaviour:
     ViewFieldPath: ShadowColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ShadowDistance:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: ShadowDistance
@@ -33321,7 +34720,11 @@ MonoBehaviour:
     ViewFieldPath: OutlineColor
     IsMapped: 0
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   OutlineDistance:
     ParentView: {fileID: 1477579211}
     ViewFieldPath: OutlineDistance
@@ -33492,86 +34895,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: Item
@@ -33588,11 +35008,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: IsDestroyed
@@ -33621,6 +35043,31 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Width:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: Width
@@ -33856,7 +35303,13 @@ MonoBehaviour:
     ViewFieldPath: BackgroundColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+  _layoutRoot: {fileID: 0}
+  _canvasGroup: {fileID: 0}
   UseListMask:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: UseListMask
@@ -33929,7 +35382,11 @@ MonoBehaviour:
     ViewFieldPath: ListMaskColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   ListMaskAlignment:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: ListMaskAlignment
@@ -34030,7 +35487,11 @@ MonoBehaviour:
     ViewFieldPath: HorizontalScrollbarColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   HorizontalScrollbarHandleImage:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: HorizontalScrollbarHandleImage
@@ -34057,7 +35518,11 @@ MonoBehaviour:
     ViewFieldPath: HorizontalScrollbarHandleColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   VerticalScrollbarOrientation:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: VerticalScrollbarOrientation
@@ -34123,7 +35588,11 @@ MonoBehaviour:
     ViewFieldPath: VerticalScrollbarColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   VerticalScrollbarHandleImage:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: VerticalScrollbarHandleImage
@@ -34150,7 +35619,11 @@ MonoBehaviour:
     ViewFieldPath: VerticalScrollbarHandleColor
     IsMapped: 1
     _isSet: 0
-    _internalValue: {r: 0, g: 0, b: 0, a: 0}
+    _internalValue:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
   CanScrollHorizontally:
     ParentView: {fileID: 1536070299}
     ViewFieldPath: CanScrollHorizontally
@@ -34450,16 +35923,25 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   ItemDeselected:
     Name: ItemDeselected
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   ListChanged:
     Name: ListChanged
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
+  _presentedListItems: []
+  _listItemTemplates: []
+  _updateWidth: 0
+  _updateHeight: 0
+  _previousViewportMin: 0
+  _updateVirtualization: 0
 --- !u!114 &1536070300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34599,6 +36081,80 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000030518, y: 66.5}
   m_SizeDelta: {x: 0.000061035, y: 41.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1786939064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1786939065}
+  - component: {fileID: 1786939067}
+  - component: {fileID: 1786939066}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1786939065
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1786939064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -325.10004, y: 125.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 611693809}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 132.9, y: -28.919998}
+  m_SizeDelta: {x: 265.6, y: 57.850006}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1786939066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1786939064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: SHOOTERS
+--- !u!222 &1786939067
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1786939064}
 --- !u!1 &1910194889
 GameObject:
   m_ObjectHideFlags: 0
@@ -34729,86 +36285,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 1944658252}
     ViewFieldPath: Item
@@ -34825,11 +36398,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 1944658252}
     ViewFieldPath: IsDestroyed
@@ -34859,37 +36434,68 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 399450383}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   From: Highlighted
   To: Default
 --- !u!1001 &1998302127
@@ -35099,86 +36705,103 @@ MonoBehaviour:
     TriggeredByEventSystem: 1
     EventTriggerType: 16
     IsDisabled: 0
+    _viewActionEntries: []
   Deselect:
     Name: Deselect
     TriggeredByEventSystem: 1
     EventTriggerType: 10
     IsDisabled: 0
+    _viewActionEntries: []
   Drop:
     Name: Drop
     TriggeredByEventSystem: 1
     EventTriggerType: 6
     IsDisabled: 0
+    _viewActionEntries: []
   Move:
     Name: Move
     TriggeredByEventSystem: 1
     EventTriggerType: 11
     IsDisabled: 0
+    _viewActionEntries: []
   Click:
     Name: Click
     TriggeredByEventSystem: 1
     EventTriggerType: 4
     IsDisabled: 0
+    _viewActionEntries: []
   BeginDrag:
     Name: BeginDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 13
     IsDisabled: 0
+    _viewActionEntries: []
   EndDrag:
     Name: EndDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 14
     IsDisabled: 0
+    _viewActionEntries: []
   Drag:
     Name: Drag
     TriggeredByEventSystem: 1
     EventTriggerType: 5
     IsDisabled: 0
+    _viewActionEntries: []
   InitializePotentialDrag:
     Name: InitializePotentialDrag
     TriggeredByEventSystem: 1
     EventTriggerType: 12
     IsDisabled: 0
+    _viewActionEntries: []
   MouseDown:
     Name: MouseDown
     TriggeredByEventSystem: 1
     EventTriggerType: 2
     IsDisabled: 0
+    _viewActionEntries: []
   MouseEnter:
     Name: MouseEnter
     TriggeredByEventSystem: 1
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   MouseExit:
     Name: MouseExit
     TriggeredByEventSystem: 1
     EventTriggerType: 1
     IsDisabled: 0
+    _viewActionEntries: []
   MouseUp:
     Name: MouseUp
     TriggeredByEventSystem: 1
     EventTriggerType: 3
     IsDisabled: 0
+    _viewActionEntries: []
   Scroll:
     Name: Scroll
     TriggeredByEventSystem: 1
     EventTriggerType: 7
     IsDisabled: 0
+    _viewActionEntries: []
   Select:
     Name: Select
     TriggeredByEventSystem: 1
     EventTriggerType: 9
     IsDisabled: 0
+    _viewActionEntries: []
   Submit:
     Name: Submit
     TriggeredByEventSystem: 1
     EventTriggerType: 15
     IsDisabled: 0
+    _viewActionEntries: []
   UpdateSelected:
     Name: UpdateSelected
     TriggeredByEventSystem: 1
     EventTriggerType: 8
     IsDisabled: 0
+    _viewActionEntries: []
   Item:
     ParentView: {fileID: 2033508620}
     ViewFieldPath: Item
@@ -35195,11 +36818,13 @@ MonoBehaviour:
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   Deactivated:
     Name: Deactivated
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   IsDestroyed:
     ParentView: {fileID: 2033508620}
     ViewFieldPath: IsDestroyed
@@ -35229,36 +36854,67 @@ MonoBehaviour:
   ValueConverterContext:
     BaseDirectory: 
     UnitSize: {x: 40, y: 40, z: 40}
+  _viewTypeData:
+    ViewTypeName: 
+    ViewNameAliases: []
+    ReplacesViewModel: 
+    Xuml: 
+    DependencyNames: []
+    ViewActionFields: []
+    DependencyFields: []
+    ComponentFields: []
+    ReferenceFields: []
+    FieldsNotSetFromXuml: []
+    ExcludedComponentFields: []
+    ViewFields: []
+    GenericViewFields: []
+    MapViewFields: []
+    ViewFieldConverters: []
+    ViewFieldChangeHandlers: []
+    PermanentMark: 0
+    TemporaryMark: 0
+    HideInPresenter: 0
+  _eventSystemViewActions: []
+  _isDefaultState: 0
+  _isInitialized: 0
+  _previousState: 
+  _stateAnimation: {fileID: 0}
   Target: {fileID: 393999234}
   AnimationStarted:
     Name: AnimationStarted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationReversed:
     Name: AnimationReversed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationCompleted:
     Name: AnimationCompleted
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationStopped:
     Name: AnimationStopped
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationPaused:
     Name: AnimationPaused
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   AnimationResumed:
     Name: AnimationResumed
     TriggeredByEventSystem: 0
     EventTriggerType: 0
     IsDisabled: 0
+    _viewActionEntries: []
   From: Any
   To: Highlighted

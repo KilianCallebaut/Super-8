@@ -1,7 +1,0 @@
-﻿<TextMeshProInputField xmlns="MarkLight">
-  <Region Id="InputFieldPlaceholder">
-    <ContentPlaceholder />
-  </Region>
-
-  <Label Id="InputText" />  
-</TextMeshProInputField>

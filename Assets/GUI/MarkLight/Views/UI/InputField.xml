@@ -1,7 +1,0 @@
-<InputField>    
-  <Region Id="InputFieldPlaceholder">
-    <ContentPlaceholder />
-  </Region>
-
-  <UnityLabel Id="InputText" />
-</InputField>
