@@ -119,19 +119,21 @@ public class Weapon : MonoBehaviour {
 		float mean = 0.0f;
 		switch (spreadMode) {
 		case SPREAD_MODE_EVEN:
-				ret = spread / 2;
-				float spreadPerIndex = spread / (float)(max - 1);
-				ret = ret - spreadPerIndex * index;
+				if (max > 1) {
+					ret = spread / 2;
+					float spreadPerIndex = spread / (float)(max - 1);
+					ret = ret - spreadPerIndex * index;
+				}
 				break;
 			case SPREAD_MODE_RANDOM_EQUAL:
-				//generate random number between -spread and spread
-				ret = Random.value * spread * 2.0f - spread;
+				//generate random number between -spread/2 and spread/2
+				ret = Random.value * spread - spread/2;
 				break;
 			case SPREAD_MODE_RANDOM_NORMAL:
 				//use normal distribution with spread distribution
-				float u1 = 1.0-Random.value; //uniform(0,1] random doubles
-				float u2 = 1.0-Random.value;
-				float randStdNormal = Mathf.Sqrt(-2.0 * Mathf.Log(u1)) * Mathf.Sin(2.0 * Mathf.PI * u2); //random normal(0,1)
+				float u1 = 1.0f-Random.value; //uniform(0,1] random doubles
+				float u2 = 1.0f-Random.value;
+				float randStdNormal = Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2); //random normal(0,1)
 				ret = mean + spread * randStdNormal; //random normal(mean,stdDev^2)
 				break;
 			default:
