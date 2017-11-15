@@ -1,0 +1,10 @@
+<PlayerListView xmlns="MarkLight">
+  <List Alignment="Left">
+    <ListItem Alignment="Left">
+      <Label Text="Shooter" />'
+    </ListItem>
+    <ListItem>
+      <Label Text="Shooter" />'
+    </ListItem>
+  </List>
+</PlayerListView>
