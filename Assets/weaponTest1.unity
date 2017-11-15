@@ -159,17 +159,17 @@ MonoBehaviour:
     type: 2}
   projectileSpawnDistanceFromCenter: 2
   center: {x: 0, y: 0, z: 0}
-  projectilesPerShot: 1
+  projectilesPerShot: 3
   optimalRangeHint: 100
-  spreadMode: 2
-  spread: 0.05
+  spreadMode: 0
+  spread: 0.5
   ammoCount: -1
   reloadDuration: 5
   volleysUntilReload: 3
   timeBetweenShots: 0.1
   timeBetweenVolleys: 2
   timeUntilFirstVolley: 1
-  shotsPerVolley: 10
+  shotsPerVolley: 1
 --- !u!23 &712096563
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -24,8 +24,8 @@ public abstract class AbstractProjectile : MonoBehaviour {
 	protected abstract void onCollision (GameObject g);
 	protected abstract void bulletUpdate (float dTime);
 
-	void OnCollisionEnter(Collision c) {
-		if (c.gameObject == ignoreCollisionsWith)
+	void OnTriggerEnter2D(Collider2D c) {
+		if (c.gameObject == ignoreCollisionsWith || c.gameObject.GetComponent<AbstractProjectileCollidable>() == null)
 			return;
 		onCollision (c.gameObject);
 	}
