@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 114469612905295590}
   - component: {fileID: 114730754666858728}
   m_Layer: 5
-  m_Name: Shooter
+  m_Name: ShooterItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
