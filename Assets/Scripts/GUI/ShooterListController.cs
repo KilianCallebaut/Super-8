@@ -16,22 +16,13 @@ public class ShooterListController : MonoBehaviour {
 		for (int i = 0; i < 4; i++)
         {
             GameObject newShooter = GameObject.Instantiate(ShooterPrefab) as GameObject;
-            ShooterController controller = newShooter.GetComponent<ShooterController>();
-            controller.Name.text = shooters[i].Name;
-			controller.SetDropdownValue (shooters[i].Role);
+			ShooterController controller = newShooter.GetComponent<ShooterController>();
+			controller.Initialize (shooters[i]);
             newShooter.transform.parent = ShooterList.transform;
             newShooter.transform.localScale = Vector3.one;
         }
 	}
 
-	private class Shooter {
-		public string Name { get; }
-		public string Role { get; set; }
 
-		public Shooter (string Name, string Role) {
-			this.Name = Name;
-			this.Role = Role;
-		}
-	}
 
 }
