@@ -45,6 +45,8 @@ public class Agent : MonoBehaviour {
         weapon = gameObject.AddComponent<Gun>();
         
         Behaviour = gameObject.AddComponent<AgentStandardBehaviour>();
+        Destination = transform.position;
+        visionDirection = gameObject.GetComponent<Rigidbody2D>().transform.forward;
     }
 
 
@@ -59,7 +61,7 @@ public class Agent : MonoBehaviour {
     private void See()
     {
         // update direction 
-        if (AtDestination())
+        if (!AtDestination())
         { 
             var heading = (Destination - transform.position);
             direction = heading / heading.magnitude;
@@ -67,11 +69,11 @@ public class Agent : MonoBehaviour {
 
        
         // update visionDirection 
-        if (visionDirection == Vector3.zero)
-        {
-            var seeing = (LookingDestination - transform.position);
-            visionDirection = seeing / seeing.magnitude;
-        }
+        //if (LookingDestination == Vector3.zero)
+        //{
+            //var seeing = (LookingDestination - transform.position);
+            //visionDirection = seeing / seeing.magnitude;
+        //}
 
         // See enemies
         Spotting();
@@ -133,6 +135,7 @@ public class Agent : MonoBehaviour {
         }
 
         // Remove deleted agents
+        /*
         foreach (KeyValuePair<string, OtherAgent> oa in seenOtherAgents)
         {
             var tosearch = LevelManager.Instance.Agents.Find(x => x.name == oa.Key);
@@ -144,7 +147,7 @@ public class Agent : MonoBehaviour {
                     TargetAgent = null;
                 }
             }
-        }
+        }*/
 
         
     }
@@ -204,16 +207,7 @@ public class Agent : MonoBehaviour {
     // Placeholder for collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Bullet" && gameObject.name != collision.GetComponent<Bullet>().Source.name)
-        {
-            Destroy(collision.gameObject);
-            health--;
-            if (health == 0.0f)
-            {
-                Die();
-
-            }
-        }
+        
         Stop();
     }
     
@@ -299,5 +293,24 @@ public class Agent : MonoBehaviour {
         Destination = transform.position;
     }
 
-   
+    // Damages agent by damage.
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0.0f)
+        {
+            Die();
+        }
+    }
+
+    // For debugging
+    void OnDrawGizmosSelected()
+    {
+        Debug.Log(TargetAgent);
+        // Display the explosion radius when selected
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(TargetAgent.LastPosition, 0.1f);
+
+        
+    }
 }

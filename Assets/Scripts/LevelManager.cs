@@ -141,7 +141,7 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
-        for (int i = 0; i< StartTilesTeam1.Count; i++) //
+        for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
@@ -151,13 +151,14 @@ public class LevelManager : Singleton<LevelManager> {
             Agents.Add(newAgent);
         }
 
-        for (int i = 0; i < StartTilesTeam2.Count; i++) //
+        for (int i = 0; i < StartTilesTeam2.Count ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i].transform.position;
             newAgent.Team = 2;
+            newAgent.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
             Agents.Add(newAgent);
         }
     }
@@ -165,10 +166,26 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent death
     public void DeleteAgent(Agent deletedAgent)
     {
-        Destroy(deletedAgent.gameObject);
         Agents.Remove(deletedAgent);
+
+        foreach(Agent a in Agents)
+        {
+            if (a.seenOtherAgents.ContainsKey(deletedAgent.name))
+            {
+                a.seenOtherAgents.Remove(deletedAgent.name);
+            }
+
+            if (a.TargetAgent != null &&  a.TargetAgent.Enemy.Name == deletedAgent.name)
+            {
+                a.TargetAgent = null;
+            }
+        }
+
+        Destroy(deletedAgent.gameObject);
+
 
     }
 
+  
 
 }

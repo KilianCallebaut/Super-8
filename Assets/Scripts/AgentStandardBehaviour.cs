@@ -19,12 +19,13 @@ public class AgentStandardBehaviour : AgentBehaviour {
 
     public override void Think()
     {
+
         if (agent == null)
             agent = GetComponent<Agent>();
 
       
         // Placeholder for pathfinding
-        if (agent.Destination == null || agent.AtDestination())
+        if (agent.AtDestination())
         {
                 MoveToRandomDestination();
         }
@@ -50,7 +51,7 @@ public class AgentStandardBehaviour : AgentBehaviour {
     {
 
 
-        if (agent.TargetAgent == null && agent.seenOtherAgents.Count == 0 && !agent.AtDestination())
+        if (agent.TargetAgent == null && !agent.AtDestination())
         {
             agent.LookingDestination = agent.Destination;
         }
@@ -61,13 +62,16 @@ public class AgentStandardBehaviour : AgentBehaviour {
 
             foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
             {
-                if (agent.TargetAgent == null)
+                if (a.Value.Team != agent.Team)
                 {
-                    agent.TargetAgent = new Target(a.Value, Time.time);
-                }
-                if (Vector3.Distance(transform.position, a.Value.Position) < Vector3.Distance(transform.position, agent.TargetAgent.LastPosition))
-                {
-                    agent.TargetAgent = new Target(a.Value, Time.time);
+                    if (agent.TargetAgent == null)
+                    {
+                        agent.TargetAgent = new Target(a.Value, Time.time);
+                    }
+                    if (Vector3.Distance(transform.position, a.Value.Position) < Vector3.Distance(transform.position, agent.TargetAgent.LastPosition))
+                    {
+                        agent.TargetAgent = new Target(a.Value, Time.time);
+                    }
                 }
             }
         }

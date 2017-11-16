@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     public GameObject Source { get; set; }
+    private float damage = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -22,10 +23,32 @@ public class Bullet : MonoBehaviour {
     {
         try
         {
-            if (collision.tag != "Bullet" && collision.tag != Source.tag)
+
+            switch (collision.tag)
             {
-                Destroy(gameObject);
+                case "Bullet":
+                    break;
+
+                case "Agent":
+                    if ( collision.gameObject.name != Source.name)
+                    {
+                        collision.gameObject.GetComponent<Agent>().Damage(damage);
+                        Destroy(gameObject);
+
+                    }
+                    break;
+
+                default:
+                    Destroy(gameObject);
+                    break;
+
+                    
             }
+            if (collision.tag == "Bullet")
+            {
+                return;
+            }
+
         } catch (Exception e)
         {
             
