@@ -14,7 +14,6 @@ public class CoverScript : AbstractProjectileCollidable {
 		
 		float f = Random.value;
 		f = f * hitChanceMultiplier;//higher HCM value means higher chance to hit. Lower means less chance.
-		Debug.Log (this.gameObject.name + " was "+(f > (1.0f-frac) ? "" : "not " )+"hit");
 		return f > (1.0f - frac);
 	}
 	public override void receiveDamage (int damage) {

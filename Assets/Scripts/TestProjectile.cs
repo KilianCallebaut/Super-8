@@ -14,6 +14,7 @@ public class TestProjectile : AbstractProjectile {
 	protected override void onCollision(GameObject g) {
 		AbstractProjectileCollidable a = g.GetComponent<AbstractProjectileCollidable> ();
 		if (a.collides (dTrav*vel, dTrav, dTrav / travMax)) {
+			Debug.Log (this.gameObject.name +" hit " g.name);
 			a.receiveDamage (damage);
 			Destroy (this.gameObject);
 		}
