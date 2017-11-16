@@ -7,17 +7,31 @@ public class ShooterListController : MonoBehaviour {
     public GameObject ShooterPrefab;
 	
 	void Start () {
-        string[] names = new string[] { "bob", "alice", "henning", "alfons" };
-        string[] status = new string[] { "YES", "YES", "NO", "YES" };
+		Shooter[] shooters = new Shooter[] {
+			new Shooter ("Alice", "Tank"),
+			new Shooter ("Bob", "Cop"),
+			new Shooter ("Henning", "Mailman"),
+			new Shooter ("Alfons", "Pilot")
+		};
 		for (int i = 0; i < 4; i++)
         {
             GameObject newShooter = GameObject.Instantiate(ShooterPrefab) as GameObject;
             ShooterController controller = newShooter.GetComponent<ShooterController>();
-            controller.Name.text = names[i];
-            controller.Status.text = status[i];
+            controller.Name.text = shooters[i].Name;
+			controller.SetDropdownValue (shooters[i].Role);
             newShooter.transform.parent = ShooterList.transform;
             newShooter.transform.localScale = Vector3.one;
         }
+	}
+
+	private class Shooter {
+		public string Name { get; }
+		public string Role { get; set; }
+
+		public Shooter (string Name, string Role) {
+			this.Name = Name;
+			this.Role = Role;
+		}
 	}
 
 }
