@@ -15,11 +15,14 @@ public class TestProjectile : AbstractProjectile {
 		AbstractProjectileCollidable a = g.GetComponent<AbstractProjectileCollidable> ();
 		if (a.collides (dTrav*vel, dTrav, dTrav / travMax)) {
 			a.receiveDamage (damage);
+			Destroy (this.gameObject);
 		}
-		Destroy (this.gameObject);
 	}
 	protected override void bulletUpdate(float dTime) {
 		dTrav += dTime;
 		transform.Translate (dir * vel * dTime);
+		if (dTrav >= travMax) {
+			Destroy (this.gameObject);
+		}
 	}
 }

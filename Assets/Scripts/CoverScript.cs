@@ -10,13 +10,15 @@ public class CoverScript : AbstractProjectileCollidable {
 	}
 	public int maxDamage = 10;
 	public int damageReceived = 0;
-	public float cover = 0.3f;
-	public override bool collides (float dist, float time, float frac) {
+	public override bool bulletCollides (float dist, float time, float frac) {
+		
 		float f = Random.value;
-		f = (1.0f - frac) * f + frac;
-		return f < (1.0f - cover);
+		f = f * hitChanceMultiplier;//higher HCM value means higher chance to hit. Lower means less chance.
+		Debug.Log (this.gameObject.name + " was "+(f > (1.0f-frac) ? "" : "not " )+"hit");
+		return f > (1.0f - frac);
 	}
 	public override void receiveDamage (int damage) {
+		Debug.Log (this.gameObject.name + " took " + damage + " points of damage.");
 		damageReceived += damage;
 		if (damageReceived >= maxDamage) {
 			Destroy (this.gameObject);
