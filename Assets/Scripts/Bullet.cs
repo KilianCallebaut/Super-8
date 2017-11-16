@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
+
+    public GameObject Source { get; set; }
 
 	// Use this for initialization
 	void Start () {
@@ -17,11 +20,16 @@ public class Bullet : MonoBehaviour {
     // Placeholder for collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Bullet")
-        { 
-            Destroy(gameObject);
+        try
+        {
+            if (collision.tag != "Bullet" && collision.tag != Source.tag)
+            {
+                Destroy(gameObject);
+            }
+        } catch (Exception e)
+        {
+            
         }
-
 
        
     }

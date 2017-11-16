@@ -8,10 +8,10 @@ public class TestProjectile : AbstractProjectile {
 	void Start () {
 		
 	}
-	private override void onCollision(GameObject g) {
+	protected override void onCollision(GameObject g) {
 		Destroy (this.gameObject);
 	}
-	private override void bulletUpdate(float dTime) {
+	protected override void bulletUpdate(float dTime) {
 		transform.Translate (dir * vel * dTime);
 	}
 	// Update is called once per frame

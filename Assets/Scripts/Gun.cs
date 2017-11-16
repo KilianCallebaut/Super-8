@@ -8,22 +8,20 @@ public class Gun : MonoBehaviour {
     private float bulletSpeed = 19.0f;
     private float fireRate = 1.0f/9.0f ; // Firerate of 9 bullets/sec
 
-    [SerializeField]
     private Rigidbody2D bullet;
 
     private float lastShot;
     private bool coolDown;
-    private int counter;
 
 	// Use this for initialization
 	void Start () {
         lastShot = Time.time;
         coolDown = false;
-        counter = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        bullet = ObjectManager.Instance.getBulletOfType(0);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -41,8 +39,7 @@ public class Gun : MonoBehaviour {
             
             Rigidbody2D newBullet = Instantiate(bullet);
             newBullet.transform.position = transform.position;
-            newBullet.name = gameObject.name + " Bullet " + counter;
-            counter++;
+            newBullet.GetComponent<Bullet>().Source = gameObject;
             Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
             var heading = (target - transform.position);

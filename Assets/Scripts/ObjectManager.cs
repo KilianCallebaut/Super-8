@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectManager : MonoBehaviour {
+public class ObjectManager : Singleton<ObjectManager> {
 
- 
+    [SerializeField]
+    private Rigidbody2D[] Bullets;
+
+    //Returns Bullet of this type
+    public Rigidbody2D getBulletOfType(int type)
+    {
+        return Bullets[type];
+    }
 
     // Use this for initialization
     void Start () {

@@ -34,7 +34,7 @@ public class AgentAttributes {
     // Default/debugger agentattributes
     public AgentAttributes(GameObject agentPrefab)
     {
-        this.speed = 5.0f;
+        this.speed = 2.0f;
         this.reachOfVision = 10.0f;
         this.widthOfVision = 50.0f;
         this.reflex = 1.0f / 2.0f;

@@ -15,13 +15,15 @@ public class Agent : MonoBehaviour {
     public Target TargetAgent { get; set; }
 
     // Percepts
-    public List<OtherAgent> seenOtherAgents { get; private set; }
+    public Dictionary<string, OtherAgent> seenOtherAgents { get; private set; }
     public Vector3 direction { get; private set; }
     public Vector3 visionDirection { get; private set; }
 
     // Agent info
     public int Team { get; set; }
-    private Gun gun;
+    private Gun weapon;
+
+    private GameObject bullet;
 
     // Agent's bonusses
     private float aimBonus = 0.0f;
@@ -39,8 +41,9 @@ public class Agent : MonoBehaviour {
 
     private void initialize()
     {
-        seenOtherAgents = new List<OtherAgent>();
-        gun = GetComponent<Gun>();
+        seenOtherAgents = new Dictionary<string, OtherAgent>();
+        weapon = gameObject.AddComponent<Gun>();
+        
         Behaviour = gameObject.AddComponent<AgentStandardBehaviour>();
     }
 
@@ -56,7 +59,7 @@ public class Agent : MonoBehaviour {
     private void See()
     {
         // update direction 
-        if (Destination != transform.position)
+        if (AtDestination())
         { 
             var heading = (Destination - transform.position);
             direction = heading / heading.magnitude;
@@ -76,8 +79,6 @@ public class Agent : MonoBehaviour {
         // Aim at target
         Aiming();
 
-        // Delete killed agents
-        seenOtherAgents.RemoveAll(delegate (OtherAgent o) { return o == null; });
         
         // For debugging purposes, shows field of vision
         var forwardpoint = (visionDirection * Attributes.reachOfVision);
@@ -108,11 +109,10 @@ public class Agent : MonoBehaviour {
             {
 
                 // Update position
-                int index = seenOtherAgents.FindLastIndex(x => x == oa);
-                if (index != -1)
-                    seenOtherAgents[index].Position = oa.Position;
+                if (seenOtherAgents.ContainsKey(oa.Name))
+                    seenOtherAgents[oa.Name].Position = oa.Position;
                 else
-                    seenOtherAgents.Add(oa);
+                    seenOtherAgents.Add(oa.Name, oa);
 
                 if (TargetAgent != null && TargetAgent.Enemy.Equals(oa))
                 {
@@ -122,11 +122,26 @@ public class Agent : MonoBehaviour {
             }
             else 
             {
+
                 // Remove unseen agents
-                seenOtherAgents.Remove(oa);
+                seenOtherAgents.Remove(oa.Name);
                 if (TargetAgent != null && TargetAgent.Enemy.Equals(oa))
                 {
                     TargetAgent.Seen = false;
+                }
+            }
+        }
+
+        // Remove deleted agents
+        foreach (KeyValuePair<string, OtherAgent> oa in seenOtherAgents)
+        {
+            var tosearch = LevelManager.Instance.Agents.Find(x => x.name == oa.Key);
+            if (tosearch == null)
+            {
+                seenOtherAgents.Remove(oa.Key);
+                if (oa.Key == TargetAgent.Enemy.Name)
+                {
+                    TargetAgent = null;
                 }
             }
         }
@@ -143,7 +158,6 @@ public class Agent : MonoBehaviour {
         if (TargetAgent != null )
         {
             aimBonus = aimIncrease * TargetAgent.AimOffset;
-
             var aimZone = (Mathf.Pow(Vector3.Distance(transform.position, TargetAgent.Enemy.Position), 2.0f) / Attributes.accuracy) - aimBonus;
             var aimlimitleft = TargetAgent.LastPosition + new Vector3(-aimZone, 0);
             var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
@@ -181,12 +195,18 @@ public class Agent : MonoBehaviour {
         
     }
 
+    // Checks if the agent is at its destination
+    public bool AtDestination()
+    {
+        return Destination == transform.position;
+    }
 
     // Placeholder for collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Bullet" || gameObject.tag == "Bullet")
+        if (collision.tag == "Bullet" && gameObject.name != collision.GetComponent<Bullet>().Source.name)
         {
+            Destroy(collision.gameObject);
             health--;
             if (health == 0.0f)
             {
@@ -220,13 +240,31 @@ public class Agent : MonoBehaviour {
     {
         if (TargetAgent != null)
         {
+            // Update direction
             float offSet = Mathf.Pow(Vector3.Distance(transform.position, TargetAgent.Enemy.Position), 2.0f) / Attributes.accuracy;
             offSet -= aimBonus;
             Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
-            gun.Shoot(shootingLocation);
+            Vector3 shootingDirection = shootingLocation - transform.position;
+            float shootingAngle = Vector3.Angle(shootingDirection, direction);
+            //weapon.setShootingDirection(shootingAngle * Mathf.Deg2Rad);
+            weapon.Shoot(shootingLocation);
             TargetAgent.AimTime = Time.time;
-           
+
+            /*
+            if (!weapon.isShooting())
+            {
+                weapon.startShooting();
+            }*/
+
         }
+
+        /*
+        if (TargetAgent == null && weapon.isShooting())
+        {
+            weapon.stopShooting();
+        }*/
+
+       
     }
 
 

@@ -47,11 +47,19 @@ public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	}
+
+        projectileType = (GameObject) Resources.Load("Bullet");
+    }
 
 	public void startShooting() {
 		shooting = true;
 	}
+
+
+    public bool isShooting()
+    {
+        return shooting;
+    }
 
 	public void stopShooting() {
 		shooting = false;
@@ -69,6 +77,7 @@ public class Weapon : MonoBehaviour {
 		else
 			stopShooting ();
 	}
+
 
 	public void shootOnce() {
 		volleysUntilStopShooting = 1;
@@ -119,8 +128,8 @@ public class Weapon : MonoBehaviour {
 		float mean = 0.0f;
 		switch (spreadMode) {
 		case SPREAD_MODE_EVEN:
-				ret = spread / 2;
-				float spreadPerIndex = spread / (float)(max - 1);
+				ret = spread / 2.0f;
+				float spreadPerIndex = spread / (float)(max - 1.0f);
 				ret = ret - spreadPerIndex * index;
 				break;
 			case SPREAD_MODE_RANDOM_EQUAL:
@@ -129,9 +138,9 @@ public class Weapon : MonoBehaviour {
 				break;
 			case SPREAD_MODE_RANDOM_NORMAL:
 				//use normal distribution with spread distribution
-				float u1 = 1.0-Random.value; //uniform(0,1] random doubles
-				float u2 = 1.0-Random.value;
-				float randStdNormal = Mathf.Sqrt(-2.0 * Mathf.Log(u1)) * Mathf.Sin(2.0 * Mathf.PI * u2); //random normal(0,1)
+				float u1 = 1.0f-Random.value; //uniform(0,1] random doubles
+				float u2 = 1.0f-Random.value;
+				float randStdNormal = Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2); //random normal(0,1)
 				ret = mean + spread * randStdNormal; //random normal(mean,stdDev^2)
 				break;
 			default:
