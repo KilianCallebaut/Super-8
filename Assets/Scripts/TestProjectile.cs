@@ -14,8 +14,4 @@ public class TestProjectile : AbstractProjectile {
 	protected override void bulletUpdate(float dTime) {
 		transform.Translate (dir * vel * dTime);
 	}
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

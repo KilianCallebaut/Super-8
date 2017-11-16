@@ -22,6 +22,7 @@ public class AgentStandardBehaviour : AgentBehaviour {
         if (agent == null)
             agent = GetComponent<Agent>();
 
+      
         // Placeholder for pathfinding
         if (agent.Destination == null || agent.AtDestination())
         {

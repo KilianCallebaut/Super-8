@@ -9,7 +9,7 @@ public abstract class AbstractProjectile : MonoBehaviour {
 		
 	}
 	protected Vector3 dir;
-	protected float vel;
+	protected float vel = 1.0f;
 	protected GameObject ignoreCollisionsWith = null;
 
 

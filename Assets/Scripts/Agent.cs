@@ -103,7 +103,7 @@ public class Agent : MonoBehaviour {
     {
         foreach (Agent a in LevelManager.Instance.Agents)
         {
-            OtherAgent oa = new OtherAgent(a.name, a.transform.position);
+            OtherAgent oa = new OtherAgent(a.name, a.Team, a.transform.position);
 
             if (InFieldOfVision(a))
             {

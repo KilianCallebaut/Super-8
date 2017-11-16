@@ -11,11 +11,13 @@ public class OtherAgent {
 
     public Vector3 Position { get; set; }
     public string Name { get; set; }
+    public int Team { get; set; }
 
-    public OtherAgent( string name, Vector3 position)
+    public OtherAgent( string name, int team, Vector3 position)
     {
         this.Position = position;
         this.Name = name;
+        this.Team = team;
     }
 
     public override bool Equals(object obj)

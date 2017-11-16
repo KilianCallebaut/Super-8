@@ -128,13 +128,16 @@ public class Weapon : MonoBehaviour {
 		float mean = 0.0f;
 		switch (spreadMode) {
 		case SPREAD_MODE_EVEN:
-				ret = spread / 2.0f;
-				float spreadPerIndex = spread / (float)(max - 1.0f);
-				ret = ret - spreadPerIndex * index;
+
+				if (max > 1) {
+					ret = spread / 2;
+					float spreadPerIndex = spread / (float)(max - 1);
+					ret = ret - spreadPerIndex * index;
+				}
 				break;
 			case SPREAD_MODE_RANDOM_EQUAL:
-				//generate random number between -spread and spread
-				ret = Random.value * spread * 2.0f - spread;
+				//generate random number between -spread/2 and spread/2
+				ret = Random.value * spread - spread/2;
 				break;
 			case SPREAD_MODE_RANDOM_NORMAL:
 				//use normal distribution with spread distribution
