@@ -11,6 +11,7 @@ public class ObjectivePlacement : MonoBehaviour {
 
 	private GameObject objectiveMarker;
 	private bool markerIsActive = false;
+	private bool markerIsPlaced = false;
 
 	void Start () {
 		objectiveMarker = GameObject.Instantiate(ObjectiveMarkerPrefab) as GameObject;
@@ -25,7 +26,7 @@ public class ObjectivePlacement : MonoBehaviour {
 
 	public void SendObjectiveToLevelManager()
 	{
-		if (!markerIsActive)
+		if (!markerIsPlaced)
 			return;
 		
 		LevelManager actualLevelManager = LevelManager.GetComponent<LevelManager> ();
@@ -44,34 +45,12 @@ public class ObjectivePlacement : MonoBehaviour {
 	{
 		if (Input.GetMouseButtonDown(0)) // left click
 		{
-			// do a graphics raycast on the canvas
-			GraphicRaycaster gr = GetComponent<GraphicRaycaster> ();
-			PointerEventData ped = new PointerEventData(null);
-			ped.position = Input.mousePosition;
-			List<RaycastResult> results = new List<RaycastResult>();
-			gr.Raycast(ped, results);
-
-			if (markerIsActive)
+			if (markerIsActive) {
 				markerIsActive = false;
-
-			// if (this) node is in the raycast results, do something
-			if (results.Find((result) => result.gameObject == gameObject).gameObject != null)
-			{
-				
+				markerIsPlaced = true;
 			}
 		}
 
-		/*if (Input.GetMouseButtonDown(1)) // right click
-		{
-			if (arrowIsActive)
-			{
-				// destroy the arrow
-				arrow.SetActive(false);
-				arrowIsActive = false;
-			}
-		}*/
-
-		// update the arrow so that it ends at the mouse pointer
 		if (markerIsActive)
 			UpdateMarker();
 	}
