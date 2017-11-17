@@ -244,6 +244,7 @@ public class Agent : MonoBehaviour
     // Placeholder for dying
     private void Die()
     {
+        AgentGroup.DeleteMember(this);
         LevelManager.Instance.DeleteAgent(this);
     }
 

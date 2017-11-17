@@ -27,9 +27,13 @@ public class AgentStandardBehaviour : AgentBehaviour {
         // Placeholder for pathfinding
         if (agent.AtDestination())
         {
-                MoveToRandomDestination();
+            GoToGroupObjective();
         }
         
+        if (agent.AgentGroup.Leader != null && agent.AgentGroup.Leader.name != agent.name)
+        {
+            StayInGroup();
+        }
 
 
         Targetting();
@@ -46,6 +50,31 @@ public class AgentStandardBehaviour : AgentBehaviour {
         agent.Destination = tile.transform.position;
     }
 
+    // Go to grouplocation
+    private void GoToGroupObjective()
+    {
+        if (agent.AgentGroup.Objectives.Count > 0)
+        {
+            //int index = UnityEngine.Random.Range(0, LevelManager.Instance.Tiles.Count);
+            agent.Destination = agent.AgentGroup.Objectives[0];
+        } else
+        {
+            if (agent.AtDestination()) 
+                MoveToRandomDestination();
+        }
+    }
+
+    // When he strays to far away from the group go to the leader
+    private void StayInGroup()
+    {
+        if(Vector2.Distance(transform.position, agent.AgentGroup.Leader.transform.position) > agent.AgentGroup.Closeness)
+        {
+            agent.Destination = agent.AgentGroup.Leader.transform.position;
+        } else
+        {
+            GoToGroupObjective();
+        }
+    }
     // Placeholder for Targetting
     private void Targetting()
     {

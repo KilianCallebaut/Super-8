@@ -73,9 +73,7 @@ public class Group : MonoBehaviour
         Members.Add(a.name, a);
         if ( Leader == null)
         {
-
-            int index = UnityEngine.Random.Range(0, Members.Count);
-            Leader = System.Linq.Enumerable.ToList(Members.Values)[index];
+            AssignRandomLeader();
         }
     }
 
@@ -86,5 +84,29 @@ public class Group : MonoBehaviour
 
         Leader = a;
         AddMember(a);
+    }
+
+    public void AssignRandomLeader()
+    {
+        int index = UnityEngine.Random.Range(0, Members.Count);
+        Leader = System.Linq.Enumerable.ToList(Members.Values)[index];
+
+    }
+
+    public void DeleteMember(Agent a)
+    {
+        if (Members.Count>1)
+        {
+            Members.Remove(a.name);
+            if(Leader.name == a.name)
+            {
+                AssignRandomLeader();
+            }
+
+        } else
+        {
+            Members.Remove(a.name);
+            Destroy(this);
+        }
     }
 }
