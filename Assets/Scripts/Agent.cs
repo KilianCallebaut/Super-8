@@ -180,7 +180,7 @@ public class Agent : MonoBehaviour
     // Checks if the agent is at its destination
     public bool AtDestination()
     {
-        return Destination == transform.position;
+        return transform.position == Destination;
     }
 
     // Placeholder for collisions
@@ -193,6 +193,7 @@ public class Agent : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(gameObject.name + " " + collision.transform.tag);
         Stop();
 
     }
@@ -203,6 +204,9 @@ public class Agent : MonoBehaviour
     // Placeholder for movement
     private void MoveToDirection()
     {
+      
+
+
         if (transform.position != Destination) { 
             transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
         }
