@@ -76,9 +76,6 @@ public class Agent : MonoBehaviour
         // Aim at target
         Aiming();
 
-        
-      
-
     }
 
     private void Act()
