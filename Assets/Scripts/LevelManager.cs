@@ -21,6 +21,7 @@ public class LevelManager : Singleton<LevelManager> {
 
     public List<Agent> Agents { get; private set; }
     public List<GameObject> Bullets { get; private set; } 
+    public List<Vector3> Objectives { get; private set; }
 
 
     private int[,] map;
@@ -56,10 +57,8 @@ public class LevelManager : Singleton<LevelManager> {
     // Use this for initialization
     void Start () {
         initialize();
-        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
-        CreateMap(worldStart);
-        CreateAgents(worldStart);
 
+        Go();
     }
 
     // Update is called once per frame
@@ -76,6 +75,15 @@ public class LevelManager : Singleton<LevelManager> {
 
         WallTiles = new List<GameObject>();
         Agents = new List<Agent>();
+        Objectives = new List<Vector3>();
+    }
+
+    // What happens when you press the start button
+    public void Go()
+    {
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
+        CreateMap(worldStart);
+        CreateAgents(worldStart);
     }
 
     // Placeholder for reading file from map
@@ -146,6 +154,7 @@ public class LevelManager : Singleton<LevelManager> {
     {
         GameObject groupObj1 = Instantiate(group);
         Group group1 = groupObj1.AddComponent<Group>();
+        group1.Objectives = Objectives;
         group1.name = "Group1";
         for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
@@ -196,6 +205,12 @@ public class LevelManager : Singleton<LevelManager> {
         Destroy(deletedAgent.gameObject);
 
 
+    }
+
+    // Temporary method for adding objective for 1 team
+    public void AddObjectiveForTeam1(Vector3 Objective)
+    {
+        Objectives.Add(Objective);
     }
 
   

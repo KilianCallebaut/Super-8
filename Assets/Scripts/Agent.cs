@@ -193,9 +193,8 @@ public class Agent : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(gameObject.name + " " + collision.transform.tag);
         Stop();
-
+        Debug.Log(collision.transform.tag);
     }
     
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameUI : MonoBehaviour {
+public class InGameUI : Singleton<InGameUI> {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +13,9 @@ public class InGameUI : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void addObjective()
+    {
+
+    }
 }
