@@ -25,6 +25,9 @@ public class ObjectivePlacement : MonoBehaviour {
 
 	public void SendObjectiveToLevelManager()
 	{
+		if (!markerIsActive)
+			return;
+		
 		LevelManager actualLevelManager = LevelManager.GetComponent<LevelManager> ();
 		Camera c = Camera.main;
 		Vector3 objective = c.ScreenToWorldPoint (objectiveMarker.transform.position);

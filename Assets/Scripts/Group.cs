@@ -15,43 +15,28 @@ public class Group : MonoBehaviour
     public List<OtherAgent> TimesSeenOtherAgents { get; set; }
     private bool initialized = false;
 
-	// Use this for initialization
-	void Start () {
-        Initialize();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void Initialize()
+    public void Initialize()
     {
-        if (!initialized)
-        {
-            Objectives = new List<Vector3>();
-            SubObjectives = new List<Vector3>();
-            Closeness = 6.0f;
-            Members = new Dictionary<string, Agent>();
-            SharedSeenOtherAgents = new Dictionary<string, OtherAgent>();
-            TimesSeenOtherAgents = new List<OtherAgent>();
-        }
+        Objectives = new List<Vector3>();
+        SubObjectives = new List<Vector3>();
+        Closeness = 6.0f;
+        Members = new Dictionary<string, Agent>();
+        SharedSeenOtherAgents = new Dictionary<string, OtherAgent>();
+        TimesSeenOtherAgents = new List<OtherAgent>();
     }
 
 
     // Event where agent shares a seen agent
     public void SeenAgent(OtherAgent oa)
     {
-        Initialize();
         TimesSeenOtherAgents.Add(oa);
-        SharedSeenOtherAgents.Add(oa.Name, oa);
+		if (!SharedSeenOtherAgents.ContainsKey(oa.Name))
+        	SharedSeenOtherAgents.Add(oa.Name, oa);
     }
 
     // Event where agent no longer sees agent
     public void UnseenAgent(OtherAgent oa)
     {
-        Initialize();
-
         int index = TimesSeenOtherAgents.FindLastIndex(x => x == oa);
         if (index != -1)
         {
@@ -67,8 +52,6 @@ public class Group : MonoBehaviour
     // Adds member and a leader if there's none
     public void AddMember(Agent a)
     {
-        Initialize();
-
         a.AgentGroup = this;
         Members.Add(a.name, a);
         if ( Leader == null)
@@ -80,8 +63,6 @@ public class Group : MonoBehaviour
     // Adds leader
     public void AddLeader(Agent a)
     {
-        Initialize();
-
         Leader = a;
         AddMember(a);
     }

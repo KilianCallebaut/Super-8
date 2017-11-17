@@ -156,8 +156,8 @@ public class LevelManager : Singleton<LevelManager> {
     {
         GameObject groupObj1 = Instantiate(group);
         Group group1 = groupObj1.AddComponent<Group>();
+		group1.Initialize ();
         group1.Objectives = Objectives;
-		Debug.Log (group1.Objectives[0]);
         group1.name = "Group1";
         for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
@@ -172,7 +172,8 @@ public class LevelManager : Singleton<LevelManager> {
 
         GameObject groupObj2 = Instantiate(group);
         Group group2 = groupObj2.AddComponent<Group>();
-        group1.name = "Group2";
+		group2.Initialize ();
+        group2.name = "Group2";
 
         for (int i = 0; i < StartTilesTeam2.Count ; i++) //
         {
