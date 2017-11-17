@@ -14,6 +14,9 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField]
 	private Texture2D mapTexture;
 
+    [SerializeField]
+    private GameObject group;
+
     public List<GameObject> Tiles { get; private set; }
     public List<GameObject> StartTilesTeam1 { get; private set; }
     public List<GameObject> StartTilesTeam2 { get; private set; }
@@ -21,6 +24,7 @@ public class LevelManager : Singleton<LevelManager> {
 
     public List<Agent> Agents { get; private set; }
     public List<GameObject> Bullets { get; private set; } 
+    public List<Vector3> Objectives { get; private set; }
 
 	private GameObject tile_dump;
 	private GameObject team1_parent;
@@ -60,9 +64,7 @@ public class LevelManager : Singleton<LevelManager> {
     void Start () {
         initialize();
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
-        //CreateMap(worldStart);
-        CreateAgents(worldStart);
-
+        Go();
     }
 
     // Update is called once per frame
@@ -115,6 +117,15 @@ public class LevelManager : Singleton<LevelManager> {
         Agents = new List<Agent>();
 
 		readMapTexture();
+        Objectives = new List<Vector3>();
+    }
+
+    // What happens when you press the start button
+    public void Go()
+    {
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
+        //CreateMap(worldStart);
+        CreateAgents(worldStart);
     }
 
     // Placeholder for reading file from map
@@ -183,7 +194,11 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
-        for (int i = 0; i< StartTilesTeam1.Count; i++) //
+        GameObject groupObj1 = Instantiate(group);
+        Group group1 = groupObj1.AddComponent<Group>();
+        group1.Objectives = Objectives;
+        group1.name = "Group1";
+        for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
@@ -192,9 +207,14 @@ public class LevelManager : Singleton<LevelManager> {
             newAgent.Team = 1;
             Agents.Add(newAgent);
 			newAgent.transform.SetParent (team1_parent.transform);
+            group1.AddMember(newAgent);
         }
 
-        for (int i = 0; i < StartTilesTeam2.Count; i++) //
+        GameObject groupObj2 = Instantiate(group);
+        Group group2 = groupObj2.AddComponent<Group>();
+        group1.name = "Group2";
+
+        for (int i = 0; i < StartTilesTeam2.Count ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
@@ -203,16 +223,39 @@ public class LevelManager : Singleton<LevelManager> {
             newAgent.Team = 2;
             Agents.Add(newAgent);
 			newAgent.transform.SetParent (team2_parent.transform);
+            group2.AddMember(newAgent);
         }
     }
 
     // Placeholder for agent death
     public void DeleteAgent(Agent deletedAgent)
     {
-        Destroy(deletedAgent.gameObject);
         Agents.Remove(deletedAgent);
+
+        foreach(Agent a in Agents)
+        {
+            if (a.seenOtherAgents.ContainsKey(deletedAgent.name))
+            {
+                a.seenOtherAgents.Remove(deletedAgent.name);
+            }
+
+            if (a.TargetAgent != null &&  a.TargetAgent.Enemy.Name == deletedAgent.name)
+            {
+                a.TargetAgent = null;
+            }
+        }
+
+        Destroy(deletedAgent.gameObject);
+
 
     }
 
+    // Temporary method for adding objective for 1 team
+    public void AddObjectiveForTeam1(Vector3 Objective)
+    {
+        Objectives.Add(Objective);
+    }
+
+  
 
 }

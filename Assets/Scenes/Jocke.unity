@@ -142,6 +142,7 @@ MonoBehaviour:
   tilePrefabs: []
   agent: {fileID: 1325232987127572, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
   mapTexture: {fileID: 2800000, guid: ec4d9ef75fa85e34bbae9078a55d3321, type: 3}
+  group: {fileID: 1273282103004620, guid: f47bfdcb54aabf047b11cc9ae6fdaf11, type: 2}
 --- !u!4 &99850540
 Transform:
   m_ObjectHideFlags: 0
