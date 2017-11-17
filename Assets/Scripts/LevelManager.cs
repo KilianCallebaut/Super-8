@@ -69,7 +69,7 @@ public class LevelManager : Singleton<LevelManager> {
     void Update () {
 	
 	}
-
+		
 	private void readMapTexture () {
 		Color[] pixels = mapTexture.GetPixels (0, 0, mapTexture.width, mapTexture.height);
 		for (int y = 0; y < mapTexture.height; y++) {
