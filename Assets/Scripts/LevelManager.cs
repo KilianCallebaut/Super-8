@@ -23,6 +23,7 @@ public class LevelManager : Singleton<LevelManager> {
     public List<GameObject> Bullets { get; private set; } 
     public List<Vector3> Objectives { get; private set; }
 
+	private Vector3 worldStart;
 
     private int[,] map;
 
@@ -58,7 +59,10 @@ public class LevelManager : Singleton<LevelManager> {
     void Start () {
         initialize();
 
-        Go();
+		// these two lines were moved from Go()
+		worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
+		CreateMap(worldStart);
+        //Go();
     }
 
     // Update is called once per frame
@@ -81,8 +85,6 @@ public class LevelManager : Singleton<LevelManager> {
     // What happens when you press the start button
     public void Go()
     {
-        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
-        CreateMap(worldStart);
         CreateAgents(worldStart);
     }
 
@@ -155,6 +157,7 @@ public class LevelManager : Singleton<LevelManager> {
         GameObject groupObj1 = Instantiate(group);
         Group group1 = groupObj1.AddComponent<Group>();
         group1.Objectives = Objectives;
+		Debug.Log (group1.Objectives[0]);
         group1.name = "Group1";
         for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
