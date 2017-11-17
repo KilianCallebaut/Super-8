@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour {
+public class Agent : MonoBehaviour
+{
 
     //Agent's specifics
 
@@ -22,6 +23,7 @@ public class Agent : MonoBehaviour {
     // Agent info
     public int Team { get; set; }
     private Gun weapon;
+    public Group AgentGroup { get; set; }
 
     private GameObject bullet;
 
@@ -67,13 +69,6 @@ public class Agent : MonoBehaviour {
             direction = heading / heading.magnitude;
         }
 
-       
-        // update visionDirection 
-        //if (LookingDestination == Vector3.zero)
-        //{
-            //var seeing = (LookingDestination - transform.position);
-            //visionDirection = seeing / seeing.magnitude;
-        //}
 
         // See enemies
         Spotting();
@@ -82,14 +77,7 @@ public class Agent : MonoBehaviour {
         Aiming();
 
         
-        // For debugging purposes, shows field of vision
-        var forwardpoint = (visionDirection * Attributes.reachOfVision);
-        Debug.DrawLine(transform.position, (visionDirection *Attributes.reachOfVision) + transform.position, Color.red);
-        var rotatedforwardpoint = Quaternion.Euler(0, 0,Attributes.widthOfVision) * forwardpoint + transform.position;
-        Debug.DrawLine(transform.position, rotatedforwardpoint);
-        var rotatedforwardpoint2 = Quaternion.Euler(0, 0, - Attributes.widthOfVision) * forwardpoint + transform.position;
-        Debug.DrawLine(transform.position, rotatedforwardpoint2);
-        Debug.DrawLine(transform.position, Destination, Color.blue);
+      
 
     }
 
@@ -109,6 +97,7 @@ public class Agent : MonoBehaviour {
 
             if (InFieldOfVision(a))
             {
+                AgentGroup.SeenAgent(oa);
 
                 // Update position
                 if (seenOtherAgents.ContainsKey(oa.Name))
@@ -124,6 +113,7 @@ public class Agent : MonoBehaviour {
             }
             else 
             {
+                AgentGroup.UnseenAgent(oa);
 
                 // Remove unseen agents
                 seenOtherAgents.Remove(oa.Name);
@@ -161,18 +151,6 @@ public class Agent : MonoBehaviour {
         if (TargetAgent != null )
         {
             aimBonus = aimIncrease * TargetAgent.AimOffset;
-            var aimZone = (Mathf.Pow(Vector3.Distance(transform.position, TargetAgent.Enemy.Position), 2.0f) / Attributes.accuracy) - aimBonus;
-            var aimlimitleft = TargetAgent.LastPosition + new Vector3(-aimZone, 0);
-            var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
-            var aimlimitup = TargetAgent.LastPosition + new Vector3(0, aimZone);
-            var aimlimitdown = TargetAgent.LastPosition + new Vector3(0, -aimZone);
-
-            Debug.DrawLine(aimlimitleft, aimlimitup);
-            Debug.DrawLine(aimlimitleft, aimlimitdown);
-            Debug.DrawLine(aimlimitright, aimlimitup);
-            Debug.DrawLine(aimlimitright, aimlimitdown);
-
-
         }
     }
 
@@ -194,7 +172,8 @@ public class Agent : MonoBehaviour {
     // Checks if the gameObject is behind another one
     private bool BehindObject(GameObject a)
     {
-        return Physics.Linecast(transform.position, a.transform.position);
+        return Physics2D.Linecast(transform.position, a.transform.position, LayerMask.GetMask("Walls"));
+        
         
     }
 
@@ -306,11 +285,37 @@ public class Agent : MonoBehaviour {
     // For debugging
     void OnDrawGizmosSelected()
     {
+        Debug.Log(AtDestination());
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(Destination, 0.4f);
+
+        // For debugging purposes, shows field of vision
+        var forwardpoint = (visionDirection * Attributes.reachOfVision);
+        Debug.DrawLine(transform.position, (visionDirection * Attributes.reachOfVision) + transform.position, Color.red);
+        var rotatedforwardpoint = Quaternion.Euler(0, 0, Attributes.widthOfVision) * forwardpoint + transform.position;
+        Debug.DrawLine(transform.position, rotatedforwardpoint);
+        var rotatedforwardpoint2 = Quaternion.Euler(0, 0, -Attributes.widthOfVision) * forwardpoint + transform.position;
+        Debug.DrawLine(transform.position, rotatedforwardpoint2);
+        Debug.DrawLine(transform.position, Destination, Color.blue);
+
+        var aimZone = (Mathf.Pow(Vector3.Distance(transform.position, TargetAgent.Enemy.Position), 2.0f) / Attributes.accuracy) - aimBonus;
+        var aimlimitleft = TargetAgent.LastPosition + new Vector3(-aimZone, 0);
+        var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
+        var aimlimitup = TargetAgent.LastPosition + new Vector3(0, aimZone);
+        var aimlimitdown = TargetAgent.LastPosition + new Vector3(0, -aimZone);
+
+        Debug.DrawLine(aimlimitleft, aimlimitup);
+        Debug.DrawLine(aimlimitleft, aimlimitdown);
+        Debug.DrawLine(aimlimitright, aimlimitup);
+        Debug.DrawLine(aimlimitright, aimlimitdown);
+
         Debug.Log(TargetAgent);
         // Display the explosion radius when selected
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(TargetAgent.LastPosition, 0.1f);
 
         
+
+
     }
 }

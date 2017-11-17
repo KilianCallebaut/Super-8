@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour {
                     break;
 
                 case "Agent":
-                    if ( collision.gameObject.name != Source.name)
+                    if ( collision.gameObject.GetComponent<Agent>().Team != Source.GetComponent<Agent>().Team)
                     {
                         collision.gameObject.GetComponent<Agent>().Damage(damage);
                         Destroy(gameObject);

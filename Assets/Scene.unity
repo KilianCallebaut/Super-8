@@ -267,6 +267,7 @@ MonoBehaviour:
   - {fileID: 1904875169984752, guid: 13e973c061dfd85478c2b83506204af8, type: 2}
   - {fileID: 1619350258945380, guid: 94f01fd0b5b6cc14cb1765a7e665fffc, type: 2}
   agent: {fileID: 1379835529334146, guid: 856398582af6f05408c3020254e260eb, type: 2}
+  group: {fileID: 1273282103004620, guid: f47bfdcb54aabf047b11cc9ae6fdaf11, type: 2}
 --- !u!4 &577440573
 Transform:
   m_ObjectHideFlags: 0

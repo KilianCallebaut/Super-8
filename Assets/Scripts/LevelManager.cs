@@ -11,6 +11,9 @@ public class LevelManager : Singleton<LevelManager> {
     [SerializeField]
     private GameObject agent;
 
+    [SerializeField]
+    private GameObject group;
+
     public List<GameObject> Tiles { get; private set; }
     public List<GameObject> StartTilesTeam1 { get; private set; }
     public List<GameObject> StartTilesTeam2 { get; private set; }
@@ -141,6 +144,9 @@ public class LevelManager : Singleton<LevelManager> {
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
     {
+        GameObject groupObj1 = Instantiate(group);
+        Group group1 = groupObj1.AddComponent<Group>();
+        group1.name = "Group1";
         for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
 
@@ -149,7 +155,12 @@ public class LevelManager : Singleton<LevelManager> {
             newAgent.transform.position = StartTilesTeam1[i].transform.position;
             newAgent.Team = 1;
             Agents.Add(newAgent);
+            group1.AddMember(newAgent);
         }
+
+        GameObject groupObj2 = Instantiate(group);
+        Group group2 = groupObj2.AddComponent<Group>();
+        group1.name = "Group2";
 
         for (int i = 0; i < StartTilesTeam2.Count ; i++) //
         {
@@ -157,9 +168,10 @@ public class LevelManager : Singleton<LevelManager> {
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i].transform.position;
-            newAgent.Team = 2;
             newAgent.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            newAgent.Team = 2;
             Agents.Add(newAgent);
+            group2.AddMember(newAgent);
         }
     }
 
