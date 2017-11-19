@@ -13,7 +13,7 @@ public class TestProjectile : AbstractProjectile {
 	public int damage = 1;
 	protected override void onCollision(GameObject g) {
 		AbstractProjectileCollidable a = g.GetComponent<AbstractProjectileCollidable> ();
-		if (a.collides (dTrav*vel, dTrav, dTrav / travMax)) {
+		if (a.bulletCollides (dTrav*vel, dTrav, dTrav / travMax)) {
 			a.receiveDamage (damage);
 			Destroy (this.gameObject);
 		}
