@@ -47,11 +47,19 @@ public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	}
+
+        projectileType = (GameObject) Resources.Load("Bullet");
+    }
 
 	public void startShooting() {
 		shooting = true;
 	}
+
+
+    public bool isShooting()
+    {
+        return shooting;
+    }
 
 	public void stopShooting() {
 		shooting = false;
@@ -69,6 +77,7 @@ public class Weapon : MonoBehaviour {
 		else
 			stopShooting ();
 	}
+
 
 	public void shootOnce() {
 		volleysUntilStopShooting = 1;
@@ -128,6 +137,7 @@ public class Weapon : MonoBehaviour {
 		float mean = 0.0f;
 		switch (spreadMode) {
 		case SPREAD_MODE_EVEN:
+
 				if (max > 1) {
 					ret = spread / 2;
 					float spreadPerIndex = spread / (float)(max - 1);

@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Agent
+  - Bullet
+  - Walls
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Agents
+  - Walls
   - 
   - 
   - 
@@ -40,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Map
+    uniqueID: 889296609
+    locked: 0
+  - name: Agent
+    uniqueID: 2341681857
+    locked: 0
+  - name: Walls
+    uniqueID: 2428592241
     locked: 0
