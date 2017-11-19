@@ -92,6 +92,11 @@ public class Weapon : MonoBehaviour {
 		shotDirection = dir;
 	}
 
+	public void setShootingDirection(Vector3 dir) {
+		float f = Vector3.Angle (transform.forward, dir - transform.position);
+		setShootingDirection (f * Mathf.Deg2Rad);
+	}
+
 	public void reload(int ammo) {
 		if (ammoCount >= 0) {
 			ammoCount += ammo;
@@ -104,6 +109,10 @@ public class Weapon : MonoBehaviour {
 
 	public bool isOutOfAmmo() {
 		return outOfAmmo;
+	}
+
+	public bool isShooting() {
+		return shooting;
 	}
 
 	public void spawnProjectiles(float dTime) {
