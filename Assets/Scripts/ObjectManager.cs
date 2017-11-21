@@ -25,12 +25,30 @@ public class ObjectManager : Singleton<ObjectManager> {
 		
 	}
 
-    public static Agent spawnAgent( AgentAttributes attributes)
+    public static void setRole(Agent agent, string role)
+    {
+        switch (role)
+        {
+            case "Heavy":
+                agent.Behaviour = agent.gameObject.AddComponent<HeavyRole>();
+                break;
+            case "Assault":
+                agent.Behaviour = agent.gameObject.AddComponent<AssaultRole>();
+                break;
+            default:
+                agent.Behaviour = agent.gameObject.AddComponent<AgentStandardBehaviour>();
+                break;
+        }
+    }
+
+    public static Agent spawnAgent( AgentAttributes attributes, string role)
     {
         var agentSpawn = Instantiate(attributes.agentPrefab);
         Agent agentScript = agentSpawn.AddComponent<Agent>() as Agent;
-     
+        setRole(agentScript, role);
         agentScript.Attributes = attributes;
         return agentScript;
     }
+
+ 
 }

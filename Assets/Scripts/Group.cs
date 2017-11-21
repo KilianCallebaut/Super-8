@@ -13,7 +13,7 @@ public class Group : MonoBehaviour
     public Agent Leader { get; set; }
     public Dictionary<string, OtherAgent> SharedSeenOtherAgents { get; set; }
     public List<OtherAgent> TimesSeenOtherAgents { get; set; }
-    private bool initialized = false;
+
 
     public void Initialize()
     {

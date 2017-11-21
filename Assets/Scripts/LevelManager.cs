@@ -203,8 +203,17 @@ public class LevelManager : Singleton<LevelManager> {
         group1.name = "Group1";
         for (int i = 0; i< StartTilesTeam1.Count ; i++) //
         {
+            Agent newAgent;
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
+            // FOR DEBUGGING PURPOSES
+            if (i < 2)
+            {
+                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Assault");
+            } else
+            {
+                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Heavy");
+            }
+
             newAgent.name = "Agent_" + i + "_Team1";
             newAgent.transform.position = StartTilesTeam1[i].transform.position;
             newAgent.Team = 1;
@@ -221,7 +230,7 @@ public class LevelManager : Singleton<LevelManager> {
         for (int i = 0; i < StartTilesTeam2.Count ; i++) //
         {
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent));
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "standard");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i].transform.position;
             newAgent.Team = 2;
