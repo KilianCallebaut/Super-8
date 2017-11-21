@@ -6,6 +6,7 @@ using UnityEngine;
 
 /**
  * Bullet sponge that also deals out a lot of damage to agents in front of him.
+ * Defender
  * */
 public class HeavyRole : AgentBehaviour
 {

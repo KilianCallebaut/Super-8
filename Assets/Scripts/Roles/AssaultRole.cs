@@ -5,6 +5,7 @@ using UnityEngine;
 
 /**
  * Fast runner, avoiding bullets to deal a lot of damage closeby
+ * Attacker
  * */
 public class AssaultRole : AgentBehaviour {
 
@@ -37,32 +38,22 @@ public class AssaultRole : AgentBehaviour {
 
     }
 
-
-    // When spotting an agent that's close enough approach otherwise avoid
-    // Since the only thing that is really meant to change here is the destination, we can order
-    // Goal: Avoiding line of fire by taking evading route
-    private void Positioning()
+    // Looks around when no target is selected
+    // Only meant to change the LookingDestination
+    private void Inspecting()
     {
-        StayInGroup();
-
-        if (agent.TargetAgent != null )
+        if (agent.TargetAgent == null)
         {
-            // When targets looks away from you, sneak up on him, else avoid his gaze
-            if (!InEnemyFieldOfVision(agent.TargetAgent.Enemy))
-            {
-                flankingSide = 0;
-                Chasing();
-            } else
-            {
-                Approaching();
-            }
-        } else
-        {
-            flankingSide = 0;
+            LookAround();
         }
 
-        
+        if (agent.TargetAgent != null)
+        {
+            agent.LookingDestination = agent.TargetAgent.LastPosition;
+        }
     }
+
+   
 
   
 
@@ -77,20 +68,35 @@ public class AssaultRole : AgentBehaviour {
         }
     }
 
-    // Looks around when no target is selected
-    // Only meant to change the LookingDestination
-    private void Inspecting()
+    // When spotting an agent that's close enough approach otherwise avoid
+    // Since the only thing that is really meant to change here is the destination, we can order
+    // Goal: Avoiding line of fire by taking evading route
+    private void Positioning()
     {
-        if (agent.TargetAgent == null )
-        {
-            LookAround();
-        }
+        StayInGroup();
 
         if (agent.TargetAgent != null)
         {
-            agent.LookingDestination = agent.TargetAgent.LastPosition;
+            // When targets looks away from you, sneak up on him, else avoid his gaze
+            if (!InEnemyFieldOfVision(agent.TargetAgent.Enemy))
+            {
+                flankingSide = 0;
+                Chasing();
+            }
+            else
+            {
+                Approaching();
+            }
         }
+        else
+        {
+            flankingSide = 0;
+        }
+
+
     }
+
+    //Checks
 
     // Checks if player is in enemy's breadth of vision
     private bool InEnemyFieldOfVision(OtherAgent Enemy)
@@ -109,6 +115,8 @@ public class AssaultRole : AgentBehaviour {
     {
         return Vector3.Distance(transform.position, agent.AgentGroup.Objectives[0]) < inAreaThreshold;
     }
+
+    // Positioning methods
 
     // When he strays to far away from the group go to the leader
     private void StayInGroup()
@@ -193,7 +201,7 @@ public class AssaultRole : AgentBehaviour {
 
     }
 
-   
+   // Targetting methods
 
     // Go after closest agent that is closer than a threshold
     private void Prioritizing()
@@ -215,6 +223,8 @@ public class AssaultRole : AgentBehaviour {
             }
         }
     }
+
+    // Inspecting methods
 
     // Look around in an angle of the current direction
     // For now look at destination 
