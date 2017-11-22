@@ -10,6 +10,7 @@ public class CoverScript : AbstractProjectileCollidable {
 	}
 	public int maxDamage = 10;
 	public int damageReceived = 0;
+	public bool destroyable = true;
 	public override bool bulletCollides (float dist, float time, float frac) {
 		
 		float f = Random.value;
@@ -19,7 +20,7 @@ public class CoverScript : AbstractProjectileCollidable {
 	public override void receiveDamage (int damage) {
 		Debug.Log (this.gameObject.name + " took " + damage + " points of damage.");
 		damageReceived += damage;
-		if (damageReceived >= maxDamage) {
+		if (damageReceived >= maxDamage && destroyable) {
 			Destroy (this.gameObject);
 		}
 	}
