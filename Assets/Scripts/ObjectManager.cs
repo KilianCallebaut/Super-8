@@ -5,12 +5,12 @@ using UnityEngine;
 public class ObjectManager : Singleton<ObjectManager> {
 
     [SerializeField]
-    private Rigidbody2D[] Bullets;
+    private GameObject[] Bullets;
 
     
 
     //Returns Bullet of this type
-    public Rigidbody2D getBulletOfType(int type)
+    public GameObject getBulletOfType(int type)
     {
         return Bullets[type];
     }
@@ -50,5 +50,16 @@ public class ObjectManager : Singleton<ObjectManager> {
         return agentScript;
     }
 
+    // Build and add a standard weapon to agent
+    public static Weapon AddStandardWeapon(Agent agent)
+    {
+
+        var weapon = agent.gameObject.AddComponent<Weapon>();
+        weapon.projectileType = ObjectManager.Instance.Bullets[0];
+        weapon.spread = 0.0f;
+        weapon.shotsPerVolley = 10;
+        weapon.timeBetweenShots = 0.1f;
+        return weapon;
+    }
  
 }

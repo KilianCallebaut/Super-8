@@ -3,57 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : AbstractProjectile {
 
     public GameObject Source { get; set; }
-    private float damage = 1.0f;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	protected override void onCollision (GameObject g) {
+		AbstractProjectileCollidable c;
+		if((c = g.GetComponent<AbstractProjectileCollidable>()) != null) {
+			if (c.bulletCollides (dTrav*vel, dTrav, dTrav / travMax)) {
+				c.receiveDamage (damage);
+				Destroy (this.gameObject);
+			}
+		}
+
 	}
-
-    // Placeholder for collision
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        try
-        {
-
-            switch (collision.tag)
-            {
-                case "Bullet":
-                    break;
-
-                case "Agent":
-                    if ( collision.gameObject.GetComponent<Agent>().Team != Source.GetComponent<Agent>().Team)
-                    {
-                        collision.gameObject.GetComponent<Agent>().Damage(damage);
-                        Destroy(gameObject);
-
-                    }
-                    break;
-
-                default:
-                    Destroy(gameObject);
-                    break;
-
-                    
-            }
-            if (collision.tag == "Bullet")
-            {
-                return;
-            }
-
-        } catch (Exception e)
-        {
-            
-        }
-
-       
-    }
+	protected override void bulletUpdate (float dTime) {
+		dTrav += dTime;
+		transform.Translate (dir * vel * dTime);
+		if (dTrav >= travMax) {
+			Destroy (this.gameObject);
+		}
+	}
 }

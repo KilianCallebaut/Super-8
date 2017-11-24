@@ -56,11 +56,6 @@ public class Weapon : MonoBehaviour {
 	}
 
 
-    public bool isShooting()
-    {
-        return shooting;
-    }
-
 	public void stopShooting() {
 		shooting = false;
 		volleysFired = 0;
@@ -93,7 +88,8 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void setShootingDirection(Vector3 dir) {
-		float f = Vector3.Angle (transform.forward, dir - transform.position);
+		float f = Vector3.Angle (new Vector3(1,0,0), dir - transform.position);
+		Debug.Log ("" + dir + " becomes " + f);
 		setShootingDirection (f * Mathf.Deg2Rad);
 	}
 
@@ -111,7 +107,10 @@ public class Weapon : MonoBehaviour {
 		return outOfAmmo;
 	}
 
-
+    public bool isShooting()
+    {
+        return shooting;
+    }
 
 	public void spawnProjectiles(float dTime) {
 		if(projectileType == null)return;

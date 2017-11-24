@@ -22,7 +22,7 @@ public class Agent : MonoBehaviour
 
     // Agent info
     public int Team { get; set; }
-    private Gun weapon;
+    private Weapon weapon;
     public Group AgentGroup { get; set; }
 
     private GameObject bullet;
@@ -44,8 +44,11 @@ public class Agent : MonoBehaviour
     private void initialize()
     {
         seenOtherAgents = new Dictionary<string, OtherAgent>();
-        weapon = gameObject.AddComponent<Gun>();
+
+        weapon = ObjectManager.AddStandardWeapon(this);
+		gameObject.AddComponent<DamageRecipient>();
         
+
         Destination = transform.position;
         //visionDirection = gameObject.GetComponent<Rigidbody2D>().transform.forward;
         visionDirection = new Vector3(-1f, 0f, 0f);
@@ -58,10 +61,14 @@ public class Agent : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        
-        See();
-        Behaviour.Think();
-        Act();
+		int dam = GetComponent<DamageRecipient> ().damageReceived;
+		if (health <= dam) {
+			Die ();
+		} else {
+			See();
+			Behaviour.Think();
+			Act();
+		}
     }
 
     private void See()
@@ -214,6 +221,8 @@ public class Agent : MonoBehaviour
       
         if (transform.position != Destination) { 
             transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
+			//experiment: use rigidbody2d for velocity instead
+			//GetComponent<Rigidbody2D>().velocity = (Destination-transform.position).normalized*Attributes.speed*Time.deltaTime;
         }
 
 
@@ -229,28 +238,23 @@ public class Agent : MonoBehaviour
             Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
             float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
             offSet -= aimBonus;
-            Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
-            Vector3 shootingDirection = shootingLocation - transform.position;
-            float shootingAngle = Vector3.Angle(shootingDirection, direction);
-            //weapon.setShootingDirection(shootingAngle * Mathf.Deg2Rad);
-            weapon.Shoot(shootingLocation);
+			Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
+
+			Debug.Log (shootingLocation);
+
+			weapon.setShootingDirection (shootingLocation);
             TargetAgent.AimTime = Time.time;
 
-            /*
-            if (!weapon.isShooting())
-            {
-                weapon.startShooting();
-            }
-            */
+			weapon.startShooting ();
 
         }
 
-        /*
+        
         if (TargetAgent == null && weapon.isShooting())
         {
             weapon.stopShooting();
         }
-        */
+
 
        
     }
@@ -286,16 +290,6 @@ public class Agent : MonoBehaviour
     private void Stop()
     {
         Destination = transform.position;
-    }
-
-    // Damages agent by damage.
-    public void Damage(float damage)
-    {
-        health -= damage;
-        if (health <= 0.0f)
-        {
-            Die();
-        }
     }
 
     // For debugging
