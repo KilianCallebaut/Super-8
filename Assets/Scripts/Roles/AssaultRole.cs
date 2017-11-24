@@ -9,7 +9,6 @@ using UnityEngine;
  * */
 public class AssaultRole : AgentBehaviour {
 
-    private Agent agent;
     private float chaseThreshold = 15.0f;
     private float inAreaThreshold = 4.0f;
     private float extraOutOfVisionDegrees = 5.0f;
@@ -35,7 +34,6 @@ public class AssaultRole : AgentBehaviour {
         Targetting();
         Positioning();
         
-
     }
 
     // Looks around when no target is selected
@@ -63,8 +61,8 @@ public class AssaultRole : AgentBehaviour {
     {
         if (agent.seenOtherAgents.Count > 0)
         {
-
             Prioritizing();
+            Engaging();
         }
     }
 
@@ -73,8 +71,10 @@ public class AssaultRole : AgentBehaviour {
     // Goal: Avoiding line of fire by taking evading route
     private void Positioning()
     {
+        GoToGroupObjective();
         StayInGroup();
-
+        
+    
         if (agent.TargetAgent != null)
         {
             // When targets looks away from you, sneak up on him, else avoid his gaze
@@ -117,38 +117,6 @@ public class AssaultRole : AgentBehaviour {
     }
 
     // Positioning methods
-
-    // When he strays to far away from the group go to the leader
-    private void StayInGroup()
-    {
-        if (Vector2.Distance(transform.position, agent.AgentGroup.Leader.transform.position) > agent.AgentGroup.Closeness)
-        {
-            agent.Destination = agent.AgentGroup.Leader.transform.position;
-        }
-        else
-        {
-            GoToGroupObjective();
-        }
-    }
-
-    // Go to grouplocation
-    private void GoToGroupObjective()
-    {
-        if (agent.AgentGroup.Objectives.Count > 0)
-        {
-            agent.Destination = agent.AgentGroup.Objectives[0];
-        }
-
-    }
-
-    // Chase down target
-    private void Chasing()
-    {
-        if (agent.TargetAgent != null)
-        {
-            agent.Destination = agent.TargetAgent.LastPosition;
-        }
-    }
 
     // Approach, while avoid being hit
     private void Approaching()
@@ -208,7 +176,7 @@ public class AssaultRole : AgentBehaviour {
     {
         foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
         {
-            if (a.Value.Team != agent.Team && Vector3.Distance(transform.position, a.Value.Position) < chaseThreshold)
+            if (a.Value.Team != agent.Team && !agentIsTarget(a.Value) && Vector3.Distance(transform.position, a.Value.Position) < chaseThreshold)
             {
                 if (agent.TargetAgent == null)
                 {
@@ -224,10 +192,20 @@ public class AssaultRole : AgentBehaviour {
         }
     }
 
+    // Decide when to shoot
+    // For now always when agent has a target
+    private void Engaging()
+    {
+        if (agent.TargetAgent != null)
+        {
+            agent.Shoot();
+        }
+    }
+
+
     // Inspecting methods
 
     // Look around in an angle of the current direction
-    // For now look at destination 
     private void LookAround()
     {        
         agent.LookingDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * agent.visionDirection * agent.Attributes.reachOfVision + transform.position;

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AgentStandardBehaviour : AgentBehaviour {
 
-    private Agent agent;
 
 	// Use this for initialization
 	void Start () {
@@ -25,17 +24,13 @@ public class AgentStandardBehaviour : AgentBehaviour {
 
       
         // Placeholder for pathfinding
+        GoToGroupObjective();
         if (agent.AtDestination())
         {
-            GoToGroupObjective();
+            MoveToRandomDestination();
         }
+        StayInGroup();
         
-        if (agent.AgentGroup.Leader != null && agent.AgentGroup.Leader.name != agent.name)
-        {
-            StayInGroup();
-        }
-
-
         Targetting();
         Chasing();
     }
@@ -44,37 +39,13 @@ public class AgentStandardBehaviour : AgentBehaviour {
     // Placeholder for pathfinding
     private void MoveToRandomDestination()
     {
+
         int index = UnityEngine.Random.Range(0, LevelManager.Instance.Tiles.Count);
 
         GameObject tile = (GameObject)LevelManager.Instance.Tiles[index];
         agent.Destination = tile.transform.position;
     }
-
-    // Go to grouplocation
-    private void GoToGroupObjective()
-    {
-        if (agent.AgentGroup.Objectives.Count > 0)
-        {
-            //int index = UnityEngine.Random.Range(0, LevelManager.Instance.Tiles.Count);
-            agent.Destination = agent.AgentGroup.Objectives[0];
-        } else
-        {
-            if (agent.AtDestination()) 
-                MoveToRandomDestination();
-        }
-    }
-
-    // When he strays to far away from the group go to the leader
-    private void StayInGroup()
-    {
-        if(Vector2.Distance(transform.position, agent.AgentGroup.Leader.transform.position) > agent.AgentGroup.Closeness)
-        {
-            agent.Destination = agent.AgentGroup.Leader.transform.position;
-        } else
-        {
-            GoToGroupObjective();
-        }
-    }
+    
 
     // Placeholder for Targetting
     private void Targetting()
@@ -111,14 +82,18 @@ public class AgentStandardBehaviour : AgentBehaviour {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
         }
 
+        Engaging();
+
     }
 
-    // Chasing placeholder
-    private void Chasing()
+   
+
+    // For now always when agent has a target
+    private void Engaging()
     {
         if (agent.TargetAgent != null)
         {
-            agent.Destination = agent.TargetAgent.LastPosition;
-        } 
+            agent.Shoot();
+        }
     }
 }

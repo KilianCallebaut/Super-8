@@ -11,7 +11,6 @@ using UnityEngine;
 public class HeavyRole : AgentBehaviour
 {
 
-    private Agent agent;
     private float inAreaThreshold = 4.0f;
 
     // Use this for initialization
@@ -41,6 +40,7 @@ public class HeavyRole : AgentBehaviour
     // Goal: position so small flanking options + best area covering
     private void Positioning()
     {
+        GoToGroupObjective();
         StayInGroup();
 
         if (InObjectiveArea())
@@ -63,6 +63,7 @@ public class HeavyRole : AgentBehaviour
         {
 
             Prioritizing();
+            Engaging();
         }
 
     }
@@ -95,7 +96,7 @@ public class HeavyRole : AgentBehaviour
     {
         foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
         {
-            if (a.Value.Team != agent.Team)
+            if (a.Value.Team != agent.Team && !agentIsTarget(a.Value))
             {
                 if (agent.TargetAgent == null)
                 {
@@ -116,26 +117,15 @@ public class HeavyRole : AgentBehaviour
         }
     }
 
-    // When he strays to far away from the group go to the leader
-    private void StayInGroup()
+    // Decide when to shoot
+    // For now always when agent has a target
+    private void Engaging()
     {
-        if (Vector2.Distance(transform.position, agent.AgentGroup.Leader.transform.position) > agent.AgentGroup.Closeness)
+        if (agent.TargetAgent != null)
         {
-            agent.Destination = agent.AgentGroup.Leader.transform.position;
-        }
-        else
-        {
-            GoToGroupObjective();
+            agent.Shoot();
         }
     }
 
-    // Go to grouplocation
-    private void GoToGroupObjective()
-    {
-        if (agent.AgentGroup.Objectives.Count > 0)
-        {
-            agent.Destination = agent.AgentGroup.Objectives[0];
-        }
-        
-    }
+  
 }

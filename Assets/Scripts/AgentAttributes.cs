@@ -55,10 +55,9 @@ public class AgentAttributes {
     public AgentAttributes(GameObject agentPrefab)
     {
         this.speed = 2.0f;
-        this.reachOfVision = 20.0f;
+        this.reachOfVision = 23.0f;
         this.widthOfVision = 22.5f;
-
-      
+        
         this.reflex = 1.0f / 2.0f;
         this.agility = 1.0f;
         this.accuracy = 10.0f;

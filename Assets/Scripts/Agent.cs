@@ -51,7 +51,9 @@ public class Agent : MonoBehaviour
 
         Destination = transform.position;
         //visionDirection = gameObject.GetComponent<Rigidbody2D>().transform.forward;
-        visionDirection = new Vector3(-1f, 0f, 0f);
+        direction = new Vector3(-1f, 0f, 0f);
+        visionDirection = direction;
+
 
 
     }
@@ -93,7 +95,13 @@ public class Agent : MonoBehaviour
     {
         MoveToDirection();
         RotateToDirection();
-        Shoot();
+
+
+        if (TargetAgent == null && weapon.isShooting())
+        {
+            weapon.stopShooting();
+        }
+
     }
 
     // Percepts
@@ -215,6 +223,9 @@ public class Agent : MonoBehaviour
 
 
     //Actions
+
+    // Updates
+    
     // Placeholder for movement
     private void MoveToDirection()
     {
@@ -226,44 +237,6 @@ public class Agent : MonoBehaviour
         }
 
 
-    }
-    
-    // Placeholder for shooting
-    private void Shoot()
-    {
-        if (TargetAgent != null)
-        {
-            // Update direction
-            Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
-            Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
-            float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
-            offSet -= aimBonus;
-			Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
-            Debug.DrawLine(transform.position, shootingLocation);
-
-			weapon.setShootingDirection (shootingLocation);
-            TargetAgent.AimTime = Time.time;
-
-			weapon.startShooting ();
-
-        }
-
-        
-        if (TargetAgent == null && weapon.isShooting())
-        {
-            weapon.stopShooting();
-        }
-
-
-       
-    }
-
-
-    // Placeholder for dying
-    private void Die()
-    {
-        AgentGroup.DeleteMember(this);
-        LevelManager.Instance.DeleteAgent(this);
     }
 
     // Placeholder for rotating vision
@@ -278,12 +251,43 @@ public class Agent : MonoBehaviour
             if (visionDirection != TargetDirection)
             {
                 visionDirection = Vector3.RotateTowards(visionDirection, TargetDirection, Attributes.agility * Time.deltaTime, 0.0f);
-
             }
         }
 
-        
+
     }
+
+    // Agent Actions
+
+    public void Shoot()
+    {
+        if (TargetAgent != null)
+        {
+            // Update direction
+            Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
+            Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
+            float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
+            offSet -= aimBonus;
+			Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
+
+			weapon.setShootingDirection (shootingLocation);
+            TargetAgent.AimTime = Time.time;
+
+			weapon.startShooting ();
+
+        }
+
+    }
+
+
+    // Placeholder for dying
+    private void Die()
+    {
+        AgentGroup.DeleteMember(this);
+        LevelManager.Instance.DeleteAgent(this);
+    }
+
+   
 
     // Placeholder for stopping
     private void Stop()
@@ -299,9 +303,8 @@ public class Agent : MonoBehaviour
         Gizmos.DrawSphere(Destination, 0.4f);
 
         // For debugging purposes, shows field of vision
-        Debug.Log(visionDirection);
+        Debug.DrawLine(new Vector3(5.0f, 160f, 0f), new Vector3(105.0f, 160f, 0f)) ;
         var forwardpoint = (visionDirection * Attributes.reachOfVision);
-        Debug.Log(forwardpoint);
         Debug.DrawLine(transform.position, (visionDirection * Attributes.reachOfVision) + transform.position, Color.red);
         var rotatedforwardpoint = Quaternion.Euler(0, 0, Attributes.widthOfVision) * forwardpoint + transform.position;
         Debug.DrawLine(transform.position, rotatedforwardpoint);
