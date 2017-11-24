@@ -11,9 +11,11 @@ public class DamageRecipient : AbstractProjectileCollidable {
 
 	public int maxDamage = 10;
 	public int damageReceived = 0;
+
 	public override bool bulletCollides (float dist, float time, float frac) {
 		return true;//I think it might be frustrating to see a character dodge bullets?
 	}
+
 	public override void receiveDamage (int damage) {
 		Debug.Log (this.gameObject.name + " took " + damage + " points of damage.");
 		//take damage

@@ -240,8 +240,6 @@ public class Agent : MonoBehaviour
             offSet -= aimBonus;
 			Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
 
-			Debug.Log (shootingLocation);
-
 			weapon.setShootingDirection (shootingLocation);
             TargetAgent.AimTime = Time.time;
 
@@ -309,25 +307,28 @@ public class Agent : MonoBehaviour
         Debug.DrawLine(transform.position, rotatedforwardpoint2);
         //Debug.DrawLine(transform.position, Destination, Color.blue);
 
-        Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
-        Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
-        float aimZone = Vector3.Distance(enemyDirection, shootingDirectionLimit) - aimBonus;
-        var aimlimitleft = TargetAgent.LastPosition + new Vector3(-aimZone, 0);
-        var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
-        var aimlimitup = TargetAgent.LastPosition + new Vector3(0, aimZone);
-        var aimlimitdown = TargetAgent.LastPosition + new Vector3(0, -aimZone);
-        Debug.Log(aimZone);
+        if (TargetAgent != null)
+        {
+            Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
+            Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
+            float aimZone = Vector3.Distance(enemyDirection, shootingDirectionLimit) - aimBonus;
+            var aimlimitleft = TargetAgent.LastPosition + new Vector3(-aimZone, 0);
+            var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
+            var aimlimitup = TargetAgent.LastPosition + new Vector3(0, aimZone);
+            var aimlimitdown = TargetAgent.LastPosition + new Vector3(0, -aimZone);
+            Debug.Log(aimZone);
 
 
-        Debug.DrawLine(aimlimitleft, aimlimitup);
-        Debug.DrawLine(aimlimitleft, aimlimitdown);
-        Debug.DrawLine(aimlimitright, aimlimitup);
-        Debug.DrawLine(aimlimitright, aimlimitdown);
+            Debug.DrawLine(aimlimitleft, aimlimitup);
+            Debug.DrawLine(aimlimitleft, aimlimitdown);
+            Debug.DrawLine(aimlimitright, aimlimitup);
+            Debug.DrawLine(aimlimitright, aimlimitdown);
 
-        Debug.Log(TargetAgent);
-        // Display the explosion radius when selected
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(TargetAgent.LastPosition, 0.1f);
+            Debug.Log(TargetAgent);
+            // Display the explosion radius when selected
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(TargetAgent.LastPosition, 0.1f);
+        }
 
     }
 }

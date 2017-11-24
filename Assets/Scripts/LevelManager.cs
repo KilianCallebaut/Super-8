@@ -201,7 +201,7 @@ public class LevelManager : Singleton<LevelManager> {
 		group1.Initialize ();
         group1.Objectives = Objectives;
         group1.name = "Group1";
-        for (int i = 0; i< StartTilesTeam1.Count ; i++) //
+        for (int i = 0; i< StartTilesTeam1.Count-2 ; i++) //
         {
             Agent newAgent;
 
@@ -227,7 +227,7 @@ public class LevelManager : Singleton<LevelManager> {
 		group2.Initialize ();
         group2.name = "Group2";
 
-        for (int i = 0; i < StartTilesTeam2.Count ; i++) //
+        for (int i = 0; i < StartTilesTeam2.Count-2 ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "standard");

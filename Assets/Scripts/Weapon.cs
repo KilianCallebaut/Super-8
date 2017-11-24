@@ -89,7 +89,6 @@ public class Weapon : MonoBehaviour {
 
 	public void setShootingDirection(Vector3 dir) {
 		float f = Vector3.Angle (new Vector3(1,0,0), dir - transform.position);
-		Debug.Log ("" + dir + " becomes " + f);
 		setShootingDirection (f * Mathf.Deg2Rad);
 	}
 
@@ -119,9 +118,10 @@ public class Weapon : MonoBehaviour {
 			float actualSpread = calculateSpread(i, projectilesPerShot);
 			Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
 			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity);
-			AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
+            
+            AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
 			if (a != null) {
-				a.initialUpdate (dTime, this.gameObject, direction);
+				a.initialUpdate ( this.gameObject, direction);
 			} else {
 				Debug.Log ("Non-projectile projectile fired");
 			}

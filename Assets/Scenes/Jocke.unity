@@ -679,7 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullets:
-  - {fileID: 50954769120210032, guid: 1ff0dc791c1aff641b1f934b6ebc3a98, type: 2}
+  - {fileID: 0}
 --- !u!4 &1836581662
 Transform:
   m_ObjectHideFlags: 0
@@ -808,32 +808,32 @@ Prefab:
     - target: {fileID: 224085037436574374, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 312.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 224085037436574374, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -98.5
+      value: -57.5
       objectReference: {fileID: 0}
     - target: {fileID: 224085037436574374, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224393743585209312, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 312.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 224393743585209312, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -150.5
+      value: -109.5
       objectReference: {fileID: 0}
     - target: {fileID: 224393743585209312, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1085357365214662, guid: 7c49bbfedaea2db4f9237a99edc6668d, type: 2}
       propertyPath: m_IsActive
@@ -35647,6 +35647,10 @@ Prefab:
         type: 2}
       propertyPath: m_Tiles.Array.data[452].second.m_ColliderType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551380506114288, guid: 88e991435f536c74b97e47bf301c6707, type: 2}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88e991435f536c74b97e47bf301c6707, type: 2}

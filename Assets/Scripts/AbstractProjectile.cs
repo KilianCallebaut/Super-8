@@ -9,18 +9,18 @@ public abstract class AbstractProjectile : MonoBehaviour {
 		
 	}
 	protected Vector3 dir;
-	public float vel = 1.0f;
+	public float vel = 15.0f;
 	protected GameObject ignoreCollisionsWith = null;
 	public float travMax = 20.0f;
 	protected float dTrav = 0.0f;
 	public int damage = 1;
 
-	public void initialUpdate(float dTime, GameObject doNotCollideWith, Vector3 direction) {
+	public void initialUpdate( GameObject doNotCollideWith, Vector3 direction) {
 		dir.x = direction.x;
 		dir.y = direction.y;
 		dir.z = 0.0f;
 		ignoreCollisionsWith = doNotCollideWith;
-		bulletUpdate (dTime);
+		bulletUpdate (Time.deltaTime);
 	}
 
 	protected abstract void onCollision (GameObject g);

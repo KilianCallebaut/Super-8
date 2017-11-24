@@ -23,9 +23,9 @@ public class Bullet : AbstractProjectile {
 
 	}
 	protected override void bulletUpdate (float dTime) {
-		dTrav += dTime;
+        dTrav += dTime;
 		transform.Translate (dir * vel * dTime);
-		if (dTrav >= travMax) {
+        if (dTrav >= travMax) {
 			Destroy (this.gameObject);
 		}
 	}

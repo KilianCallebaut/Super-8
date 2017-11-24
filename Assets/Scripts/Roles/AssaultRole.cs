@@ -201,7 +201,7 @@ public class AssaultRole : AgentBehaviour {
 
     }
 
-   // Targetting methods
+    // Targetting methods
 
     // Go after closest agent that is closer than a threshold
     private void Prioritizing()
