@@ -189,7 +189,6 @@ public class LevelManager : Singleton<LevelManager> {
 
         if (type == 3)
         {
-			newTile.AddComponent<CoverScript> ();
             WallTiles.Add(newTile);
         }
     }
