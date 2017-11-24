@@ -107,7 +107,10 @@ public class Weapon : MonoBehaviour {
 		return outOfAmmo;
 	}
 
-
+    public bool isShooting()
+    {
+        return shooting;
+    }
 
 	public void spawnProjectiles(float dTime) {
 		if(projectileType == null)return;
