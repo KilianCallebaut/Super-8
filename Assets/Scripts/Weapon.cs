@@ -93,7 +93,8 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void setShootingDirection(Vector3 dir) {
-		float f = Vector3.Angle (transform.forward, dir - transform.position);
+		float f = Vector3.Angle (new Vector3(1,0,0), dir - transform.position);
+		Debug.Log ("" + dir + " becomes " + f);
 		setShootingDirection (f * Mathf.Deg2Rad);
 	}
 
