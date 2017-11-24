@@ -56,11 +56,6 @@ public class Weapon : MonoBehaviour {
 	}
 
 
-    public bool isShooting()
-    {
-        return shooting;
-    }
-
 	public void stopShooting() {
 		shooting = false;
 		volleysFired = 0;
