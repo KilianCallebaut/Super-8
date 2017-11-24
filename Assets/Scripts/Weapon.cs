@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour {
 	public GameObject projectileType = null;
 	public float projectileSpawnDistanceFromCenter = 0.0f;
 	public Vector3 center = new Vector3(0.0f,0.0f,0.0f);
-	private float shotDirection = 0.0f;
+    private Vector3 shotDirection;
 	public int projectilesPerShot = 1;
 
 	//accuracy
@@ -83,13 +83,10 @@ public class Weapon : MonoBehaviour {
 		startShooting ();
 	}
 
-	public void setShootingDirection(float dir) {
-		shotDirection = dir;
-	}
+
 
 	public void setShootingDirection(Vector3 dir) {
-		float f = Vector3.Angle (new Vector3(1,0,0), dir - transform.position);
-		setShootingDirection (f * Mathf.Deg2Rad);
+        shotDirection = (dir - transform.position).normalized;
 	}
 
 	public void reload(int ammo) {
@@ -112,11 +109,13 @@ public class Weapon : MonoBehaviour {
     }
 
 	public void spawnProjectiles(float dTime) {
+
 		if(projectileType == null)return;
 		for (int i = 0; i < projectilesPerShot; ++i) {
 			//TODO: calculate spread
 			float actualSpread = calculateSpread(i, projectilesPerShot);
-			Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
+            //Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
+            Vector3 direction = shotDirection;
 			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity);
             
             AbstractProjectile a = g.GetComponent<AbstractProjectile> ();

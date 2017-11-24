@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestWeaponScript : MonoBehaviour {
 
-	public float shootDir = 0.0f;
+	public Vector3 shootDir = new Vector3(1.0f, 0.0f);
 
 	// Use this for initialization
 	void Start () {

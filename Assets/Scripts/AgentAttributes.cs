@@ -13,7 +13,7 @@ public class AgentAttributes {
     // Reach of agent's vision
     public float reachOfVision { get; private set; }
 
-    //
+    // 22.5
     // Width of agent's vision
     public float widthOfVision { get;  private set;}
 

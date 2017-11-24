@@ -239,6 +239,7 @@ public class Agent : MonoBehaviour
             float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
             offSet -= aimBonus;
 			Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
+            Debug.DrawLine(transform.position, shootingLocation);
 
 			weapon.setShootingDirection (shootingLocation);
             TargetAgent.AimTime = Time.time;
@@ -298,6 +299,7 @@ public class Agent : MonoBehaviour
         Gizmos.DrawSphere(Destination, 0.4f);
 
         // For debugging purposes, shows field of vision
+        Debug.Log(visionDirection);
         var forwardpoint = (visionDirection * Attributes.reachOfVision);
         Debug.Log(forwardpoint);
         Debug.DrawLine(transform.position, (visionDirection * Attributes.reachOfVision) + transform.position, Color.red);
