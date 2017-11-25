@@ -110,7 +110,7 @@ public class Agent : MonoBehaviour
         foreach (Agent a in LevelManager.Instance.Agents)
         {
             OtherAgent oa = new OtherAgent(a.name, a.Team, a.transform.position, a.visionDirection);
-            if (InFieldOfVision(a))
+            if (InFieldOfVision(a.gameObject))
             {
                 
 
@@ -162,8 +162,23 @@ public class Agent : MonoBehaviour
         }
     }
 
+    // Defines if place is seen or not
+    public bool InFieldOfVision(Vector3 a)
+    {
+        Vector3 objectPosition = a;
+        float distanceToObject = (objectPosition - transform.position).magnitude;
+        Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
+
+        if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) < Attributes.widthOfVision
+            && Vector3.Angle(directionToObject, visionDirection) > -Attributes.widthOfVision && !BehindObject(a))
+        {
+            return true;
+        }
+        return false;
+    }
+
     // Defines if something is seen or not
-    private bool InFieldOfVision(Agent a)
+    public bool InFieldOfVision(GameObject a)
     {
         Vector3 objectPosition = a.transform.position;
         float distanceToObject = (objectPosition - transform.position).magnitude;
@@ -178,7 +193,7 @@ public class Agent : MonoBehaviour
     }
 
     // Defines if agent is seen or not, search by name
-    private bool InFieldOfVision(string name)
+    public bool InFieldOfVision(string name)
     {
         Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
         Vector3 objectPosition = a.transform.position;
@@ -193,12 +208,16 @@ public class Agent : MonoBehaviour
         return false;
     }
 
+    // Checks if the position is behind an object
+    private bool BehindObject(Vector3 a)
+    {
+        return Physics2D.Linecast(transform.position, a, LayerMask.GetMask("Walls"));
+    }
+
     // Checks if the gameObject is behind another one
     private bool BehindObject(GameObject a)
     {
         return Physics2D.Linecast(transform.position, a.transform.position, LayerMask.GetMask("Walls"));
-        
-        
     }
 
     // Checks if the agent is at its destination

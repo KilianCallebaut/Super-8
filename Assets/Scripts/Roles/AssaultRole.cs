@@ -38,7 +38,7 @@ public class AssaultRole : AgentBehaviour {
 
     // Looks around when no target is selected
     // Only meant to change the LookingDestination
-    private void Inspecting()
+    protected override void Inspecting()
     {
         if (agent.TargetAgent == null)
         {
@@ -51,13 +51,13 @@ public class AssaultRole : AgentBehaviour {
         }
     }
 
-   
 
-  
+
+
 
     // Targets closest enemy under distancethreshold
     // Only meant to change the agents Target
-    private void Targetting()
+    protected override void Targetting()
     {
         if (agent.seenOtherAgents.Count > 0)
         {
@@ -69,7 +69,7 @@ public class AssaultRole : AgentBehaviour {
     // When spotting an agent that's close enough approach otherwise avoid
     // Since the only thing that is really meant to change here is the destination, we can order
     // Goal: Avoiding line of fire by taking evading route
-    private void Positioning()
+    protected override void Positioning()
     {
         GoToGroupObjective();
         StayInGroup();
@@ -205,10 +205,5 @@ public class AssaultRole : AgentBehaviour {
 
     // Inspecting methods
 
-    // Look around in an angle of the current direction
-    private void LookAround()
-    {        
-        agent.LookingDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * agent.visionDirection * agent.Attributes.reachOfVision + transform.position;
-    
-    }
+   
 }

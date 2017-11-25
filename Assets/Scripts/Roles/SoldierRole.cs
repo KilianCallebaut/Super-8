@@ -7,8 +7,6 @@ using UnityEngine;
  * */
 public class SoldierRole : AgentBehaviour {
 
-    private Vector3 turningDestination;
-    private float acceptingThreshold = 0.01f;
 
 
     // Use this for initialization
@@ -39,7 +37,7 @@ public class SoldierRole : AgentBehaviour {
     // Looks around when no target is selected
     // Only meant to change the LookingDestination
     // goal: Checks for flanking every once in a while, mostly focused on objective
-    private void Inspecting()
+    protected override void Inspecting()
     {
         if (agent.TargetAgent == null)
         {
@@ -56,7 +54,7 @@ public class SoldierRole : AgentBehaviour {
     // Targets close flanking enemies and midrange enemies
     // Only meant to change the agents Target
     // goal: Deals with flanking enemies, picks best targets from cover position, deals with strongest targets first
-    private void Targetting()
+    protected override void Targetting()
     {
          if (agent.seenOtherAgents.Count > 0)
         {
@@ -70,49 +68,25 @@ public class SoldierRole : AgentBehaviour {
 
     // Keeps medium distance from targets
     // Since the only thing that is really meant to change here is the destination, we can order
-    private void Positioning()
+    protected override void Positioning()
     {
         GoToGroupObjective();
         StayInGroup();
 
         if (agent.TargetAgent != null)
         {
-
+            if(Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < midRange)
+            {
+                Retreat();
+            }
         }
 
        
     }
 
-
     // Inspecting methods
-    // Look around in an angle of the current direction
-    private void CheckFlanks()
-    {
-        Vector3 forward = agent.direction;
-        
-        if (turningDestination == Vector3.zero)
-        {
-            turningDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
 
-        }
-        else if (Vector3.Distance(turningDestination, agent.visionDirection) < acceptingThreshold)
-        {
-
-            if (Vector3.Distance(turningDestination, Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward) < acceptingThreshold)
-            {
-                turningDestination = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward;
-            } else if (Vector3.Distance(turningDestination, Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward) < acceptingThreshold)
-            {
-                turningDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
-            } else
-            {
-                turningDestination = Vector3.zero;
-            }
-        } else
-        {
-            agent.LookingDestination = turningDestination * agent.Attributes.reachOfVision + transform.position;
-        }
-    }
+    
 
     // Targetting methods
 
@@ -166,7 +140,7 @@ public class SoldierRole : AgentBehaviour {
                 
             }
 
-            if ( a.Value.Equals(agent.TargetAgent.Enemy))
+            if (agentIsTarget(a.Value))
             {
                 // Standared medium range 
                 if (agent.TargetAgent.ThreatLevel < 1 &&
@@ -190,7 +164,16 @@ public class SoldierRole : AgentBehaviour {
         }
     }
 
-    
+    // Positioning methods
+
+    // Retreats to position further from target
+    // For now go in exact opposite direction
+    private void Retreat()
+    {
+        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
+        var oppositeDirection = new Vector3(-direction.x, -direction.y);
+        agent.Destination = oppositeDirection + transform.position;
+    }    
 
 
     // For debugging

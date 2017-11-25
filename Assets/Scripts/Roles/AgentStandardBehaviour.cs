@@ -48,7 +48,7 @@ public class AgentStandardBehaviour : AgentBehaviour {
     
 
     // Placeholder for Targetting
-    private void Targetting()
+    protected override void Targetting()
     {
 
 
@@ -95,5 +95,15 @@ public class AgentStandardBehaviour : AgentBehaviour {
         {
             agent.Shoot();
         }
+    }
+
+    protected override void Inspecting()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void Positioning()
+    {
+        throw new NotImplementedException();
     }
 }

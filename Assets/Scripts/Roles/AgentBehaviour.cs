@@ -8,6 +8,10 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected float closeRange = 1.0f;
     protected float midRange = 5.0f;
     protected float longRange = 15.0f;
+    private float acceptingThreshold = 0.01f;
+
+    protected Vector3 turningDestination;
+
 
     // Use this for initialization
     void Start () {
@@ -20,6 +24,9 @@ public abstract class AgentBehaviour : MonoBehaviour {
 	}
 
     abstract public void Think();
+    abstract protected void Inspecting();
+    abstract protected void Targetting();
+    abstract protected void Positioning();
 
     // Measures the level of threat an enemy poses to agent
     // TODO: balance out threat measurement
@@ -34,6 +41,61 @@ public abstract class AgentBehaviour : MonoBehaviour {
         return 0.0f;
 
     }
+
+    // Checks if the agent is the target
+    protected bool agentIsTarget(OtherAgent oa)
+    {
+        if (agent.TargetAgent != null && oa.Equals(agent.TargetAgent.Enemy))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    // Inspecting methods
+
+    // Look around in an angle of the current direction
+    protected void LookAround()
+    {
+        agent.LookingDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * agent.visionDirection * agent.Attributes.reachOfVision + transform.position;
+
+    }
+
+    // Look to the flanks
+    protected void CheckFlanks()
+    {
+        Vector3 forward = agent.direction;
+
+        if (turningDestination == Vector3.zero)
+        {
+            turningDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
+
+        }
+        else if (Vector3.Angle(turningDestination, agent.visionDirection) < acceptingThreshold)
+        {
+
+            if (Vector3.Distance(turningDestination, Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward) < acceptingThreshold)
+            {
+                turningDestination = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward;
+            }
+            else if (Vector3.Distance(turningDestination, Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward) < acceptingThreshold)
+            {
+                turningDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
+            }
+            else
+            {
+                turningDestination = Vector3.zero;
+            }
+        }
+        else
+        {
+            agent.LookingDestination = turningDestination * agent.Attributes.reachOfVision + transform.position;
+        }
+    }
+
+
+    // Postioning methods
 
     // Going to group's objective
     protected void GoToGroupObjective()
@@ -64,13 +126,5 @@ public abstract class AgentBehaviour : MonoBehaviour {
         }
     }
 
-    // Checks if the agent is the target
-    protected bool agentIsTarget(OtherAgent oa)
-    {
-        if(agent.TargetAgent != null && oa.Equals(agent.TargetAgent.Enemy))
-        {
-            return true;
-        }
-        return false;
-    }
+    
 }

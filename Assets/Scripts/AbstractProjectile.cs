@@ -10,12 +10,12 @@ public abstract class AbstractProjectile : MonoBehaviour {
 	}
 	protected Vector3 dir;
 	public float vel = 15.0f;
-	protected GameObject ignoreCollisionsWith = null;
+	protected Agent ignoreCollisionsWith = null;
 	public float travMax = 20.0f;
 	protected float dTrav = 0.0f;
 	public int damage = 1;
 
-	public void initialUpdate( GameObject doNotCollideWith, Vector3 direction) {
+	public void initialUpdate( Agent doNotCollideWith, Vector3 direction) {
 		dir.x = direction.x;
 		dir.y = direction.y;
 		dir.z = 0.0f;
@@ -27,7 +27,9 @@ public abstract class AbstractProjectile : MonoBehaviour {
 	protected abstract void bulletUpdate (float dTime);
 
 	void OnTriggerEnter2D(Collider2D c) {
-		if (c.gameObject == ignoreCollisionsWith || c.gameObject.GetComponent<AbstractProjectileCollidable>() == null)
+        Agent collider = c.gameObject.GetComponent<Agent>();
+		if ((collider != null && collider.Team == ignoreCollisionsWith.Team) 
+            || c.gameObject.GetComponent<AbstractProjectileCollidable>() == null)
 			return;
 		onCollision (c.gameObject);
 	}

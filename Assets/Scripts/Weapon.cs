@@ -120,7 +120,7 @@ public class Weapon : MonoBehaviour {
             
             AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
 			if (a != null) {
-				a.initialUpdate ( this.gameObject, direction);
+				a.initialUpdate ( this.gameObject.GetComponent<Agent>(), direction);
 			} else {
 				Debug.Log ("Non-projectile projectile fired");
 			}

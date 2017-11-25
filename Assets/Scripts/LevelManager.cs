@@ -227,7 +227,7 @@ public class LevelManager : Singleton<LevelManager> {
 		group2.Initialize ();
         group2.name = "Group2";
 
-        for (int i = 0; i < StartTilesTeam2.Count-2 ; i++) //
+        for (int i = 0; i < StartTilesTeam2.Count ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "standard");

@@ -1,17 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-
-/**
- * Bullet sponge that also deals out a lot of damage to agents in front of him.
- * Defender
- * */
-public class HeavyRole : AgentBehaviour
-{
-
-    private float inAreaThreshold = 4.0f;
+public class SniperRole : AgentBehaviour {
+  
+    
 
     // Use this for initialization
     void Start () {
@@ -25,58 +18,20 @@ public class HeavyRole : AgentBehaviour
 
     public override void Think()
     {
-        // Positions and shoots at the enemy closest to his visiondirection
         if (agent == null)
             agent = GetComponent<Agent>();
 
         Inspecting();
         Targetting();
         Positioning();
-
     }
 
-    // When spotting an enemy agent, stop (when in targetarea)
-    // Since the only thing that is really meant to change here is the destination, we can order
-    // Goal: position so small flanking options + best area covering
-    protected override void Positioning()
-    {
-        GoToGroupObjective();
-        StayInGroup();
-
-        if (InObjectiveArea())
-        {
-            OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
-            if (enemy != null)
-            {
-                agent.Destination = agent.transform.position;
-            }
-            
-        } 
-    }
-
-
-    // Targets agent closest to vision direction
-    // Only meant to change the agents Target
-    protected override void Targetting()
-    { 
-        if (agent.seenOtherAgents.Count > 0)
-        {
-
-            Prioritizing();
-            Engaging();
-        }
-
-    }
-
-
-    // Looks forward when no target is selected
-    // GOAL: looks at openings to anticipate attackers
-    // Only meant to change the LookingDestination
+    // Screens in front of him
     protected override void Inspecting()
     {
-        if (agent.TargetAgent == null && !agent.AtDestination())
+        if (agent.TargetAgent == null)
         {
-            agent.LookingDestination = agent.Destination;
+            CheckFlanks();
         }
 
         if (agent.TargetAgent != null)
@@ -85,11 +40,39 @@ public class HeavyRole : AgentBehaviour
         }
     }
 
-    // Checks if the agent is in the objective area
-    private bool InObjectiveArea()
+    // Targets 
+    protected override void Targetting()
     {
-        return Vector3.Distance(transform.position, agent.AgentGroup.Objectives[0]) < inAreaThreshold;
+        if (agent.seenOtherAgents.Count > 0)
+        {
+
+            Prioritizing();
+            Engaging();
+        }
     }
+
+    // Set up from a distance
+    protected override void Positioning()
+    {
+        GoToGroupObjective();
+        StayInGroup();
+
+        if (InObjectiveArea() && agent.InFieldOfVision(agent.Destination))
+        {
+            agent.Destination = transform.position;
+        }
+
+        if (agent.TargetAgent != null)
+        {
+            if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < longRange)
+            {
+                Retreat();
+            }
+        }
+
+    }
+
+    // targetting methods
 
     // Prioritizes targets
     private void Prioritizing()
@@ -117,8 +100,6 @@ public class HeavyRole : AgentBehaviour
         }
     }
 
-    // Decide when to shoot
-    // For now always when agent has a target
     private void Engaging()
     {
         if (agent.TargetAgent != null)
@@ -127,5 +108,20 @@ public class HeavyRole : AgentBehaviour
         }
     }
 
-  
+    // positioning methods
+
+    // Retreats to position further from target
+    // For now go in exact opposite direction
+    private void Retreat()
+    {
+        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
+        var oppositeDirection = new Vector3(-direction.x, -direction.y);
+        agent.Destination = oppositeDirection + transform.position;
+    }
+
+    // Checks if the agent is in the objective area
+    private bool InObjectiveArea()
+    {
+        return Vector3.Distance(transform.position, agent.AgentGroup.Objectives[0]) < longRange;
+    }
 }
