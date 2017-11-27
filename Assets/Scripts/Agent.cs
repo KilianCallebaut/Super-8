@@ -6,7 +6,6 @@ public class Agent : MonoBehaviour
 {
 
     //Agent's specifics
-
     public AgentAttributes Attributes { get; set; }
     public AgentBehaviour Behaviour { get; set; }
 
@@ -44,7 +43,7 @@ public class Agent : MonoBehaviour
     private void initialize()
     {
         seenOtherAgents = new Dictionary<string, OtherAgent>();
-        weapon = gameObject.AddComponent<Gun>();
+		weapon = transform.Find("arm_left/gun").gameObject.AddComponent<Gun>();
         
         Behaviour = gameObject.AddComponent<AgentStandardBehaviour>();
         Destination = transform.position;
