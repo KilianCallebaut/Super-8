@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour {
 	public const int SPREAD_MODE_EVEN = 0;
 	public const int SPREAD_MODE_RANDOM_EQUAL = 1;
 	public const int SPREAD_MODE_RANDOM_NORMAL = 2;
-	public float spread = 0.0f;
+	public float spread = 0.0f;//spread angle in radians
 
 	//reload and ammo stuff
 	public int ammoCount = -1;//-1 means infinite
@@ -233,6 +233,88 @@ public class Weapon : MonoBehaviour {
 				}
 			}
 			remainingTime = dTime;
+		}
+	}
+
+	//******************************************************
+	//pre-defined functions to generate specific weapons here
+
+	public void beShadowPistol() {
+		shotsPerVolley = 1;
+		volleysUntilReload = 9;
+		timeUntilFirstVolley = 0;
+		timeBetweenShots = 0;
+		timeBetweenVolleys = 0.8f;
+		spread = (2 * Mathf.PI / 360) * 10;
+		reloadDuration = 3.0f;
+		spreadMode = SPREAD_MODE_RANDOM_EQUAL;
+		projectilesPerShot = 1;
+		optimalRangeHint = 200 / spread;
+		projectileType = Resources.Load ("PistolBullet") as AbstractProjectile;
+	}
+
+	public void beHeavyMinigun() {
+		shotsPerVolley = 10;
+		volleysUntilReload = 10;
+		timeUntilFirstVolley = 5;
+		timeBetweenShots = 0.2f;
+		timeBetweenVolleys = 2;
+		spread = (2 * Mathf.PI / 360) * 30;
+		reloadDuration = 10.0f;
+		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
+		projectilesPerShot = 1;
+		optimalRangeHint = 200 / spread;
+		projectileType = Resources.Load ("MGBullet") as AbstractProjectile;
+	}
+
+	public void beAssaultShotgun() {
+		shotsPerVolley = 2;
+		volleysUntilReload = 3;
+		timeUntilFirstVolley = 3;
+		timeBetweenShots = 0.5f;
+		timeBetweenVolleys = 2;
+		spread = (2 * Mathf.PI / 360) * 45;
+		reloadDuration = 5.0f;
+		spreadMode = SPREAD_MODE_EVEN;
+		projectilesPerShot = 11;
+		optimalRangeHint = 200 / spread;
+		projectileType = Resources.Load ("SGBullet") as AbstractProjectile;
+	}
+
+	public void beSoldierRifle() {
+		shotsPerVolley = 3;
+		volleysUntilReload = 3;
+		timeUntilFirstVolley = 2;
+		timeBetweenShots = 0.3f;
+		timeBetweenVolleys = 1.5f;
+		spread = (2 * Mathf.PI / 360) * 10;
+		reloadDuration = 5.0f;
+		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
+		projectilesPerShot = 1;
+		optimalRangeHint = 200 / spread;
+		projectileType = Resources.Load ("MGBullet") as AbstractProjectile;
+	}
+
+	public void beSniperRifle() {
+		shotsPerVolley = 1;
+		volleysUntilReload = 3;
+		timeUntilFirstVolley = 10;
+		timeBetweenShots = 0;
+		timeBetweenVolleys = 5;
+		spread = (2 * Mathf.PI / 360) * 1;
+		reloadDuration = 10.0f;
+		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
+		projectilesPerShot = 1;
+		optimalRangeHint = 200 / spread;
+		projectileType = Resources.Load ("SniperBullet") as AbstractProjectile;
+	}
+
+	public void shapeAfterRole(AgentBehaviour s) {
+		//TODO: load ammunition type somewhere
+		if (s is AssaultRole) {
+			beAssaultShotgun ();
+		} else if (s is HeavyRole) {
+			beHeavyMinigun ();
 		}
 	}
 }

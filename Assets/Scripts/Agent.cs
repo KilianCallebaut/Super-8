@@ -247,9 +247,7 @@ public class Agent : MonoBehaviour
 			weapon.setShootingDirection (shootingLocation);
 			//weapon.setShootingDirection	(new Vector3(shootingLocation.x, 0.0f, shootingLocation.y));
             TargetAgent.AimTime = Time.time;
-
-            
-            }
+			weapon.startShooting ();
 
         }
 

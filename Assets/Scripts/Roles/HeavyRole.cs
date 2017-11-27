@@ -15,7 +15,7 @@ public class HeavyRole : AgentBehaviour
 
     // Use this for initialization
     void Start () {
-		
+		gameObject.GetComponent<Weapon> ().beHeavyMinigun ();
 	}
 	
 	// Update is called once per frame
