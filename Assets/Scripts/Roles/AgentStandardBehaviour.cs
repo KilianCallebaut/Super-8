@@ -75,6 +75,7 @@ public class AgentStandardBehaviour : AgentBehaviour {
             GoToGroupObjective();
         }
     }
+
     // Placeholder for Targetting
     private void Targetting()
     {

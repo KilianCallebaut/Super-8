@@ -10,14 +10,17 @@ using UnityEngine;
 public class OtherAgent {
 
     public Vector3 Position { get; set; }
+    public Vector3 VisionDirection { get; set; }
+    
     public string Name { get; set; }
     public int Team { get; set; }
 
-    public OtherAgent( string name, int team, Vector3 position)
+    public OtherAgent( string name, int team, Vector3 position, Vector3 visiondir)
     {
         this.Position = position;
         this.Name = name;
         this.Team = team;
+        this.VisionDirection = visiondir;
     }
 
     public override bool Equals(object obj)
