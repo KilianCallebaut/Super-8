@@ -8,10 +8,10 @@ public class WallScript : AbstractProjectileCollidable {
 	void Start () {
 		
 	}
-	public abstract bool bulletCollides(float dist, float time, float frac){
+	public override bool bulletCollides(float dist, float time, float frac){
 		return true;
 	}
-	public abstract void receiveDamage(int damage) {
+	public override void receiveDamage(int damage) {
 		return;//walls don't break
 	}
 	// Update is called once per frame

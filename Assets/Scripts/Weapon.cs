@@ -250,7 +250,7 @@ public class Weapon : MonoBehaviour {
 		spreadMode = SPREAD_MODE_RANDOM_EQUAL;
 		projectilesPerShot = 1;
 		optimalRangeHint = 200 / spread;
-		projectileType = Resources.Load ("PistolBullet") as AbstractProjectile;
+		projectileType = Resources.Load ("PistolBullet") as GameObject;
 	}
 
 	public void beHeavyMinigun() {
@@ -264,7 +264,7 @@ public class Weapon : MonoBehaviour {
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
 		optimalRangeHint = 200 / spread;
-		projectileType = Resources.Load ("MGBullet") as AbstractProjectile;
+		projectileType = Resources.Load ("MGBullet") as GameObject;
 	}
 
 	public void beAssaultShotgun() {
@@ -278,7 +278,7 @@ public class Weapon : MonoBehaviour {
 		spreadMode = SPREAD_MODE_EVEN;
 		projectilesPerShot = 11;
 		optimalRangeHint = 200 / spread;
-		projectileType = Resources.Load ("SGBullet") as AbstractProjectile;
+		projectileType = Resources.Load ("SGBullet") as GameObject;
 	}
 
 	public void beSoldierRifle() {
@@ -292,7 +292,7 @@ public class Weapon : MonoBehaviour {
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
 		optimalRangeHint = 200 / spread;
-		projectileType = Resources.Load ("MGBullet") as AbstractProjectile;
+		projectileType = Resources.Load ("MGBullet") as GameObject;
 	}
 
 	public void beSniperRifle() {
@@ -306,7 +306,7 @@ public class Weapon : MonoBehaviour {
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
 		optimalRangeHint = 200 / spread;
-		projectileType = Resources.Load ("SniperBullet") as AbstractProjectile;
+		projectileType = Resources.Load ("SniperBullet") as GameObject;
 	}
 
 	public void shapeAfterRole(AgentBehaviour s) {
