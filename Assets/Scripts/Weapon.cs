@@ -94,7 +94,7 @@ public class Weapon : MonoBehaviour {
 
 	public void setShootingDirection(Vector3 dir) {
 		float f = Vector3.Angle (new Vector3(1,0,0), dir - transform.position);
-		Debug.Log ("" + dir + " becomes " + f);
+		//Debug.Log ("" + dir + " becomes " + f);
 		setShootingDirection (f * Mathf.Deg2Rad);
 	}
 
@@ -249,7 +249,7 @@ public class Weapon : MonoBehaviour {
 		reloadDuration = 3.0f;
 		spreadMode = SPREAD_MODE_RANDOM_EQUAL;
 		projectilesPerShot = 1;
-		optimalRangeHint = 200 / spread;
+		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
 		projectileType = Resources.Load ("PistolBullet") as GameObject;
 	}
 
@@ -263,7 +263,7 @@ public class Weapon : MonoBehaviour {
 		reloadDuration = 10.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
-		optimalRangeHint = 200 / spread;
+		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
 		projectileType = Resources.Load ("MGBullet") as GameObject;
 	}
 
@@ -277,7 +277,7 @@ public class Weapon : MonoBehaviour {
 		reloadDuration = 5.0f;
 		spreadMode = SPREAD_MODE_EVEN;
 		projectilesPerShot = 11;
-		optimalRangeHint = 200 / spread;
+		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
 		projectileType = Resources.Load ("SGBullet") as GameObject;
 	}
 
@@ -291,7 +291,7 @@ public class Weapon : MonoBehaviour {
 		reloadDuration = 5.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
-		optimalRangeHint = 200 / spread;
+		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
 		projectileType = Resources.Load ("MGBullet") as GameObject;
 	}
 
@@ -305,7 +305,7 @@ public class Weapon : MonoBehaviour {
 		reloadDuration = 10.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
-		optimalRangeHint = 200 / spread;
+		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
 		projectileType = Resources.Load ("SniperBullet") as GameObject;
 	}
 

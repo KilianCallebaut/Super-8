@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vel: 100
-  travMax: 20
+  travMax: 5
   damage: 1
 --- !u!212 &212599635054679962
 SpriteRenderer:
