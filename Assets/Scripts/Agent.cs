@@ -6,7 +6,6 @@ public class Agent : MonoBehaviour
 {
 
     //Agent's specifics
-
     public AgentAttributes Attributes { get; set; }
     public AgentBehaviour Behaviour { get; set; }
 
@@ -44,13 +43,13 @@ public class Agent : MonoBehaviour
     private void initialize()
     {
         seenOtherAgents = new Dictionary<string, OtherAgent>();
-        weapon = gameObject.AddComponent<Weapon>();
-		weapon.projectileType = bullet;
+        weapon = transform.Find("arm_left/gun").gameObject.AddComponent<Weapon>();
+        weapon.projectileType = bullet;
 		weapon.spread = 0.0f;
 		weapon.shotsPerVolley = 10;
 		weapon.timeBetweenShots = 0.1f;
 		gameObject.AddComponent<DamageRecipient>();
-
+        
         Behaviour = gameObject.AddComponent<AgentStandardBehaviour>();
         Destination = transform.position;
         visionDirection = gameObject.GetComponent<Rigidbody2D>().transform.forward;
