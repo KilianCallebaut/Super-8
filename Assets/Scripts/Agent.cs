@@ -32,7 +32,23 @@ public class Agent : MonoBehaviour
     private float aimBonus = 0.0f;
     private float aimIncrease = 0.1f;
     private float health = 0.0f;
-    public bool Shadow { get; set; }
+    private bool shadow = false;
+    public bool Shadow
+    {
+        get
+        {
+            return shadow;
+        }
+
+        set
+        {
+            shadow = value;
+            if (value == true)
+                LevelManager.Instance.ShadowMap.Add(this, new Dictionary<Agent, int>());
+            else
+                LevelManager.Instance.ShadowMap.Remove(this);
+        }
+    }
 
     // Main loop
     // Use this for initialization
@@ -94,10 +110,7 @@ public class Agent : MonoBehaviour
         RotateToDirection();
 
 
-        if (TargetAgent == null && weapon.isShooting())
-        {
-            weapon.stopShooting();
-        }
+       
 
     }
 
@@ -107,7 +120,7 @@ public class Agent : MonoBehaviour
         foreach (Agent a in LevelManager.Instance.Agents)
         {
             OtherAgent oa = new OtherAgent(a.name, a.Team, a.transform.position, a.visionDirection, a.direction);
-            if (InFieldOfVision(a.gameObject))
+            if (InFieldOfVision(a.name))
             {
 
 
@@ -159,79 +172,20 @@ public class Agent : MonoBehaviour
         }
     }
 
-    // Defines if place is seen or not
-    public bool InFieldOfVision(Vector3 a)
-    {
-        Vector3 objectPosition = a;
-        float distanceToObject = (objectPosition - transform.position).magnitude;
-        Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
-
-        if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) < Attributes.widthOfVision
-            && Vector3.Angle(directionToObject, visionDirection) > -Attributes.widthOfVision && !BehindObject(a))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    // Defines if something is seen or not
-    public bool InFieldOfVision(GameObject a)
-    {
-        try { 
-            Vector3 objectPosition = a.transform.position;
-            float distanceToObject = (objectPosition - transform.position).magnitude;
-            Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
-
-            if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) <Attributes.widthOfVision 
-                && Vector3.Angle(directionToObject, visionDirection) > - Attributes.widthOfVision && !BehindObject(a.gameObject))
-            {
-                return true;
-            }
-            return false;
-
-        } catch (NullReferenceException e)
-        {
-
-            return false;
-        }
-
-    }
 
     // Defines if agent is seen or not, search by name
     public bool InFieldOfVision(string name)
     {
-        try
-        {
-            Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
-            Vector3 objectPosition = a.transform.position;
-
-            float distanceToObject = (objectPosition - transform.position).magnitude;
-            Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
-
-            if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) < Attributes.widthOfVision
-                && Vector3.Angle(directionToObject, visionDirection) > -Attributes.widthOfVision && !BehindObject(a.gameObject))
-            {
-                return true;
-            }
-            return false;
-        } catch (NullReferenceException e)
-        {
-
-            return false;
-        }
+        return LevelManager.Instance.CanSee(this, name);
     }
 
-    // Checks if the position is behind an object
-    private bool BehindObject(Vector3 a)
+    // Defines if agent is seen or not, search by name
+    public bool InFieldOfVision(Vector3 position)
     {
-        return Physics2D.Linecast(transform.position, a, LayerMask.GetMask("Walls"));
+        return LevelManager.Instance.CanSee(this, position);
     }
 
-    // Checks if the gameObject is behind another one
-    private bool BehindObject(GameObject a)
-    {
-        return Physics2D.Linecast(transform.position, a.transform.position, LayerMask.GetMask("Walls"));
-    }
+
 
     // Checks if the agent is at its destination
     public bool AtDestination()
@@ -304,8 +258,10 @@ public class Agent : MonoBehaviour
 
     // Agent Actions
 
+        // Letting agent shoot
     public void Shoot()
     {
+
         if (TargetAgent != null)
         {
             // Update direction
@@ -320,10 +276,22 @@ public class Agent : MonoBehaviour
 
 			weapon.startShooting ();
 
+            if (Shadow)
+                Shadow = false;
         }
+
+        
 
     }
 
+    // Stops agent from shooting
+    public void DontShoot()
+    {
+        if (weapon.isShooting())
+        {
+            weapon.stopShooting();
+        }
+    }
 
     // Placeholder for dying
     private void Die()
@@ -387,7 +355,7 @@ public class Agent : MonoBehaviour
         }
 
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(LookingDestination, 0.4f);
+        Gizmos.DrawSphere(LookingDestination, 0.3f);
 
     }
 }

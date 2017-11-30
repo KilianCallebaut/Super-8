@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class AgentBehaviour : MonoBehaviour {
 
     protected Agent agent;
-    protected float closeRange = 1.0f;
-    protected float midRange = 5.0f;
-    protected float longRange = 15.0f;
+    protected static float closeRange = 1.0f;
+    protected static float midRange = 5.0f;
+    protected static float longRange = 15.0f;
     private float acceptingThreshold = 0.01f;
     private float extraOutOfVisionDegrees = 5.0f;
 
@@ -45,9 +46,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
         return 0.0f;
 
     }
-
-
-
+    
     // Checks if the agent is the target
     protected bool agentIsTarget(OtherAgent oa)
     {
@@ -74,8 +73,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected bool InEnemyBack(OtherAgent Enemy)
     {
         var directionToPlayer = (transform.position - Enemy.Position).normalized;
-
-        if (Vector3.Angle(directionToPlayer, -Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
+        if (Vector3.Angle(directionToPlayer, -Enemy.Direction) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
         {
             return true;
         }
@@ -92,6 +90,19 @@ public abstract class AgentBehaviour : MonoBehaviour {
         return false;
     }
 
+    // Check if any enemy is closer than midrange
+    protected bool EnemiesNear()
+    { 
+        return agent.seenOtherAgents.Any(x => ((Vector3.Distance(x.Value.Position, transform.position) < midRange) && (x.Value.Team != agent.Team)));
+
+    }
+
+    // Check if any enemy is closer than longrange
+    protected bool EnemiesAlmostNear()
+    {
+        return agent.seenOtherAgents.Any(x => ((Vector3.Distance(x.Value.Position, transform.position) < longRange) && (x.Value.Team != agent.Team)));
+
+    }
 
     // Inspecting methods
 
@@ -135,6 +146,13 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
     // Postioning methods
 
+    // Stops where he's going
+    protected void Stop()
+    {
+        agent.Destination = transform.position;
+    }
+
+
     // Going to group's objective
     protected void GoToGroupObjective()
     {
@@ -168,88 +186,90 @@ public abstract class AgentBehaviour : MonoBehaviour {
     // Approach, while avoid being hit
     protected int Flanking(int flankingSide)
     {
-
-        // go to a position on targets nearest flank
-
-        // find visionwidth line
-        var rotatedVisionPoint = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision + extraOutOfVisionDegrees) * agent.TargetAgent.Enemy.VisionDirection + agent.TargetAgent.LastPosition;
-        var k = ((rotatedVisionPoint.y - agent.TargetAgent.LastPosition.y) * (transform.position.x - agent.TargetAgent.LastPosition.x)
-            - (rotatedVisionPoint.x - agent.TargetAgent.LastPosition.x) * (transform.position.y - agent.TargetAgent.LastPosition.y))
-            / (Mathf.Pow((rotatedVisionPoint.y - agent.TargetAgent.LastPosition.y), 2.0f) + Mathf.Pow((rotatedVisionPoint.x - agent.TargetAgent.LastPosition.x), 2.0f));
-
-        // find closest point to agent
-        var xClosest = transform.position.x - k * (rotatedVisionPoint.y - agent.TargetAgent.LastPosition.y);
-        var yClosest = transform.position.y + k * (rotatedVisionPoint.x - agent.TargetAgent.LastPosition.x);
-        Vector3 ClosestPoint = new Vector3(xClosest, yClosest, 0f);
-
-        // Find visionwidth line other side
-        var rotatedVisionPoint2 = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision - extraOutOfVisionDegrees) * agent.TargetAgent.Enemy.VisionDirection + agent.TargetAgent.LastPosition;
-        var k2 = ((rotatedVisionPoint2.y - agent.TargetAgent.LastPosition.y) * (transform.position.x - agent.TargetAgent.LastPosition.x)
-            - (rotatedVisionPoint2.x - agent.TargetAgent.LastPosition.x) * (transform.position.y - agent.TargetAgent.LastPosition.y))
-            / (Mathf.Pow((rotatedVisionPoint2.y - agent.TargetAgent.LastPosition.y), 2.0f) + Mathf.Pow((rotatedVisionPoint2.x - agent.TargetAgent.LastPosition.x), 2.0f));
-
-        // find closest point to agent
-        var xClosest2 = transform.position.x - k2 * (rotatedVisionPoint2.y - agent.TargetAgent.LastPosition.y);
-        var yClosest2 = transform.position.y + k2 * (rotatedVisionPoint2.x - agent.TargetAgent.LastPosition.x);
-        Vector3 ClosestPoint2 = new Vector3(xClosest2, yClosest2, 0f);
-
-
-        if (IsAtPoint(ClosestPoint) || IsAtPoint(ClosestPoint2) || !InEnemyFieldOfVision(agent.TargetAgent.Enemy) )
+        if (agent.TargetAgent != null )
         {
-            agent.Destination = CalculateClosestSidePoint();
-            return flankingSide;
-        }
+            // go to a position on targets nearest flank
 
+            // find visionwidth line
+            var rotatedVisionPoint = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision + extraOutOfVisionDegrees) * agent.TargetAgent.Enemy.VisionDirection + agent.TargetAgent.LastPosition;
+            var k = ((rotatedVisionPoint.y - agent.TargetAgent.LastPosition.y) * (transform.position.x - agent.TargetAgent.LastPosition.x)
+                - (rotatedVisionPoint.x - agent.TargetAgent.LastPosition.x) * (transform.position.y - agent.TargetAgent.LastPosition.y))
+                / (Mathf.Pow((rotatedVisionPoint.y - agent.TargetAgent.LastPosition.y), 2.0f) + Mathf.Pow((rotatedVisionPoint.x - agent.TargetAgent.LastPosition.x), 2.0f));
 
-        if (flankingSide != 0)
-        {
-            if (flankingSide == 1)
+            // find closest point to agent
+            var xClosest = transform.position.x - k * (rotatedVisionPoint.y - agent.TargetAgent.LastPosition.y);
+            var yClosest = transform.position.y + k * (rotatedVisionPoint.x - agent.TargetAgent.LastPosition.x);
+            Vector3 ClosestPoint = new Vector3(xClosest, yClosest, 0f);
+
+            // Find visionwidth line other side
+            var rotatedVisionPoint2 = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision - extraOutOfVisionDegrees) * agent.TargetAgent.Enemy.VisionDirection + agent.TargetAgent.LastPosition;
+            var k2 = ((rotatedVisionPoint2.y - agent.TargetAgent.LastPosition.y) * (transform.position.x - agent.TargetAgent.LastPosition.x)
+                - (rotatedVisionPoint2.x - agent.TargetAgent.LastPosition.x) * (transform.position.y - agent.TargetAgent.LastPosition.y))
+                / (Mathf.Pow((rotatedVisionPoint2.y - agent.TargetAgent.LastPosition.y), 2.0f) + Mathf.Pow((rotatedVisionPoint2.x - agent.TargetAgent.LastPosition.x), 2.0f));
+
+            // find closest point to agent
+            var xClosest2 = transform.position.x - k2 * (rotatedVisionPoint2.y - agent.TargetAgent.LastPosition.y);
+            var yClosest2 = transform.position.y + k2 * (rotatedVisionPoint2.x - agent.TargetAgent.LastPosition.x);
+            Vector3 ClosestPoint2 = new Vector3(xClosest2, yClosest2, 0f);
+
+            if (InEnemyFieldOfVision(agent.TargetAgent.Enemy))
             {
-                agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
-                
-                return 1;
-            }
-            else if (flankingSide == 2)
-            {
-                agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
-                return 2;
+                if (flankingSide != 0)
+                {
+                    if (flankingSide == 1)
+                    {
+                        agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
 
-            }
+                        return 1;
+                    }
+                    else if (flankingSide == 2)
+                    {
+                        agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
+                        return 2;
+
+                    }
+                }
+
+                if (Vector3.Distance(ClosestPoint, transform.position) > Vector3.Distance(ClosestPoint2, transform.position))
+                {
+                    agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
+                    return 2;
+                }
+                else
+                {
+                    agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
+                    return 1;
+                }
+            } 
+
         }
 
-        if (Vector3.Distance(ClosestPoint, transform.position) > Vector3.Distance(ClosestPoint2, transform.position))
-        {
-             agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
-            return 2;
-        } else
-        {
-            agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
-            return 1;
-        }
-        
-
+        return 0;
     }
 
 
     // Go to location in the agent's back
     protected void HittingTheBack()
     {
-        agent.Shadow = true;
+        if (agent.TargetAgent != null && agent.Shadow == true)
+        {
+            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
 
-        Vector3 oppositeDirection = - agent.TargetAgent.Enemy.Direction;
-
-        // ToDo: avoid setting locations where there are walls
-        agent.Destination = oppositeDirection * midRange + agent.TargetAgent.LastPosition;
-
+            // ToDo: avoid setting locations where there are walls
+            agent.Destination = oppositeDirection * midRange + agent.TargetAgent.LastPosition;
+        }
     }
 
     // Retreats to position further from target
     // For now go in exact opposite direction
     protected void Retreat()
     {
-        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
-        var oppositeDirection = new Vector3(-direction.x, -direction.y);
-        agent.Destination = oppositeDirection + transform.position;
+        if (agent.TargetAgent != null)
+        {
+            var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
+            var oppositeDirection = new Vector3(-direction.x, -direction.y);
+            agent.Destination = oppositeDirection + transform.position;
+        }
     }
 
     // Calculate the closest point on the side of an agent

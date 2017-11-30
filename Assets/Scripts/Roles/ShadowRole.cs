@@ -21,6 +21,9 @@ public class ShadowRole : AgentBehaviour {
         if (agent == null)
             agent = GetComponent<Agent>();
 
+
+       
+
         Inspecting();
         Targetting();
         Positioning();
@@ -39,26 +42,30 @@ public class ShadowRole : AgentBehaviour {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
         }
 
+       
+
     }
 
     // Stays in group, goes to enemy flank
     protected override void Positioning()
-    {
-        GoToGroupObjective();
-        StayInGroup();
-
+    { 
 
         if (agent.TargetAgent != null)
         {
-            // When targets looks away from you, sneak up on him, else avoid his gaze
-            if (!InEnemyBack(agent.TargetAgent.Enemy))
+            Stop();
+        }
+
+        if (agent.AtDestination())
+        {
+            GoToGroupObjective();
+            StayInGroup();
+            HittingTheBack();
+
+            if (EnemiesNear())
             {
-                Chasing();
+                Retreat();
             }
-            else
-            {
-                HittingTheBack();
-            }
+            
         }
         
     }
@@ -71,6 +78,15 @@ public class ShadowRole : AgentBehaviour {
         {
             if (agent.TargetAgent == null) 
                 Prioritizing();
+
+            if (agent.TargetAgent != null && InEnemyBack(agent.TargetAgent.Enemy))
+            {
+                agent.Shadow = false;
+            }
+            else if (!agent.Shadow)
+            {
+                agent.Shadow = true;
+            }
 
             Engaging();
         }
@@ -101,9 +117,14 @@ public class ShadowRole : AgentBehaviour {
     // For now always when agent has a target
     private void Engaging()
     {
-        if (agent.TargetAgent != null)
+
+        if (!agent.Shadow && agent.TargetAgent != null)
         {
             agent.Shoot();
+        }
+        else
+        {
+            agent.DontShoot();
         }
     }
 }

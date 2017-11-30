@@ -55,20 +55,26 @@ public class SniperRole : AgentBehaviour {
     // Set up from a distance
     protected override void Positioning()
     {
-        GoToGroupObjective();
-        StayInGroup();
+       
+
+     
+
+        if (agent.AtDestination())
+        {
+            GoToGroupObjective();
+            StayInGroup();
+            
+        }
 
         if (InObjectiveArea() && agent.InFieldOfVision(agent.Destination))
         {
             agent.Destination = transform.position;
         }
 
-        if (agent.TargetAgent != null)
+
+        if (EnemiesAlmostNear())
         {
-            if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < longRange)
-            {
-                Retreat();
-            }
+            Retreat();
         }
 
     }
@@ -106,6 +112,10 @@ public class SniperRole : AgentBehaviour {
         if (agent.TargetAgent != null)
         {
             agent.Shoot();
+        }
+        else
+        {
+            agent.DontShoot();
         }
     }
 

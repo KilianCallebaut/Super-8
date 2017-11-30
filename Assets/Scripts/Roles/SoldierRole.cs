@@ -71,15 +71,16 @@ public class SoldierRole : AgentBehaviour {
     // Since the only thing that is really meant to change here is the destination, we can order
     protected override void Positioning()
     {
-        GoToGroupObjective();
-        StayInGroup();
-
-        if (agent.TargetAgent != null)
+        if (EnemiesNear())
         {
-            if(Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < midRange)
-            {
-                Retreat();
-            }
+            agent.Destination = transform.position;
+        }
+
+        if (agent.AtDestination())
+        {
+            GoToGroupObjective();
+            StayInGroup();
+            Retreat();
         }
 
        
@@ -98,6 +99,10 @@ public class SoldierRole : AgentBehaviour {
         if (agent.TargetAgent != null)
         {
             agent.Shoot();
+        }
+        else
+        {
+            agent.DontShoot();
         }
     }
 

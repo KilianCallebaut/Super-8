@@ -34,6 +34,8 @@ public class LevelManager : Singleton<LevelManager> {
 
     private int[,] map;
 
+
+
     public int MaxXTiles
     {
         get
@@ -208,7 +210,7 @@ public class LevelManager : Singleton<LevelManager> {
             // FOR DEBUGGING PURPOSES
             if (i < 2)
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Assault");
+                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
             } else
             {
                 newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
@@ -227,10 +229,10 @@ public class LevelManager : Singleton<LevelManager> {
 		group2.Initialize ();
         group2.name = "Group2";
 
-        for (int i = 0; i < StartTilesTeam2.Count ; i++) //
+        for (int i = 0; i < StartTilesTeam2.Count -2 ; i++) //
         {
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "standard");
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i].transform.position;
             newAgent.Team = 2;
@@ -270,5 +272,95 @@ public class LevelManager : Singleton<LevelManager> {
     }
 
   
+    public bool CanSee(Agent seeer, string name )
+    {
+        try
+        {
+            Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
+
+            if (a.Shadow)
+            {
+                return CheckShadow(seeer, name);
+            }
+
+            Vector3 objectPosition = a.transform.position;
+            Vector3 seeerPosition = seeer.transform.position;
+
+
+            float distanceToObject = (objectPosition - seeerPosition).magnitude;
+            Vector3 directionToObject = (objectPosition - seeerPosition) / distanceToObject;
+
+            if (distanceToObject < seeer.Attributes.reachOfVision && Vector3.Angle(directionToObject, seeer.visionDirection) < seeer.Attributes.widthOfVision
+                && Vector3.Angle(directionToObject, seeer.visionDirection) > -seeer.Attributes.widthOfVision && !BehindObject(seeer, a.transform.position))
+            {
+                return true;
+            }
+            return false;
+        }
+        catch (NullReferenceException e)
+        {
+
+            return false;
+        }
+    }
+
+    // Defines if place is seen or not
+    public bool CanSee(Agent seeer, Vector3 p)
+    {
+        try
+        {
+            Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
+            Vector3 objectPosition = p;
+            Vector3 seeerPosition = seeer.transform.position;
+
+
+            float distanceToObject = (objectPosition - seeerPosition).magnitude;
+            Vector3 directionToObject = (objectPosition - seeerPosition) / distanceToObject;
+
+            if (distanceToObject < seeer.Attributes.reachOfVision && Vector3.Angle(directionToObject, seeer.visionDirection) < seeer.Attributes.widthOfVision
+                && Vector3.Angle(directionToObject, seeer.visionDirection) > -seeer.Attributes.widthOfVision && !BehindObject(seeer, a.transform.position))
+            {
+                return true;
+            }
+            return false;
+        }
+        catch (NullReferenceException e)
+        {
+
+            return false;
+        }
+    }
+
+    // Checks if the position is behind an object
+    private bool BehindObject(Agent seeer, Vector3 a)
+    {
+        return Physics2D.Linecast(seeer.transform.position, a, LayerMask.GetMask("Walls"));
+    }
+
+    public Dictionary<Agent, Dictionary<Agent, int>> ShadowMap = new Dictionary<Agent, Dictionary<Agent, int>>();
+    private int SpottingChance = 70;
+
+    // Checks if the agent can see through the shadow
+    private bool CheckShadow(Agent checker, string name)
+    {
+        Agent checkedAgent = Agents.Find(x => x.name == name);
+        System.Random rand = new System.Random();
+        
+        if(checkedAgent != null && ShadowMap.ContainsKey(checkedAgent) )
+        {
+            Dictionary<Agent, int> seenList = ShadowMap[checkedAgent];
+            
+            if (!seenList.ContainsKey(checker))
+            {
+                seenList.Add(checker, rand.Next(100));
+            }
+            return seenList[checker] > SpottingChance;
+        }
+
+        return false;
+
+    }
+
+
 
 }

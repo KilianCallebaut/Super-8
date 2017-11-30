@@ -10,6 +10,7 @@ using UnityEngine;
 public class AssaultRole : AgentBehaviour {
 
     private float chaseThreshold = 15.0f;
+    private float flankThreshold = 7.5f;
     private float inAreaThreshold = 4.0f;
     // 1 -> left, 2 -> right, 0 -> not flanking
     private int flankingSide = 0;
@@ -72,26 +73,23 @@ public class AssaultRole : AgentBehaviour {
     // Goal: Avoiding line of fire by taking evading route
     protected override void Positioning()
     {
-        GoToGroupObjective();
-        StayInGroup();
-        
-    
         if (agent.TargetAgent != null)
         {
-            // When targets looks away from you, sneak up on him, else avoid his gaze
-            if (!InEnemyFieldOfVision(agent.TargetAgent.Enemy))
-            {
-                flankingSide = 0;
-                Chasing();
-            }
-            else
+            Stop();
+        }
+
+        if (agent.AtDestination())
+        {
+            GoToGroupObjective();
+            StayInGroup();
+
+            Chasing();
+
+            if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
             {
                 flankingSide = Flanking(flankingSide);
             }
-        }
-        else
-        {
-            flankingSide = 0;
+            
         }
 
     }
@@ -117,7 +115,7 @@ public class AssaultRole : AgentBehaviour {
     {
         foreach (KeyValuePair<string, OtherAgent> a in agent.AgentGroup.SharedSeenOtherAgents)
         {
-            if (a.Value.Team != agent.Team && !agentIsTarget(a.Value) && Vector3.Distance(transform.position, a.Value.Position) < chaseThreshold)
+            if (a.Value.Team != agent.Team && !agentIsTarget(a.Value))
             {
                 if (agent.TargetAgent == null)
                 {

@@ -40,18 +40,25 @@ public class HeavyRole : AgentBehaviour
     // Goal: position so small flanking options + best area covering
     protected override void Positioning()
     {
-        GoToGroupObjective();
-        StayInGroup();
+
+        if (agent.AtDestination())
+        {
+            GoToGroupObjective();
+            StayInGroup();
+
+        }
+
 
         if (InObjectiveArea())
         {
             OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
             if (enemy != null)
             {
-                agent.Destination = agent.transform.position;
+                Stop();
             }
-            
-        } 
+
+        }
+
     }
 
 
@@ -125,7 +132,11 @@ public class HeavyRole : AgentBehaviour
         if (agent.TargetAgent != null)
         {
             agent.Shoot();
+        } else
+        {
+            agent.DontShoot();
         }
+
     }
 
   
