@@ -7,6 +7,7 @@ TagManager:
   - Agent
   - Bullet
   - Walls
+  - Obstacles
   layers:
   - Default
   - TransparentFX
@@ -47,9 +48,9 @@ TagManager:
   - name: Map
     uniqueID: 889296609
     locked: 0
-  - name: Agent
-    uniqueID: 2341681857
-    locked: 0
   - name: Walls
     uniqueID: 2428592241
+    locked: 0
+  - name: Agent
+    uniqueID: 2341681857
     locked: 0

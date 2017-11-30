@@ -31,6 +31,7 @@ public class Agent : MonoBehaviour
     private float aimBonus = 0.0f;
     private float aimIncrease = 0.1f;
     private float health = 0.0f;
+    public bool Shadow { get; set; }
 
     // Main loop
     // Use this for initialization
@@ -109,7 +110,7 @@ public class Agent : MonoBehaviour
     {
         foreach (Agent a in LevelManager.Instance.Agents)
         {
-            OtherAgent oa = new OtherAgent(a.name, a.Team, a.transform.position, a.visionDirection);
+            OtherAgent oa = new OtherAgent(a.name, a.Team, a.transform.position, a.visionDirection, a.direction);
             if (InFieldOfVision(a.gameObject))
             {
                 

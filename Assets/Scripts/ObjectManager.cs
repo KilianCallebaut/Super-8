@@ -38,6 +38,12 @@ public class ObjectManager : Singleton<ObjectManager> {
             case "Soldier":
                 agent.Behaviour = agent.gameObject.AddComponent<SoldierRole>();
                 break;
+            case "Sniper":
+                agent.Behaviour = agent.gameObject.AddComponent<SniperRole>();
+                break;
+            case "Shadow":
+                agent.Behaviour = agent.gameObject.AddComponent<ShadowRole>();
+                break;
             default:
                 agent.Behaviour = agent.gameObject.AddComponent<AgentStandardBehaviour>();
                 break;

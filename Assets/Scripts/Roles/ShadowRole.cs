@@ -1,19 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-/**
- * Fast runner, avoiding bullets to deal a lot of damage closeby
- * Attacker
- * */
-public class AssaultRole : AgentBehaviour {
+public class ShadowRole : AgentBehaviour {
 
-    private float chaseThreshold = 15.0f;
-    private float inAreaThreshold = 4.0f;
-    // 1 -> left, 2 -> right, 0 -> not flanking
     private int flankingSide = 0;
-  
+
     // Use this for initialization
     void Start () {
 		
@@ -24,98 +16,73 @@ public class AssaultRole : AgentBehaviour {
 		
 	}
 
+    // Move to enemy's back, stay in back of group, keep overview
     public override void Think()
     {
+        // Positions and shoots at the enemy closest to his visiondirection
         if (agent == null)
             agent = GetComponent<Agent>();
 
         Inspecting();
         Targetting();
         Positioning();
-        
     }
 
-    // Looks around when no target is selected
-    // Only meant to change the LookingDestination
+    // Checks flanks when nog target
     protected override void Inspecting()
     {
         if (agent.TargetAgent == null)
         {
-            LookAround();
+            CheckFlanks();
         }
 
         if (agent.TargetAgent != null)
         {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
         }
+
     }
 
-
-
-
-
-    // Targets closest enemy under distancethreshold
-    // Only meant to change the agents Target
-    protected override void Targetting()
-    {
-        if (agent.seenOtherAgents.Count > 0)
-        {
-            Prioritizing();
-            Engaging();
-        }
-    }
-
-    // When spotting an agent that's close enough approach otherwise avoid
-    // Since the only thing that is really meant to change here is the destination, we can order
-    // Goal: Avoiding line of fire by taking evading route
+    // Stays in group, goes to enemy flank
     protected override void Positioning()
     {
         GoToGroupObjective();
         StayInGroup();
-        
-    
+
+
         if (agent.TargetAgent != null)
         {
             // When targets looks away from you, sneak up on him, else avoid his gaze
-            if (!InEnemyFieldOfVision(agent.TargetAgent.Enemy))
+            if (!InEnemyBack(agent.TargetAgent.Enemy))
             {
-                flankingSide = 0;
                 Chasing();
             }
             else
             {
-                flankingSide = Flanking(flankingSide);
+                HittingTheBack();
             }
         }
-        else
-        {
-            flankingSide = 0;
-        }
-
+        
     }
 
-    //Checks
-
-
-
-    // Checks if the agent is in the objective area
-    private bool InObjectiveArea()
+    // Prefers targets further away
+    protected override void Targetting()
     {
-        return Vector3.Distance(transform.position, agent.AgentGroup.Objectives[0]) < inAreaThreshold;
+        if (agent.seenOtherAgents.Count > 0)
+        {
+            if (agent.TargetAgent == null) 
+                Prioritizing();
+
+            Engaging();
+        }
     }
-
-    // Positioning methods
-
-    
-
-    // Targetting methods
 
     // Go after closest agent that is closer than a threshold
     private void Prioritizing()
     {
         foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
         {
-            if (a.Value.Team != agent.Team && !agentIsTarget(a.Value) && Vector3.Distance(transform.position, a.Value.Position) < chaseThreshold)
+            if (a.Value.Team != agent.Team && !agentIsTarget(a.Value) )
             {
                 if (agent.TargetAgent == null)
                 {
@@ -123,7 +90,7 @@ public class AssaultRole : AgentBehaviour {
                     continue;
                 }
 
-                if (Vector3.Distance(transform.position, a.Value.Position) < Vector3.Distance(transform.position, agent.TargetAgent.LastPosition))
+                if (Vector3.Distance(transform.position, a.Value.Position) > Vector3.Distance(transform.position, agent.TargetAgent.LastPosition))
                 {
                     agent.TargetAgent = new Target(a.Value, Time.time);
                 }
@@ -140,9 +107,4 @@ public class AssaultRole : AgentBehaviour {
             agent.Shoot();
         }
     }
-
-
-    // Inspecting methods
-
-   
 }

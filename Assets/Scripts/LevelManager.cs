@@ -211,7 +211,7 @@ public class LevelManager : Singleton<LevelManager> {
                 newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Assault");
             } else
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Soldier");
+                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
             }
 
             newAgent.name = "Agent_" + i + "_Team1";
