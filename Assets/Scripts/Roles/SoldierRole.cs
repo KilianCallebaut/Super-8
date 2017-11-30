@@ -56,6 +56,7 @@ public class SoldierRole : AgentBehaviour {
     // goal: Deals with flanking enemies, picks best targets from cover position, deals with strongest targets first
     protected override void Targetting()
     {
+
          if (agent.seenOtherAgents.Count > 0)
         {
 
@@ -104,7 +105,7 @@ public class SoldierRole : AgentBehaviour {
     // Target midrange agents. If one oversteps a threshold, take him out. If one is flanking, take him out.
     private void Prioritizing()
     {
-        foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
+        foreach (KeyValuePair<string, OtherAgent> a in agent.AgentGroup.SharedSeenOtherAgents)
         {
             if (a.Value.Team != agent.Team && !agentIsTarget(a.Value))
             {

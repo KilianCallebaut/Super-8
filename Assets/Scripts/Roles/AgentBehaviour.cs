@@ -106,32 +106,30 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected void CheckFlanks()
     {
         Vector3 forward = agent.direction;
+        Vector3 left = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward;
+        Vector3 right = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
+        
 
         if (turningDestination == Vector3.zero)
         {
-            turningDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
+            turningDestination = left;
 
         }
-        else if (Vector3.Angle(turningDestination, agent.visionDirection) < acceptingThreshold)
+        else if (agent.LookingInRightDirection() && Vector3.Angle(left, agent.visionDirection) < Vector3.Angle(right, agent.visionDirection) )
         {
 
-            if (Vector3.Distance(turningDestination, Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward) < acceptingThreshold)
-            {
-                turningDestination = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward;
-            }
-            else if (Vector3.Distance(turningDestination, Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward) < acceptingThreshold)
-            {
-                turningDestination = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
-            }
-            else
-            {
-                turningDestination = Vector3.zero;
-            }
+            turningDestination = right;
+
         }
-        else
+        else if (agent.LookingInRightDirection() && Vector3.Angle(left, agent.visionDirection) > Vector3.Angle(right, agent.visionDirection))
         {
-            agent.LookingDestination = turningDestination * agent.Attributes.reachOfVision + transform.position;
+
+            turningDestination = Vector3.zero;
         }
+
+        agent.LookingDestination = turningDestination * agent.Attributes.reachOfVision + transform.position;
+
+
     }
 
 
@@ -207,25 +205,26 @@ public abstract class AgentBehaviour : MonoBehaviour {
         {
             if (flankingSide == 1)
             {
-                agent.Destination = ClosestPoint;
+                agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
+                
                 return 1;
             }
             else if (flankingSide == 2)
             {
-                agent.Destination = ClosestPoint2;
+                agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
                 return 2;
 
             }
         }
 
-        agent.Destination = ClosestPoint;
         if (Vector3.Distance(ClosestPoint, transform.position) > Vector3.Distance(ClosestPoint2, transform.position))
         {
-             agent.Destination = ClosestPoint2;
-             return 2;
+             agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
+            return 2;
         } else
         {
-             return 1;
+            agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
+            return 1;
         }
         
 
@@ -242,6 +241,15 @@ public abstract class AgentBehaviour : MonoBehaviour {
         // ToDo: avoid setting locations where there are walls
         agent.Destination = oppositeDirection * midRange + agent.TargetAgent.LastPosition;
 
+    }
+
+    // Retreats to position further from target
+    // For now go in exact opposite direction
+    protected void Retreat()
+    {
+        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
+        var oppositeDirection = new Vector3(-direction.x, -direction.y);
+        agent.Destination = oppositeDirection + transform.position;
     }
 
     // Calculate the closest point on the side of an agent

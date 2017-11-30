@@ -119,6 +119,8 @@ public class Weapon : MonoBehaviour {
 			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity);
             
             AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
+            Agent ag = gameObject.GetComponent<Agent>();
+
 			if (a != null) {
 				a.initialUpdate ( this.gameObject.GetComponent<Agent>(), direction);
 			} else {

@@ -43,6 +43,7 @@ public class SniperRole : AgentBehaviour {
     // Targets 
     protected override void Targetting()
     {
+
         if (agent.seenOtherAgents.Count > 0)
         {
 
@@ -77,7 +78,7 @@ public class SniperRole : AgentBehaviour {
     // Prioritizes targets
     private void Prioritizing()
     {
-        foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
+        foreach (KeyValuePair<string, OtherAgent> a in agent.AgentGroup.SharedSeenOtherAgents)
         {
             if (a.Value.Team != agent.Team && !agentIsTarget(a.Value))
             {
@@ -110,14 +111,7 @@ public class SniperRole : AgentBehaviour {
 
     // positioning methods
 
-    // Retreats to position further from target
-    // For now go in exact opposite direction
-    private void Retreat()
-    {
-        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
-        var oppositeDirection = new Vector3(-direction.x, -direction.y);
-        agent.Destination = oppositeDirection + transform.position;
-    }
+  
 
     // Checks if the agent is in the objective area
     private bool InObjectiveArea()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,13 +56,8 @@ public class Agent : MonoBehaviour
         direction = new Vector3(-1f, 0f, 0f);
         visionDirection = direction;
 
-
-
     }
-
-
-
-
+    
     // Update is called once per frame
     void Update() {
 		int dam = GetComponent<DamageRecipient> ().damageReceived;
@@ -113,7 +109,7 @@ public class Agent : MonoBehaviour
             OtherAgent oa = new OtherAgent(a.name, a.Team, a.transform.position, a.visionDirection, a.direction);
             if (InFieldOfVision(a.gameObject))
             {
-                
+
 
                 // Update position & looking direction
                 if (seenOtherAgents.ContainsKey(oa.Name))
@@ -132,13 +128,13 @@ public class Agent : MonoBehaviour
                     TargetAgent.Enemy.Position = oa.Position;
                 }
             }
-            else 
+            else
             {
                 AgentGroup.UnseenAgent(oa);
 
                 // Remove unseen agents
                 seenOtherAgents.Remove(oa.Name);
-            
+
             }
         }
         
@@ -181,32 +177,48 @@ public class Agent : MonoBehaviour
     // Defines if something is seen or not
     public bool InFieldOfVision(GameObject a)
     {
-        Vector3 objectPosition = a.transform.position;
-        float distanceToObject = (objectPosition - transform.position).magnitude;
-        Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
+        try { 
+            Vector3 objectPosition = a.transform.position;
+            float distanceToObject = (objectPosition - transform.position).magnitude;
+            Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
 
-        if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) <Attributes.widthOfVision 
-            && Vector3.Angle(directionToObject, visionDirection) > - Attributes.widthOfVision && !BehindObject(a.gameObject))
+            if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) <Attributes.widthOfVision 
+                && Vector3.Angle(directionToObject, visionDirection) > - Attributes.widthOfVision && !BehindObject(a.gameObject))
+            {
+                return true;
+            }
+            return false;
+
+        } catch (NullReferenceException e)
         {
-            return true;
+
+            return false;
         }
-        return false;
+
     }
 
     // Defines if agent is seen or not, search by name
     public bool InFieldOfVision(string name)
     {
-        Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
-        Vector3 objectPosition = a.transform.position;
-        float distanceToObject = (objectPosition - transform.position).magnitude;
-        Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
-
-        if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) < Attributes.widthOfVision
-            && Vector3.Angle(directionToObject, visionDirection) > -Attributes.widthOfVision && !BehindObject(a.gameObject))
+        try
         {
-            return true;
+            Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
+            Vector3 objectPosition = a.transform.position;
+
+            float distanceToObject = (objectPosition - transform.position).magnitude;
+            Vector3 directionToObject = (objectPosition - transform.position) / distanceToObject;
+
+            if (distanceToObject < Attributes.reachOfVision && Vector3.Angle(directionToObject, visionDirection) < Attributes.widthOfVision
+                && Vector3.Angle(directionToObject, visionDirection) > -Attributes.widthOfVision && !BehindObject(a.gameObject))
+            {
+                return true;
+            }
+            return false;
+        } catch (NullReferenceException e)
+        {
+
+            return false;
         }
-        return false;
     }
 
     // Checks if the position is behind an object
@@ -225,6 +237,19 @@ public class Agent : MonoBehaviour
     public bool AtDestination()
     {
         return transform.position == Destination;
+    }
+
+    // Checks if the agent is looking at its targetdirection
+    public bool LookingInRightDirection()
+    {
+        var TargetDirection = (LookingDestination - transform.position).normalized;
+
+        float ang = Vector3.Angle(TargetDirection, visionDirection);
+        if (ang < 0.5)
+        {
+            return true;
+        }
+        return false;
     }
 
     // Placeholder for collisions
@@ -265,10 +290,10 @@ public class Agent : MonoBehaviour
 
         if (LookingDestination != transform.position)
         {
-            var Targetting = (LookingDestination - transform.position);
-            var TargetDirection = Targetting / Targetting.magnitude;
+            var TargetDirection = (LookingDestination - transform.position).normalized;
 
-            if (visionDirection != TargetDirection)
+            
+            if (!LookingInRightDirection())
             {
                 visionDirection = Vector3.RotateTowards(visionDirection, TargetDirection, Attributes.agility * Time.deltaTime, 0.0f);
             }
@@ -288,7 +313,7 @@ public class Agent : MonoBehaviour
             Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
             float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
             offSet -= aimBonus;
-			Vector3 shootingLocation = (Vector3) Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
+			Vector3 shootingLocation = (Vector3) UnityEngine.Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
 
 			weapon.setShootingDirection (shootingLocation);
             TargetAgent.AimTime = Time.time;
@@ -303,6 +328,10 @@ public class Agent : MonoBehaviour
     // Placeholder for dying
     private void Die()
     {
+        foreach(OtherAgent oa in seenOtherAgents.Values)
+        {
+            AgentGroup.UnseenAgent(oa);
+        }
         AgentGroup.DeleteMember(this);
         LevelManager.Instance.DeleteAgent(this);
     }
@@ -318,7 +347,7 @@ public class Agent : MonoBehaviour
     // For debugging
     void OnDrawGizmosSelected()
     {
-        Debug.Log(AtDestination());
+        //Debug.Log(AtDestination());
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(Destination, 0.4f);
 
@@ -332,6 +361,8 @@ public class Agent : MonoBehaviour
         Debug.DrawLine(transform.position, rotatedforwardpoint2);
         //Debug.DrawLine(transform.position, Destination, Color.blue);
 
+        
+
         if (TargetAgent != null)
         {
             Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
@@ -341,7 +372,7 @@ public class Agent : MonoBehaviour
             var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
             var aimlimitup = TargetAgent.LastPosition + new Vector3(0, aimZone);
             var aimlimitdown = TargetAgent.LastPosition + new Vector3(0, -aimZone);
-            Debug.Log(aimZone);
+            //Debug.Log(aimZone);
 
 
             Debug.DrawLine(aimlimitleft, aimlimitup);
@@ -349,11 +380,14 @@ public class Agent : MonoBehaviour
             Debug.DrawLine(aimlimitright, aimlimitup);
             Debug.DrawLine(aimlimitright, aimlimitdown);
 
-            Debug.Log(TargetAgent);
+            Debug.Log(TargetAgent.Enemy.Name);
             // Display the explosion radius when selected
             Gizmos.color = Color.blue;
             Gizmos.DrawSphere(TargetAgent.LastPosition, 0.1f);
         }
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(LookingDestination, 0.4f);
 
     }
 }

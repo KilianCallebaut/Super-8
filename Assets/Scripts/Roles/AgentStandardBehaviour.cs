@@ -51,7 +51,6 @@ public class AgentStandardBehaviour : AgentBehaviour {
     protected override void Targetting()
     {
 
-
         if (agent.TargetAgent == null && !agent.AtDestination())
         {
             agent.LookingDestination = agent.Destination;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ShadowRole : AgentBehaviour {
 
-    private int flankingSide = 0;
-
     // Use this for initialization
     void Start () {
 		
@@ -68,6 +66,7 @@ public class ShadowRole : AgentBehaviour {
     // Prefers targets further away
     protected override void Targetting()
     {
+
         if (agent.seenOtherAgents.Count > 0)
         {
             if (agent.TargetAgent == null) 
@@ -80,7 +79,7 @@ public class ShadowRole : AgentBehaviour {
     // Go after closest agent that is closer than a threshold
     private void Prioritizing()
     {
-        foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
+        foreach (KeyValuePair<string, OtherAgent> a in agent.AgentGroup.SharedSeenOtherAgents)
         {
             if (a.Value.Team != agent.Team && !agentIsTarget(a.Value) )
             {

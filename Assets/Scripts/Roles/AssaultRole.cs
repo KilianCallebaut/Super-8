@@ -29,6 +29,7 @@ public class AssaultRole : AgentBehaviour {
         if (agent == null)
             agent = GetComponent<Agent>();
 
+
         Inspecting();
         Targetting();
         Positioning();
@@ -41,7 +42,7 @@ public class AssaultRole : AgentBehaviour {
     {
         if (agent.TargetAgent == null)
         {
-            LookAround();
+            CheckFlanks();
         }
 
         if (agent.TargetAgent != null)
@@ -58,6 +59,7 @@ public class AssaultRole : AgentBehaviour {
     // Only meant to change the agents Target
     protected override void Targetting()
     {
+       
         if (agent.seenOtherAgents.Count > 0)
         {
             Prioritizing();
@@ -113,7 +115,7 @@ public class AssaultRole : AgentBehaviour {
     // Go after closest agent that is closer than a threshold
     private void Prioritizing()
     {
-        foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
+        foreach (KeyValuePair<string, OtherAgent> a in agent.AgentGroup.SharedSeenOtherAgents)
         {
             if (a.Value.Team != agent.Team && !agentIsTarget(a.Value) && Vector3.Distance(transform.position, a.Value.Position) < chaseThreshold)
             {
@@ -142,7 +144,6 @@ public class AssaultRole : AgentBehaviour {
     }
 
 
-    // Inspecting methods
 
    
 }

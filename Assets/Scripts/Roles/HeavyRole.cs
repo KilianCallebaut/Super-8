@@ -59,6 +59,7 @@ public class HeavyRole : AgentBehaviour
     // Only meant to change the agents Target
     protected override void Targetting()
     { 
+
         if (agent.seenOtherAgents.Count > 0)
         {
 
@@ -94,7 +95,7 @@ public class HeavyRole : AgentBehaviour
     // Prioritizes targets
     private void Prioritizing()
     {
-        foreach (KeyValuePair<string, OtherAgent> a in agent.seenOtherAgents)
+        foreach (KeyValuePair<string, OtherAgent> a in agent.AgentGroup.SharedSeenOtherAgents)
         {
             if (a.Value.Team != agent.Team && !agentIsTarget(a.Value))
             {

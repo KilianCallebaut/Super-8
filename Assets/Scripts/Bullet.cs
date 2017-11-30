@@ -20,7 +20,6 @@ public class Bullet : AbstractProjectile {
 				Destroy (this.gameObject);
 			}
 		}
-
 	}
 	protected override void bulletUpdate (float dTime) {
         dTrav += dTime;
