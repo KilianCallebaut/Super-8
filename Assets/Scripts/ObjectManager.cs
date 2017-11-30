@@ -66,7 +66,7 @@ public class ObjectManager : Singleton<ObjectManager> {
     public static Weapon AddStandardWeapon(Agent agent)
     {
 
-        var weapon = agent.gameObject.AddComponent<Weapon>();
+        var weapon = agent.transform.Find("arm_left/gun").gameObject.AddComponent<Weapon>();
         weapon.projectileType = ObjectManager.Instance.Bullets[0];
         weapon.spread = 0.0f;
         weapon.shotsPerVolley = 10;

@@ -7,7 +7,6 @@ public class Agent : MonoBehaviour
 {
 
     //Agent's specifics
-
     public AgentAttributes Attributes { get; set; }
     public AgentBehaviour Behaviour { get; set; }
 
@@ -66,6 +65,7 @@ public class Agent : MonoBehaviour
         weapon = ObjectManager.AddStandardWeapon(this);
 		gameObject.AddComponent<DamageRecipient>();
         
+
 
         Destination = transform.position;
         //visionDirection = gameObject.GetComponent<Rigidbody2D>().transform.forward;
