@@ -41,13 +41,14 @@ public class HeavyRole : AgentBehaviour
     protected override void Positioning()
     {
 
+      
+
         if (agent.AtDestination())
         {
             GoToGroupObjective();
             StayInGroup();
 
         }
-
 
         if (InObjectiveArea())
         {
@@ -56,8 +57,8 @@ public class HeavyRole : AgentBehaviour
             {
                 Stop();
             }
-
         }
+
 
     }
 

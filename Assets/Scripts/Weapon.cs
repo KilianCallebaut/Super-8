@@ -116,13 +116,13 @@ public class Weapon : MonoBehaviour {
 			float actualSpread = calculateSpread(i, projectilesPerShot);
             //Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
             Vector3 direction = shotDirection;
-			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity);
+			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.position, Quaternion.identity);
             
             AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
-            Agent ag = gameObject.GetComponent<Agent>();
+            Agent ag = gameObject.GetComponentInParent<Agent>();
 
 			if (a != null) {
-				a.initialUpdate ( this.gameObject.GetComponent<Agent>(), direction);
+				a.initialUpdate ( ag, direction);
 			} else {
 				Debug.Log ("Non-projectile projectile fired");
 			}

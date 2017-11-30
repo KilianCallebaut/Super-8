@@ -21,9 +21,7 @@ public class ShadowRole : AgentBehaviour {
         if (agent == null)
             agent = GetComponent<Agent>();
 
-
-       
-
+        
         Inspecting();
         Targetting();
         Positioning();
@@ -48,7 +46,19 @@ public class ShadowRole : AgentBehaviour {
 
     // Stays in group, goes to enemy flank
     protected override void Positioning()
-    { 
+    {
+
+        if (EnemiesVeryNear())
+        {
+            Retreat();
+            return;
+        }
+
+        if (EnemiesNear() && !agent.Shadow)
+        {
+            Retreat();
+            return;
+        }
 
         if (agent.TargetAgent != null)
         {
@@ -60,14 +70,13 @@ public class ShadowRole : AgentBehaviour {
             GoToGroupObjective();
             StayInGroup();
             HittingTheBack();
-
-            if (EnemiesNear())
-            {
-                Retreat();
-            }
             
         }
+
         
+
+
+
     }
 
     // Prefers targets further away

@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class AgentBehaviour : MonoBehaviour {
 
     protected Agent agent;
-    protected static float closeRange = 1.0f;
+    protected static float closeRange = 2.0f;
     protected static float midRange = 5.0f;
     protected static float longRange = 15.0f;
     private float acceptingThreshold = 0.01f;
@@ -88,6 +88,13 @@ public abstract class AgentBehaviour : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    // check if any enemy is closer than closerange
+    protected bool EnemiesVeryNear()
+    {
+        return agent.seenOtherAgents.Any(x => ((Vector3.Distance(x.Value.Position, transform.position) < closeRange) && (x.Value.Team != agent.Team)));
+
     }
 
     // Check if any enemy is closer than midrange
@@ -173,6 +180,8 @@ public abstract class AgentBehaviour : MonoBehaviour {
         }
     }
 
+    // Dealing with enemies
+
     // Chasing placeholder
     protected void Chasing()
     {
@@ -243,7 +252,6 @@ public abstract class AgentBehaviour : MonoBehaviour {
             } 
 
         }
-
         return 0;
     }
 
@@ -257,7 +265,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
             // ToDo: avoid setting locations where there are walls
             agent.Destination = oppositeDirection * midRange + agent.TargetAgent.LastPosition;
-        }
+        } 
     }
 
     // Retreats to position further from target

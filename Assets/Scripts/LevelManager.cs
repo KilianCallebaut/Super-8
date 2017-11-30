@@ -354,7 +354,15 @@ public class LevelManager : Singleton<LevelManager> {
             {
                 seenList.Add(checker, rand.Next(100));
             }
-            return seenList[checker] > SpottingChance;
+
+            bool spotted = seenList[checker] > SpottingChance;
+
+            if (spotted) {
+                ShadowMap.Remove(checkedAgent);
+                checkedAgent.Shadow = false;
+            }
+
+            return spotted;
         }
 
         return false;
