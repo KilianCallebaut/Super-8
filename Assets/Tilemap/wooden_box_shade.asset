@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: wooden_box_shade
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 2c9e476c5368db34a86e3506210ad569, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b1ce6cd9efc42747ad5051ee497e233, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
