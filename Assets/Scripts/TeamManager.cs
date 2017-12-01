@@ -11,18 +11,12 @@ public class TeamManager : MonoBehaviour {
 	void Start () {
 		for (int i = 0; i < 8; ++i)
         {
-            var playerBox = Instantiate(PlayerBoxPrefab);
-            playerBox.transform.parent = PlayersScreen.transform;
-            PlayerBoxController controller = playerBox.gameObject.GetComponent<PlayerBoxController>();
-            controller.Attributes = new AgentAttributes(null);
-            //agents.Add(new AgentAttributes(null));
+			new AgentStatus (this, true);
         }
-
-
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void ActivateAgent(AgentStatus agent) {
+		var activeGrid = PlayersScreen.transform.Find ("ActiveGrid");
+		agent.SetParent (activeGrid);
 	}
 }
