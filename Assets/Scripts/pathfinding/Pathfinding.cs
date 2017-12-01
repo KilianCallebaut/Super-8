@@ -125,6 +125,7 @@ public class Pathfinding : MonoBehaviour {
 			}
 			directionOld = directionNew;
 		}
+        UnityEngine.Debug.Log(waypoints);
 		return waypoints.ToArray();
 	}
 	

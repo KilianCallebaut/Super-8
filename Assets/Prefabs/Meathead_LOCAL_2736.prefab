@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 61709150972068624}
   - component: {fileID: 50557804882293166}
   m_Layer: 8
-  m_Name: Meathead
+  m_Name: Meathead_LOCAL_2736
   m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
