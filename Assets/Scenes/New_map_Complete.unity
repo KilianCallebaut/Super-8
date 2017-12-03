@@ -149,7 +149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4853102394908814, guid: 91a8807796f776f4fa4dad5131283677, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91a8807796f776f4fa4dad5131283677, type: 2}
@@ -274,7 +274,7 @@ Prefab:
     - target: {fileID: 224085037436574374, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -58.5
+      value: -57
       objectReference: {fileID: 0}
     - target: {fileID: 224085037436574374, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
@@ -289,7 +289,7 @@ Prefab:
     - target: {fileID: 224393743585209312, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -110.5
+      value: -109
       objectReference: {fileID: 0}
     - target: {fileID: 224393743585209312, guid: 7c49bbfedaea2db4f9237a99edc6668d,
         type: 2}
@@ -88507,7 +88507,7 @@ Transform:
   - {fileID: 1764668503}
   - {fileID: 1787431036}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420460703
 GameObject:
@@ -88893,9 +88893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0204154c3826f824e94c7ff5dc66aacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs: []
   agent: {fileID: 1325232987127572, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
-  mapTexture: {fileID: 2800000, guid: ec4d9ef75fa85e34bbae9078a55d3321, type: 3}
   group: {fileID: 1273282103004620, guid: f47bfdcb54aabf047b11cc9ae6fdaf11, type: 2}
 --- !u!4 &1876116028
 Transform:
@@ -88908,7 +88906,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1889927524
 GameObject:

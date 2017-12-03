@@ -3,24 +3,36 @@ using System.Collections;
 
 public class Unit : MonoBehaviour {
 	
-	public Transform target;
+	public Vector2 Destination;
 	public float speed = 20;
+
 
 	Vector2[] path;
 	int targetIndex;
+    BoxCollider2D rightCollider;
 
 	void Start() {
-		StartCoroutine (RefreshPath ());
+        speed = gameObject.GetComponent<Agent>().Attributes.speed;
+        BoxCollider2D[] colliders = GetComponents<BoxCollider2D>();
+        for(int i = 0; i< colliders.Length; i++)
+        {
+            if (!colliders[i].isTrigger)
+                rightCollider = colliders[i];
+        }
+
+        StartCoroutine(RefreshPath ());
 	}
 
-	IEnumerator RefreshPath() {
-		Vector2 targetPositionOld = (Vector2)target.position + Vector2.up; // ensure != to target.position initially
+
+    IEnumerator RefreshPath() {
+		Vector2 targetPositionOld = Destination + Vector2.up; // ensure != to target.position initially
 			
 		while (true) {
-			if (targetPositionOld != (Vector2)target.position) {
-				targetPositionOld = (Vector2)target.position;
+			if (targetPositionOld != Destination) {
+				targetPositionOld = Destination;
+                var pos = transform.position + (Vector3) rightCollider.offset;
 
-				path = Pathfinding.RequestPath (transform.position, target.position);
+				path = Pathfinding.RequestPath (pos, Destination);
 				StopCoroutine ("FollowPath");
 				StartCoroutine ("FollowPath");
 			}
@@ -35,15 +47,16 @@ public class Unit : MonoBehaviour {
 			Vector2 currentWaypoint = path [0];
 
 			while (true) {
-				if ((Vector2)transform.position == currentWaypoint) {
+                var pos = transform.position + (Vector3)rightCollider.offset;
+
+                if ((Vector2)pos == currentWaypoint) {
 					targetIndex++;
 					if (targetIndex >= path.Length) {
 						yield break;
 					}
 					currentWaypoint = path [targetIndex];
 				}
-
-				transform.position = Vector2.MoveTowards (transform.position, currentWaypoint, speed * Time.deltaTime);
+				transform.position = Vector2.MoveTowards (transform.position, currentWaypoint - rightCollider.offset, speed * Time.deltaTime);
 				yield return null;
 
 			}

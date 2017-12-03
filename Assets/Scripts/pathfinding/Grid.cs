@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Grid : MonoBehaviour {
+public class Grid : Singleton<Grid> {
 
 	public bool displayGridGizmos;
 
@@ -15,13 +15,17 @@ public class Grid : MonoBehaviour {
 	int gridSizeX, gridSizeY;
 
 	void Awake() {
-		nodeDiameter = nodeRadius*2;
-		gridSizeX = Mathf.RoundToInt(gridWorldSize.x/nodeDiameter);
-		gridSizeY = Mathf.RoundToInt(gridWorldSize.y/nodeDiameter);
-
-		CreateGrid();
+        Instantiate();
 	}
 
+    public void Instantiate()
+    {
+        nodeDiameter = nodeRadius * 2;
+        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
+        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
+
+        CreateGrid();
+    }
   
 
     public int MaxSize {
@@ -48,6 +52,10 @@ public class Grid : MonoBehaviour {
 		}
 	}
 	
+    public Node[,] getGrid()
+    {
+        return grid;
+    }
 
 	public List<Node> GetNeighbours(Node node, int depth = 1) {
 		List<Node> neighbours = new List<Node>();
@@ -139,6 +147,7 @@ public class Grid : MonoBehaviour {
 		Gizmos.DrawWireCube(transform.position,new Vector2(gridWorldSize.x,gridWorldSize.y));
 		if (grid != null && displayGridGizmos) {
 			foreach (Node n in grid) {
+
 				Gizmos.color = Color.red;
 				if (n.walkable)
 					Gizmos.color = Color.white;

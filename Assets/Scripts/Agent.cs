@@ -26,6 +26,7 @@ public class Agent : MonoBehaviour
     public Group AgentGroup { get; set; }
 
     private GameObject bullet;
+    private Unit unit;
 
     // Agent's bonusses
     private float aimBonus = 0.0f;
@@ -67,7 +68,7 @@ public class Agent : MonoBehaviour
 
         weapon = ObjectManager.AddStandardWeapon(this);
 		gameObject.AddComponent<DamageRecipient>();
-        
+        unit = gameObject.GetComponent<Unit>();
 
 
         Destination = transform.position;
@@ -111,10 +112,7 @@ public class Agent : MonoBehaviour
     {
         MoveToDirection();
         RotateToDirection();
-
-
-       
-
+        
     }
 
     // Percepts
@@ -232,10 +230,12 @@ public class Agent : MonoBehaviour
     private void MoveToDirection()
     {
       
-        if (transform.position != Destination) { 
-            transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
-			//experiment: use rigidbody2d for velocity instead
-			//GetComponent<Rigidbody2D>().velocity = (Destination-transform.position).normalized*Attributes.speed*Time.deltaTime;
+        if (transform.position != Destination) {
+            //transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
+            //experiment: use rigidbody2d for velocity instead
+            //GetComponent<Rigidbody2D>().velocity = (Destination-transform.position).normalized*Attributes.speed*Time.deltaTime;
+
+            unit.Destination = Destination;
         }
 
 
