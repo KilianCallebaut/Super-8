@@ -2,33 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentStatus : MonoBehaviour {
-	private AgentAttributes attributes;
+public class AgentStatus {
+
+    // TODO FIX DROPDOWN
+    public enum TrainingEnum
+    {
+        Gaming, Lifting, Drinking, Dancing
+    }
+
+    public bool Active { get; set; }
+    public TrainingEnum Training = TrainingEnum.Dancing;
+
+	public AgentAttributes Attributes { get; private set; }
 	private int health; // 0-100
-	private bool active = false;
 	private GameObject playerBox;
-	private PlayerBoxController playerBoxController;
 	private TeamManager teamManager;
 
 	public AgentStatus(TeamManager teamManager, bool active) {
+        Attributes = new AgentAttributes(null); // TEMPORARY, TO BE CHANGED
 		this.teamManager = teamManager;
-		this.playerBox = Instantiate(teamManager.PlayerBoxPrefab);
-		this.playerBoxController = this.playerBox.gameObject.GetComponent<PlayerBoxController>();
-		if (active) Activate();
-		else Deactivate();
+        Active = active;
 	}
-
-	public void Activate() {
-		active = true;
-		teamManager.ActivateAgent (this);
-	}
-
-	public void Deactivate() {
-
-	}
-
-	public void SetParent(Transform parent) {
-		playerBox.transform.parent = parent;
-	}
-
 }

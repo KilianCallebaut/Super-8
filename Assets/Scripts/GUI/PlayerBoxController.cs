@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,8 @@ using UnityEngine.UI;
 public class PlayerBoxController : MonoBehaviour {
 
     private AgentAttributes attributes;
-	private AgentStatus status;
+	private AgentStatus agent;
+    private PlayersScreenController playersScreen;
 
     public Text Name;
     public Text SpeedValue;
@@ -15,10 +17,14 @@ public class PlayerBoxController : MonoBehaviour {
     public Text ReflexValue;
     public Text AgilityValue;
     public Text AccuracyValue;
+    public Button RestPlayButton;
+    public Button RetireButton;
+    public Dropdown TrainingDropdown;
 
-	void Initialize (AgentAttributes attributes, AgentStatus status) {
-		this.attributes = attributes;
-		this.status = status;
+	public void Initialize (PlayersScreenController playersScreen, AgentAttributes attributes, AgentStatus agent) {
+        this.playersScreen = playersScreen;
+        this.attributes = attributes;
+		this.agent = agent;
 
 		Name.text = "Temp Name";
 		SpeedValue.text = attributes.speed.ToString("0.0");
@@ -27,5 +33,51 @@ public class PlayerBoxController : MonoBehaviour {
 		ReflexValue.text = attributes.reflex.ToString("0.0");
 		AgilityValue.text = attributes.agility.ToString("0.0");
 		AccuracyValue.text = attributes.accuracy.ToString("0.0");
+
+        TrainingDropdown.value = (int) agent.Training;
+        TrainingDropdown.onValueChanged.AddListener(TrainingChanged);
+
+        UpdateRestPlayLabel();
+        RestPlayButton.onClick.AddListener(RestPlayClick);
+        RetireButton.onClick.AddListener(RetireClick);
 	}
+
+    void TrainingChanged(int newValue)
+    {
+        agent.Training = (AgentStatus.TrainingEnum) newValue;
+    }
+
+    public void UpdateRestPlayLabel()
+    {
+        Text restPlayButtonLabel = RestPlayButton.transform.Find("Label").GetComponent<Text>();
+        restPlayButtonLabel.text = (agent.Active ? "Rest" : "Activate");
+    }
+
+    void RestPlayClick()
+    {
+        if (agent.Active) playersScreen.DeactivateAgent(this, agent);
+        else playersScreen.ActivateAgent(this, agent);
+        UpdateRestPlayLabel();
+    }
+
+    void RetireClick()
+    {
+        playersScreen.RemovePlayerBox(agent, true);
+    }
+
+    public void SetParent(Transform parent)
+    {
+        transform.SetParent(parent);
+    }
+
+    public void Destroy()
+    {
+        TrainingDropdown.onValueChanged.RemoveAllListeners();
+        RestPlayButton.onClick.RemoveAllListeners();
+        RetireButton.onClick.RemoveAllListeners();
+        Destroy(gameObject);
+    }
+
+
+
 }
