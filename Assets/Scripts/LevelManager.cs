@@ -24,7 +24,7 @@ public class LevelManager : Singleton<LevelManager> {
 	private GameObject tile_dump;
 	private GameObject team1_parent;
 	private GameObject team2_parent;
-    private int numberOfMembers;
+    private int numberOfMembers = 1;
 
 	private Vector3 worldStart;
 
@@ -114,7 +114,6 @@ public class LevelManager : Singleton<LevelManager> {
                 Node n = startT1[x][y];
                 if (n.walkable)
                 {
-                    Debug.Log(n.worldPosition);
                     StartTilesTeam1.Add(n.worldPosition);
                     y += 4;
                     if (y >= startT1[0].Count)
@@ -134,8 +133,6 @@ public class LevelManager : Singleton<LevelManager> {
                 Node n = startT2[x][y];
                 if (n.walkable)
                 {
-                    Debug.Log(n.worldPosition);
-
                     StartTilesTeam2.Add(n.worldPosition);
                     y += 4;
                     if (y >= startT2[0].Count)
@@ -186,7 +183,7 @@ public class LevelManager : Singleton<LevelManager> {
 		group1.Initialize ();
         group1.Objectives = Objectives;
         group1.name = "Group1";
-        for (int i = 0; i< StartTilesTeam1.Count ; i++) //
+        for (int i = 0; i< numberOfMembers ; i++) //
         {
             Agent newAgent;
             // FOR DEBUGGING PURPOSES
@@ -211,7 +208,7 @@ public class LevelManager : Singleton<LevelManager> {
 		group2.Initialize ();
         group2.name = "Group2";
 
-        for (int i = 0; i < StartTilesTeam2.Count -2 ; i++) //
+        for (int i = 0; i < numberOfMembers ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
