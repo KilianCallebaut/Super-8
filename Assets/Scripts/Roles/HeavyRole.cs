@@ -72,8 +72,8 @@ public class HeavyRole : AgentBehaviour
         {
 
             Prioritizing();
-            Engaging();
         }
+        Engaging();
 
     }
 

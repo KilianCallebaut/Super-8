@@ -217,7 +217,16 @@ public class Agent : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Stop();
+        Agent isagent = collision.gameObject.GetComponent<Agent>();
+        if (isagent != null && isagent.Team == Team)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider);
+
+        }
+        else
+        {
+            Stop();
+        }
     }
     
 
@@ -261,7 +270,7 @@ public class Agent : MonoBehaviour
 
     // Agent Actions
 
-        // Letting agent shoot
+    // Letting agent shoot
     public void Shoot()
     {
 
@@ -281,6 +290,9 @@ public class Agent : MonoBehaviour
 
             if (Shadow)
                 Shadow = false;
+        } else
+        {
+            DontShoot();
         }
 
         
@@ -320,7 +332,7 @@ public class Agent : MonoBehaviour
     {
         //Debug.Log(AtDestination());
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(Destination, 0.4f);
+        Gizmos.DrawSphere(Destination, 0.1f);
 
         // For debugging purposes, shows field of vision
         Debug.DrawLine(new Vector3(5.0f, 160f, 0f), new Vector3(105.0f, 160f, 0f)) ;

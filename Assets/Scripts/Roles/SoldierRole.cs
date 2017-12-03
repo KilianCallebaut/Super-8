@@ -61,8 +61,9 @@ public class SoldierRole : AgentBehaviour {
         {
 
             Prioritizing();
-            Engaging();
         }
+        Engaging();
+
     }
 
 

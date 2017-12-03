@@ -24,7 +24,7 @@ public class LevelManager : Singleton<LevelManager> {
 	private GameObject tile_dump;
 	private GameObject team1_parent;
 	private GameObject team2_parent;
-    private int numberOfMembers = 1;
+    private int numberOfMembers = 8;
 
 	private Vector3 worldStart;
 

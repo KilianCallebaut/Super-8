@@ -97,8 +97,10 @@ public class ShadowRole : AgentBehaviour {
                 agent.Shadow = true;
             }
 
-            Engaging();
         }
+
+        Engaging();
+
     }
 
     // Go after closest agent that is closer than a threshold

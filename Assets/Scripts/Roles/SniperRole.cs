@@ -48,8 +48,9 @@ public class SniperRole : AgentBehaviour {
         {
 
             Prioritizing();
-            Engaging();
         }
+        Engaging();
+
     }
 
     // Set up from a distance

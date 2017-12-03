@@ -64,8 +64,10 @@ public class AssaultRole : AgentBehaviour {
         if (agent.seenOtherAgents.Count > 0)
         {
             Prioritizing();
-            Engaging();
         }
+
+        Engaging();
+
     }
 
     // When spotting an agent that's close enough approach otherwise avoid
