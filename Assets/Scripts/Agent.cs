@@ -288,7 +288,10 @@ public class Agent : MonoBehaviour
 			weapon.startShooting ();
 
             if (Shadow)
+            {
                 Shadow = false;
+                Debug.Log("HERE AGENT");
+            }
         } else
         {
             DontShoot();

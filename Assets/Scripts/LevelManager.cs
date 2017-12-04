@@ -338,8 +338,8 @@ public class LevelManager : Singleton<LevelManager> {
             if (spotted) {
                 ShadowMap.Remove(checkedAgent);
                 checkedAgent.Shadow = false;
+                Debug.Log("HERE LEVEL MANAGER");
             }
-
             return spotted;
         }
 
