@@ -29,8 +29,10 @@ public class PlayersScreenController : MonoBehaviour {
     {
         GameObject playerBox = Instantiate(PlayerBoxPrefab);
         PlayerBoxController playerBoxController = playerBox.gameObject.GetComponent<PlayerBoxController>();
-        if (agent.Active) ActivateAgent(playerBoxController, agent);
-        else DeactivateAgent(playerBoxController, agent);
+
+		if (agent.Active) ActivateAgent(playerBoxController, agent);
+		else if (!agent.Active) DeactivateAgent(playerBoxController, agent);
+
         playerBoxController.Initialize(this, agent.Attributes, agent);
 
         agent2playerBox.Add(agent, playerBoxController);

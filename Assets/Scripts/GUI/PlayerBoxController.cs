@@ -26,7 +26,7 @@ public class PlayerBoxController : MonoBehaviour {
         this.attributes = attributes;
 		this.agent = agent;
 
-		Name.text = "Temp Name";
+		Name.text = agent.Name;
 		SpeedValue.text = attributes.speed.ToString("0.0");
 		ReachOfVisionValue.text = attributes.reachOfVision.ToString("0.0");
 		WidthOfVisionValue.text = attributes.widthOfVision.ToString("0.0");
