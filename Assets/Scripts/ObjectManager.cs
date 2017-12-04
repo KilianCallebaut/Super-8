@@ -5,12 +5,12 @@ using UnityEngine;
 public class ObjectManager : Singleton<ObjectManager> {
 
     [SerializeField]
-    private Rigidbody2D[] Bullets;
+    private GameObject[] Bullets;
 
     
 
     //Returns Bullet of this type
-    public Rigidbody2D getBulletOfType(int type)
+    public GameObject getBulletOfType(int type)
     {
         return Bullets[type];
     }
@@ -25,12 +25,53 @@ public class ObjectManager : Singleton<ObjectManager> {
 		
 	}
 
-    public static Agent spawnAgent( AgentAttributes attributes)
+    public static void setRole(Agent agent, string role)
+    {
+        switch (role)
+        {
+            case "Heavy":
+                agent.Behaviour = agent.gameObject.AddComponent<HeavyRole>();
+                break;
+            case "Assault":
+                agent.Behaviour = agent.gameObject.AddComponent<AssaultRole>();
+                break;
+            case "Soldier":
+                agent.Behaviour = agent.gameObject.AddComponent<SoldierRole>();
+                break;
+            case "Sniper":
+                agent.Behaviour = agent.gameObject.AddComponent<SniperRole>();
+                break;
+            case "Shadow":
+                agent.Behaviour = agent.gameObject.AddComponent<ShadowRole>();
+                break;
+            case "Dummy":
+                agent.Behaviour = agent.gameObject.AddComponent<DummyRole>();
+                break;
+            default:
+                agent.Behaviour = agent.gameObject.AddComponent<AgentStandardBehaviour>();
+                break;
+        }
+    }
+
+    public static Agent spawnAgent( AgentAttributes attributes, string role)
     {
         var agentSpawn = Instantiate(attributes.agentPrefab);
         Agent agentScript = agentSpawn.AddComponent<Agent>() as Agent;
-     
+        setRole(agentScript, role);
         agentScript.Attributes = attributes;
         return agentScript;
     }
+
+    // Build and add a standard weapon to agent
+    public static Weapon AddStandardWeapon(Agent agent)
+    {
+
+        var weapon = agent.transform.Find("arm_left/gun").gameObject.AddComponent<Weapon>();
+        weapon.projectileType = ObjectManager.Instance.Bullets[0];
+        weapon.spread = 0.0f;
+        weapon.shotsPerVolley = 10;
+        weapon.timeBetweenShots = 0.1f;
+        return weapon;
+    }
+ 
 }

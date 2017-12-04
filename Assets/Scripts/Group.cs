@@ -13,7 +13,25 @@ public class Group : MonoBehaviour
     public Agent Leader { get; set; }
     public Dictionary<string, OtherAgent> SharedSeenOtherAgents { get; set; }
     public List<OtherAgent> TimesSeenOtherAgents { get; set; }
-    private bool initialized = false;
+
+    void Update()
+    {
+        var agentsToRemove = new List<string>();
+
+        foreach (KeyValuePair<string, OtherAgent> a in SharedSeenOtherAgents)
+        {
+            if(!LevelManager.Instance.Agents.Exists(x => x.name == a.Key))
+            {
+                agentsToRemove.Add(a.Key);
+            }
+        }
+
+        foreach(string s in agentsToRemove)
+        {
+            SharedSeenOtherAgents.Remove(s);
+        }
+        
+    }
 
     public void Initialize()
     {
@@ -30,8 +48,10 @@ public class Group : MonoBehaviour
     public void SeenAgent(OtherAgent oa)
     {
         TimesSeenOtherAgents.Add(oa);
-		if (!SharedSeenOtherAgents.ContainsKey(oa.Name))
-        	SharedSeenOtherAgents.Add(oa.Name, oa);
+        if (!SharedSeenOtherAgents.ContainsKey(oa.Name))
+            SharedSeenOtherAgents.Add(oa.Name, oa);
+        else
+            SharedSeenOtherAgents[oa.Name] = oa;
     }
 
     // Event where agent no longer sees agent
@@ -79,6 +99,7 @@ public class Group : MonoBehaviour
         if (Members.Count>1)
         {
             Members.Remove(a.name);
+
             if(Leader.name == a.name)
             {
                 AssignRandomLeader();

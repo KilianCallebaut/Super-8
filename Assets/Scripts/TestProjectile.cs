@@ -8,9 +8,7 @@ public class TestProjectile : AbstractProjectile {
 	void Start () {
 		
 	}
-	public float travMax = 20.0f;
-	public float dTrav = 0.0f;
-	public int damage = 1;
+
 	protected override void onCollision(GameObject g) {
 		AbstractProjectileCollidable a = g.GetComponent<AbstractProjectileCollidable> ();
 		if (a.bulletCollides (dTrav*vel, dTrav, dTrav / travMax)) {

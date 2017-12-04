@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour {
 	public GameObject projectileType = null;
 	public float projectileSpawnDistanceFromCenter = 0.0f;
 	public Vector3 center = new Vector3(0.0f,0.0f,0.0f);
-	private float shotDirection = 0.0f;
+    private Vector3 shotDirection;
 	public int projectilesPerShot = 1;
 
 	//accuracy
@@ -56,11 +56,6 @@ public class Weapon : MonoBehaviour {
 	}
 
 
-    public bool isShooting()
-    {
-        return shooting;
-    }
-
 	public void stopShooting() {
 		shooting = false;
 		volleysFired = 0;
@@ -88,13 +83,10 @@ public class Weapon : MonoBehaviour {
 		startShooting ();
 	}
 
-	public void setShootingDirection(float dir) {
-		shotDirection = dir;
-	}
+
 
 	public void setShootingDirection(Vector3 dir) {
-		float f = Vector3.Angle (transform.forward, dir - transform.position);
-		setShootingDirection (f * Mathf.Deg2Rad);
+        shotDirection = (dir - transform.position).normalized;
 	}
 
 	public void reload(int ammo) {
@@ -111,18 +103,26 @@ public class Weapon : MonoBehaviour {
 		return outOfAmmo;
 	}
 
-
+    public bool isShooting()
+    {
+        return shooting;
+    }
 
 	public void spawnProjectiles(float dTime) {
+
 		if(projectileType == null)return;
 		for (int i = 0; i < projectilesPerShot; ++i) {
 			//TODO: calculate spread
 			float actualSpread = calculateSpread(i, projectilesPerShot);
-			Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
-			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.localPosition, Quaternion.identity);
-			AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
+            //Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
+            Vector3 direction = shotDirection;
+			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.position, Quaternion.identity);
+            
+            AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
+            Agent ag = gameObject.GetComponentInParent<Agent>();
+
 			if (a != null) {
-				a.initialUpdate (dTime, this.gameObject, direction);
+				a.initialUpdate ( ag, direction);
 			} else {
 				Debug.Log ("Non-projectile projectile fired");
 			}

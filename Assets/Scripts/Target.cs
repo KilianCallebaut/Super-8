@@ -6,7 +6,7 @@ public class Target  {
 
     public OtherAgent Enemy { get; private set; }
     public float AimTime { get; set; }
-    public bool Seen { get; set; }
+    public float ThreatLevel { get; set; }
 
     public Vector3 LastPosition
     {
@@ -16,24 +16,16 @@ public class Target  {
         }
     }
 
-    public float AimOffset
-    {
-        get
-        {
-            if (Seen)
-            {
-                float offset = Time.time - AimTime;
-                return offset;
-            }
-            AimTime = Time.time;
-            return 0.0f;
-        }
-    }
-
     public Target(OtherAgent agent, float aimTime)
     {
         this.Enemy = agent;
         this.AimTime = aimTime;
-        this.Seen = false;
+    }
+
+    public Target(OtherAgent agent, float aimTime, int threatLevel)
+    {
+        this.Enemy = agent;
+        this.AimTime = aimTime;
+        this.ThreatLevel = threatLevel;
     }
 }
