@@ -46,7 +46,6 @@ public class Agent : MonoBehaviour
             if (value == true)
             {
                 LevelManager.Instance.ShadowMap.Add(this, new Dictionary<Agent, int>());
-
             }
             else
                 LevelManager.Instance.ShadowMap.Remove(this);

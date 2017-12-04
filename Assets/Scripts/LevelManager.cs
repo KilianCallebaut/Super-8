@@ -240,8 +240,7 @@ public class LevelManager : Singleton<LevelManager> {
         }
 
         Destroy(deletedAgent.gameObject);
-
-
+        
     }
 
     // Temporary method for adding objective for 1 team
@@ -345,7 +344,6 @@ public class LevelManager : Singleton<LevelManager> {
         }
 
         return false;
-
     }
 
 

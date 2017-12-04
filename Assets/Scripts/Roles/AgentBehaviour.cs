@@ -69,6 +69,24 @@ public abstract class AgentBehaviour : MonoBehaviour {
         return false;
     }
 
+    // Checks if player is in any enemy's breadth of vision
+    protected bool InAnyEnemyFieldOfVision()
+    {
+        foreach (OtherAgent Enemy in agent.seenOtherAgents.Values)
+        {
+            if (Enemy.Team != agent.Team)
+            {
+                var directionToPlayer = (transform.position - Enemy.Position).normalized;
+
+                if (Vector3.Angle(directionToPlayer, Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Checks if player is in enemy's breadth of vision
     protected bool InEnemyBack(OtherAgent Enemy)
     {
@@ -263,22 +281,33 @@ public abstract class AgentBehaviour : MonoBehaviour {
         {
             Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
 
+            var range = midRange;
+
             // ToDo: avoid setting locations where there are walls
-            agent.Destination = oppositeDirection * midRange + agent.TargetAgent.LastPosition;
-        } 
+            while (Physics2D.Linecast(agent.Destination, agent.TargetAgent.LastPosition, LayerMask.GetMask("Walls")) && range > 0.0f)
+            {
+                range -= 0.1f;
+            }
+            agent.Destination = oppositeDirection * range + agent.TargetAgent.LastPosition;
+
+        }
     }
 
     // Retreats to position further from target
     // For now go in exact opposite direction
+    /*
     protected void Retreat()
     {
         if (agent.TargetAgent != null)
         {
             var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
             var oppositeDirection = new Vector3(-direction.x, -direction.y);
-            agent.Destination = oppositeDirection + transform.position;
+
+            var retreatDistance = 2.0f;
+            agent.Destination = oppositeDirection*retreatDistance + transform.position;
         }
     }
+    */
 
     // Calculate the closest point on the side of an agent
     protected Vector3 CalculateClosestSidePoint()

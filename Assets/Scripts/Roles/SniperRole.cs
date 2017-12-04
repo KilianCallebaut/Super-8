@@ -73,11 +73,6 @@ public class SniperRole : AgentBehaviour {
         }
 
 
-        if (EnemiesAlmostNear())
-        {
-            Retreat();
-        }
-
     }
 
     // targetting methods

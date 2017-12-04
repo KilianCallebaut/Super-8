@@ -48,18 +48,6 @@ public class ShadowRole : AgentBehaviour {
     protected override void Positioning()
     {
 
-        if (EnemiesVeryNear())
-        {
-            Retreat();
-            return;
-        }
-
-        if (EnemiesNear() && !agent.Shadow)
-        {
-            Retreat();
-            return;
-        }
-
         if (agent.TargetAgent != null)
         {
             Stop();
@@ -72,10 +60,6 @@ public class ShadowRole : AgentBehaviour {
             HittingTheBack();
             
         }
-
-        
-
-
 
     }
 
@@ -92,7 +76,7 @@ public class ShadowRole : AgentBehaviour {
             {
                 agent.Shadow = false;
             }
-            else if (!agent.Shadow)
+            else if (!agent.Shadow && !InAnyEnemyFieldOfVision())
             {
                 agent.Shadow = true;
             }
@@ -100,7 +84,6 @@ public class ShadowRole : AgentBehaviour {
         }
 
         Engaging();
-
     }
 
     // Go after closest agent that is closer than a threshold
