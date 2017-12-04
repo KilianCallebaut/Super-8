@@ -33,6 +33,8 @@ public class HeavyRole : AgentBehaviour
         Inspecting();
         Targetting();
         Positioning();
+        Engaging();
+
 
     }
 
@@ -98,7 +100,6 @@ public class HeavyRole : AgentBehaviour
 
             Prioritizing();
         }
-        Engaging();
 
     }
 

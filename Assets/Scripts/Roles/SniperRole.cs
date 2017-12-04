@@ -25,6 +25,8 @@ public class SniperRole : AgentBehaviour {
         Inspecting();
         Targetting();
         Positioning();
+        Engaging();
+
     }
 
     // Screens in front of him
@@ -50,7 +52,6 @@ public class SniperRole : AgentBehaviour {
 
             Prioritizing();
         }
-        Engaging();
 
     }
 

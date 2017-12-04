@@ -27,6 +27,8 @@ public class ShadowRole : AgentBehaviour {
         Inspecting();
         Positioning();
         Targetting();
+        Engaging();
+
     }
 
     // Checks flanks when nog target
@@ -50,6 +52,7 @@ public class ShadowRole : AgentBehaviour {
     protected override void Positioning()
     {
         Debug.Log(positioning);
+        Debug.Log(agent.Shadow);
         switch (positioning)
         {
             case PositioningMethod.GoToGroupObjective:
@@ -75,7 +78,7 @@ public class ShadowRole : AgentBehaviour {
                 break;
 
         }
-
+        Debug.Log(agent.Shadow);
         if (positioning == PositioningMethod.Stop)
         {
             if (HittingTheBack())
@@ -104,11 +107,9 @@ public class ShadowRole : AgentBehaviour {
         }
         if (!agent.Shadow && !InAnyEnemyFieldOfVision())
         {
-            Debug.Log(agent.Shadow);
             agent.Shadow = true;
         }
 
-        Engaging();
     }
 
     // Go after closest agent that is closer than a threshold
@@ -139,7 +140,6 @@ public class ShadowRole : AgentBehaviour {
         if (positioning != PositioningMethod.HittingTheBack)
         {
             agent.Shoot();
-            Debug.Log(agent.Shadow);
         }
         else
         {
@@ -187,7 +187,7 @@ public class ShadowRole : AgentBehaviour {
         {
             Stop();
         }
-
+        Debug.Log("Hittingback " + agent.Shadow + (positioning == PositioningMethod.HittingTheBack));
         return positioning == PositioningMethod.HittingTheBack;
 
     }

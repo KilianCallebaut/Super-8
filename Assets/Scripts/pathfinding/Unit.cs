@@ -4,14 +4,12 @@ using System.Collections;
 public class Unit : MonoBehaviour {
 	
 	public Vector2 Destination;
-	public float speed = 20;
 
 	Vector2[] path;
 	int targetIndex;
     BoxCollider2D rightCollider;
 
 	void Start() {
-        speed = gameObject.GetComponent<Agent>().Attributes.speed;
 
         BoxCollider2D[] colliders = GetComponents<BoxCollider2D>();
         for(int i = 0; i< colliders.Length; i++)
@@ -47,6 +45,7 @@ public class Unit : MonoBehaviour {
 			Vector2 currentWaypoint = path [0];
 
 			while (true) {
+                var speed = gameObject.GetComponent<Agent>().Attributes.speed;
                 var pos = transform.position + new Vector3(transform.localScale.x * rightCollider.offset.x, transform.localScale.y * rightCollider.offset.y);
 
                 if ((Vector2)pos == currentWaypoint) {
