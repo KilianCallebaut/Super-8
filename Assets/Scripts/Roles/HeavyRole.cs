@@ -12,6 +12,7 @@ public class HeavyRole : AgentBehaviour
 {
 
     private float inAreaThreshold = 4.0f;
+    int flankingSide = 0;
 
     // Use this for initialization
     void Start () {
@@ -40,8 +41,32 @@ public class HeavyRole : AgentBehaviour
     // Goal: position so small flanking options + best area covering
     protected override void Positioning()
     {
+        switch (positioning)
+        {
+            case PositioningMethod.GoToGroupObjective:
+                GoToGroupObjective();
+                break;
+            case PositioningMethod.HittingTheBack:
+                HittingTheBack();
+                break;
+            case PositioningMethod.Flanking:
+                flankingSide = Flanking(flankingSide);
+                break;
+            case PositioningMethod.Retreat:
+                Retreat();
+                break;
+            case PositioningMethod.StayInGroup:
+                StayInGroup();
+                break;
+            case PositioningMethod.Chasing:
+                Chasing();
+                break;
+            default:
+                Stop();
+                break;
 
-      
+        }
+
 
         if (agent.AtDestination())
         {

@@ -34,6 +34,7 @@ public class ObjectivePlacement : MonoBehaviour {
 		Vector3 objective = c.ScreenToWorldPoint (objectiveMarker.transform.position);
 		objective.z = 0;
 		actualLevelManager.AddObjectiveForTeam1 (objective);
+        Debug.DrawLine(objective, Vector3.zero);
 	}
 
 	public void ActivateMarker()

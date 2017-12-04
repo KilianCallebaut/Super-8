@@ -6,7 +6,6 @@ public class Unit : MonoBehaviour {
 	public Vector2 Destination;
 	public float speed = 20;
 
-
 	Vector2[] path;
 	int targetIndex;
     BoxCollider2D rightCollider;

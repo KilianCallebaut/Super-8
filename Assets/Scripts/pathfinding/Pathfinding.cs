@@ -109,7 +109,7 @@ public class Pathfinding : MonoBehaviour {
 			currentNode = currentNode.parent;
 		}
 		Vector2[] waypoints = SimplifyPath(path);
-		
+        Array.Reverse(waypoints);
 		return waypoints;
 		
 	}
@@ -117,7 +117,6 @@ public class Pathfinding : MonoBehaviour {
 	Vector2[] SimplifyPath(List<Node> path) {
 		List<Vector2> waypoints = new List<Vector2>();
 		Vector2 directionOld = Vector2.zero;
-        path.Reverse();
 
         for (int i = 1; i < path.Count; i ++) {
 			Vector2 directionNew = new Vector2(path[i-1].gridX - path[i].gridX,path[i-1].gridY - path[i].gridY);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShadowRole : AgentBehaviour {
 
+    int flankingSide = 0;
+
     // Use this for initialization
     void Start () {
 		
@@ -23,8 +25,8 @@ public class ShadowRole : AgentBehaviour {
 
         
         Inspecting();
-        Targetting();
         Positioning();
+        Targetting();
     }
 
     // Checks flanks when nog target
@@ -47,18 +49,40 @@ public class ShadowRole : AgentBehaviour {
     // Stays in group, goes to enemy flank
     protected override void Positioning()
     {
-
-        if (agent.TargetAgent != null)
+        Debug.Log(positioning);
+        switch (positioning)
         {
-            Stop();
+            case PositioningMethod.GoToGroupObjective:
+                GoToGroupObjective();
+                break;
+            case PositioningMethod.HittingTheBack:
+                HittingTheBack();
+                break;
+            case PositioningMethod.Flanking:
+                flankingSide = Flanking(flankingSide);
+                break;
+            case PositioningMethod.Retreat:
+                Retreat();
+                break;
+            case PositioningMethod.StayInGroup:
+                StayInGroup();
+                break;
+            case PositioningMethod.Chasing:
+                Chasing();
+                break;
+            default:
+                Stop();
+                break;
+
         }
 
-        if (agent.AtDestination())
+        if (positioning == PositioningMethod.Stop)
         {
-            GoToGroupObjective();
-            StayInGroup();
-            HittingTheBack();
-            
+            if (HittingTheBack())
+                return;
+            if (GoToGroupObjective())
+                return;
+
         }
 
     }
@@ -76,11 +100,12 @@ public class ShadowRole : AgentBehaviour {
             {
                 agent.Shadow = false;
             }
-            else if (!agent.Shadow && !InAnyEnemyFieldOfVision())
-            {
-                agent.Shadow = true;
-            }
 
+        }
+        if (!agent.Shadow && !InAnyEnemyFieldOfVision())
+        {
+            Debug.Log(agent.Shadow);
+            agent.Shadow = true;
         }
 
         Engaging();
@@ -111,14 +136,60 @@ public class ShadowRole : AgentBehaviour {
     // For now always when agent has a target
     private void Engaging()
     {
-
-        if (!agent.Shadow && agent.TargetAgent != null)
+        if (positioning != PositioningMethod.HittingTheBack)
         {
             agent.Shoot();
+            Debug.Log(agent.Shadow);
         }
         else
         {
             agent.DontShoot();
         }
     }
+
+    // --------------------------------------------------------------
+    // --------------------------------------------------------------
+    // Positioning methods
+
+
+    private bool GoToGroupObjective()
+    {
+        ((AgentBehaviour) this).GoToGroupObjective();
+        
+        StayInGroup();
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+            
+        }
+        return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
+    private bool StayInGroup()
+    {
+        ((AgentBehaviour)this).StayInGroup();
+
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+
+        }
+        return positioning == PositioningMethod.StayInGroup;
+
+    }
+
+    private bool HittingTheBack()
+    {
+        ((AgentBehaviour)this).HittingTheBack();
+
+        if (agent.TargetAgent == null)
+        {
+            Stop();
+        }
+
+        return positioning == PositioningMethod.HittingTheBack;
+
+    }
+
 }

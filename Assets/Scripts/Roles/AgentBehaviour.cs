@@ -11,6 +11,9 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected static float longRange = 15.0f;
     private float acceptingThreshold = 0.01f;
     private float extraOutOfVisionDegrees = 5.0f;
+    protected enum PositioningMethod { GoToGroupObjective, StayInGroup, Chasing,
+    Flanking, HittingTheBack, Retreat, Stop}
+    protected PositioningMethod positioning = PositioningMethod.Stop;
 
 
 
@@ -62,7 +65,9 @@ public abstract class AgentBehaviour : MonoBehaviour {
     {
         var directionToPlayer = (transform.position - Enemy.Position).normalized;
 
-        if (Vector3.Angle(directionToPlayer, Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
+
+        if (Vector3.Angle(directionToPlayer, Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees 
+            && !Physics2D.Linecast(Enemy.Position, transform.position) && Vector3.Distance(transform.position, Enemy.Position) < agent.Attributes.reachOfVision)
         {
             return true;
         }
@@ -78,8 +83,9 @@ public abstract class AgentBehaviour : MonoBehaviour {
             {
                 var directionToPlayer = (transform.position - Enemy.Position).normalized;
 
-                if (Vector3.Angle(directionToPlayer, Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
+                if (InEnemyFieldOfVision(Enemy))
                 {
+                    Debug.Log(Enemy.Name);
                     return true;
                 }
             }
@@ -129,6 +135,10 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
     }
 
+    // --------------------------------------------------------------
+    // --------------------------------------------------------------
+
+
     // Inspecting methods
 
     // Look around in an angle of the current direction
@@ -168,32 +178,38 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
     }
 
+    // --------------------------------------------------------------
+    // --------------------------------------------------------------
 
-    // Postioning methods
+    // Positioning methods
 
     // Stops where he's going
     protected void Stop()
     {
+        positioning = PositioningMethod.Stop;
         agent.Destination = transform.position;
     }
 
 
     // Going to group's objective
-    protected void GoToGroupObjective()
+    public void GoToGroupObjective()
     {
         if (agent.AgentGroup.Objectives.Count > 0)
         {
+            positioning = PositioningMethod.GoToGroupObjective;
+
             agent.Destination = agent.AgentGroup.Objectives[0];
         }
 
     }
 
     // When he strays to far away from the group go to the leader
-    protected void StayInGroup()
+    public void StayInGroup()
     {
         if (agent.AgentGroup.Leader != null &&
             Vector2.Distance(transform.position, agent.AgentGroup.Leader.transform.position) > agent.AgentGroup.Closeness)
         {
+            positioning = PositioningMethod.StayInGroup;
             agent.Destination = agent.AgentGroup.Leader.transform.position;
         }
     }
@@ -201,17 +217,18 @@ public abstract class AgentBehaviour : MonoBehaviour {
     // Dealing with enemies
 
     // Chasing placeholder
-    protected void Chasing()
+    public void Chasing()
     {
         if (agent.TargetAgent != null)
         {
+            positioning = PositioningMethod.Chasing;
             agent.Destination = agent.TargetAgent.LastPosition;
         }
     }
 
 
     // Approach, while avoid being hit
-    protected int Flanking(int flankingSide)
+    public int Flanking(int flankingSide)
     {
         if (agent.TargetAgent != null )
         {
@@ -241,6 +258,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
             if (InEnemyFieldOfVision(agent.TargetAgent.Enemy))
             {
+                positioning = PositioningMethod.Flanking;
                 if (flankingSide != 0)
                 {
                     if (flankingSide == 1)
@@ -275,10 +293,11 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
 
     // Go to location in the agent's back
-    protected void HittingTheBack()
+    public void HittingTheBack()
     {
         if (agent.TargetAgent != null && agent.Shadow == true)
         {
+            positioning = PositioningMethod.HittingTheBack;
             Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
 
             var range = midRange;
@@ -295,11 +314,12 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
     // Retreats to position further from target
     // For now go in exact opposite direction
-    /*
+    
     protected void Retreat()
     {
         if (agent.TargetAgent != null)
         {
+            positioning = PositioningMethod.Retreat;
             var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
             var oppositeDirection = new Vector3(-direction.x, -direction.y);
 
@@ -307,7 +327,10 @@ public abstract class AgentBehaviour : MonoBehaviour {
             agent.Destination = oppositeDirection*retreatDistance + transform.position;
         }
     }
-    */
+    
+
+    // --------------------------------------------------------------
+    // --------------------------------------------------------------
 
     // Calculate the closest point on the side of an agent
     protected Vector3 CalculateClosestSidePoint()
