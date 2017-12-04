@@ -189,7 +189,7 @@ public class LevelManager : Singleton<LevelManager> {
             // FOR DEBUGGING PURPOSES
             if (i < 2)
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
+                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Assault");
             } else
             {
                 newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
@@ -208,10 +208,14 @@ public class LevelManager : Singleton<LevelManager> {
 		group2.Initialize ();
         group2.name = "Group2";
 
+        // FOR DEBUGGING
+        group2.Objectives = (new List<Vector3>());
+        group2.Objectives.Add(Vector3.zero); 
+
         for (int i = 0; i < numberOfMembers ; i++) //
         {
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Heavy");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
@@ -310,7 +314,7 @@ public class LevelManager : Singleton<LevelManager> {
     }
 
     // Checks if the position is behind an object
-    private bool BehindObject(Agent seeer, Vector3 a)
+    public bool BehindObject(Agent seeer, Vector3 a)
     {
         return Physics2D.Linecast(seeer.transform.position, a, LayerMask.GetMask("Walls"));
     }

@@ -67,7 +67,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
 
         if (Vector3.Angle(directionToPlayer, Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees 
-            && !Physics2D.Linecast(Enemy.Position, transform.position) && Vector3.Distance(transform.position, Enemy.Position) < agent.Attributes.reachOfVision)
+            && !LevelManager.Instance.BehindObject(agent, agent.TargetAgent.LastPosition) && Vector3.Distance(transform.position, Enemy.Position) < agent.Attributes.reachOfVision)
         {
             return true;
         }
@@ -258,6 +258,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
             if (InEnemyFieldOfVision(agent.TargetAgent.Enemy))
             {
+
                 positioning = PositioningMethod.Flanking;
                 if (flankingSide != 0)
                 {

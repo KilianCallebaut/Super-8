@@ -10,7 +10,7 @@ using UnityEngine;
 public class AssaultRole : AgentBehaviour {
 
     private float chaseThreshold = 15.0f;
-    private float flankThreshold = 7.5f;
+    private float flankThreshold = longRange;
     private float inAreaThreshold = 4.0f;
     // 1 -> left, 2 -> right, 0 -> not flanking
     private int flankingSide = 0;
@@ -34,7 +34,7 @@ public class AssaultRole : AgentBehaviour {
         Inspecting();
         Targetting();
         Positioning();
-        
+        Engaging();
     }
 
     // Looks around when no target is selected
@@ -66,7 +66,6 @@ public class AssaultRole : AgentBehaviour {
             Prioritizing();
         }
 
-        Engaging();
 
     }
 
@@ -75,6 +74,7 @@ public class AssaultRole : AgentBehaviour {
     // Goal: Avoiding line of fire by taking evading route
     protected override void Positioning()
     {
+        Debug.Log(positioning);
         switch (positioning)
         {
             case PositioningMethod.GoToGroupObjective:
@@ -98,24 +98,20 @@ public class AssaultRole : AgentBehaviour {
             default:
                 Stop();
                 break;
-
         }
 
 
         if (positioning == PositioningMethod.Stop)
         {
-            if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
-            {
-                if (Flanking(flankingSide))
-                    return;
-            }
+            
+            if (Flanking(flankingSide))
+                return;
 
             if (Chasing())
                 return;
 
             if (GoToGroupObjective())
                 return;
-            
         }
 
     }
@@ -164,6 +160,9 @@ public class AssaultRole : AgentBehaviour {
         if (agent.TargetAgent != null)
         {
             agent.Shoot();
+        } else
+        {
+            agent.DontShoot();
         }
     }
 
@@ -191,6 +190,7 @@ public class AssaultRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             Stop();
+            return false;
         }
 
         if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
@@ -205,20 +205,21 @@ public class AssaultRole : AgentBehaviour {
     private bool Flanking(int flankingSide)
     {
         flankingSide = ((AgentBehaviour)this).Flanking(flankingSide);
-
+        Debug.Log(positioning == PositioningMethod.Flanking);
         if (agent.TargetAgent == null)
-            Stop();
-
-        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) > flankThreshold)
         {
             Stop();
+            return false;
         }
+
+        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) > flankThreshold)
+            Stop();
+        
 
         if (flankingSide == 0)
             Stop();
 
         return positioning == PositioningMethod.Flanking;
-
     }
 
 }
