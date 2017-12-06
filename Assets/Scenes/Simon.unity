@@ -295,7 +295,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1551380506114288, guid: 88e991435f536c74b97e47bf301c6707,
     type: 2}
   m_PrefabInternal: {fileID: 1997952049}
---- !u!114 &304337584
+--- !u!114 &304337583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -303,13 +303,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 304337582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ee59cfd78593b4ab0bbe01e7682a62, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ed0828bdd7ea314784484652c7be582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitChanceMultiplier: 1
-  maxDamage: 1000000
-  damageReceived: 0
-  destroyable: 1
 --- !u!224 &346753566 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224518189073327818, guid: 7c49bbfedaea2db4f9237a99edc6668d,

@@ -27,22 +27,30 @@ public class ObjectManager : Singleton<ObjectManager> {
 
     public static void setRole(Agent agent, string role)
     {
+        var weapon = agent.transform.Find("arm_left/gun").gameObject.AddComponent<Weapon>();
+        agent.weapon = weapon;
+
         switch (role)
         {
             case "Heavy":
                 agent.Behaviour = agent.gameObject.AddComponent<HeavyRole>();
+                weapon.beHeavyMinigun();
                 break;
             case "Assault":
                 agent.Behaviour = agent.gameObject.AddComponent<AssaultRole>();
+                weapon.beAssaultShotgun();
                 break;
             case "Soldier":
                 agent.Behaviour = agent.gameObject.AddComponent<SoldierRole>();
+                weapon.beSoldierRifle();
                 break;
             case "Sniper":
                 agent.Behaviour = agent.gameObject.AddComponent<SniperRole>();
+                weapon.beSniperRifle();
                 break;
             case "Shadow":
                 agent.Behaviour = agent.gameObject.AddComponent<ShadowRole>();
+                weapon.beShadowPistol();
                 break;
             case "Dummy":
                 agent.Behaviour = agent.gameObject.AddComponent<DummyRole>();
@@ -61,7 +69,7 @@ public class ObjectManager : Singleton<ObjectManager> {
         agentScript.Attributes = attributes;
         return agentScript;
     }
-
+    /*
     // Build and add a standard weapon to agent
     public static Weapon AddStandardWeapon(Agent agent)
     {
@@ -73,5 +81,5 @@ public class ObjectManager : Singleton<ObjectManager> {
         weapon.timeBetweenShots = 0.1f;
         return weapon;
     }
- 
+ */
 }

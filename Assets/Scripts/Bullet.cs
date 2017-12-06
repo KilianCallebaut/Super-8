@@ -9,7 +9,6 @@ public class Bullet : AbstractProjectile {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 
 	protected override void onCollision (GameObject g) {

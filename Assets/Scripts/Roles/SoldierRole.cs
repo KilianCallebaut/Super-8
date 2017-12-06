@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /**
@@ -12,7 +13,6 @@ public class SoldierRole : AgentBehaviour {
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -72,6 +72,7 @@ public class SoldierRole : AgentBehaviour {
     // Since the only thing that is really meant to change here is the destination, we can order
     protected override void Positioning()
     {
+        Debug.Log(positioning);
         switch (positioning)
         {
             case PositioningMethod.GoToGroupObjective:
@@ -102,9 +103,17 @@ public class SoldierRole : AgentBehaviour {
 
         if (positioning == PositioningMethod.Stop)
         {
-            Retreat();
 
-            GoToGroupObjective();
+            if (Retreat())
+                return;
+
+          
+
+            if (Chasing())
+                return;
+
+            if (GoToGroupObjective())
+                return;
         }
 
        
@@ -226,6 +235,27 @@ public class SoldierRole : AgentBehaviour {
             Stop();
 
         return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
+    private bool Chasing()
+    {
+        ((AgentBehaviour)this).Chasing();
+
+        if (agent.TargetAgent == null)
+        {
+            Stop();
+            return false;
+        }
+
+        OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
+        if (enemy != null && Vector3.Distance(enemy.Position, transform.position) < longRange)
+        {
+            Stop();
+        }
+
+
+        return positioning == PositioningMethod.Chasing;
 
     }
 

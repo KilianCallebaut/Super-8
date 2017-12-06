@@ -17,7 +17,7 @@ public class AssaultRole : AgentBehaviour {
   
     // Use this for initialization
     void Start () {
-		
+		gameObject.GetComponent<Weapon> ().beAssaultShotgun ();
 	}
 	
 	// Update is called once per frame

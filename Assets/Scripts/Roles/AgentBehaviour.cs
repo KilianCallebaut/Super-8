@@ -316,6 +316,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
         }
     }
 
+
     // Retreats to position further from target
     // For now go in exact opposite direction
     

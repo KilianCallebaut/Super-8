@@ -22,7 +22,7 @@ public class Agent : MonoBehaviour
 
     // Agent info
     public int Team { get; set; }
-    private Weapon weapon;
+    public Weapon weapon { get; set; }
     public Group AgentGroup { get; set; }
 
     private GameObject bullet;
@@ -69,7 +69,7 @@ public class Agent : MonoBehaviour
     {
         seenOtherAgents = new Dictionary<string, OtherAgent>();
 
-        weapon = ObjectManager.AddStandardWeapon(this);
+
 		gameObject.AddComponent<DamageRecipient>();
         unit = gameObject.GetComponent<Unit>();
 
@@ -324,6 +324,7 @@ public class Agent : MonoBehaviour
         {
             weapon.stopShooting();
         }
+
     }
 
     // Placeholder for dying
@@ -388,6 +389,7 @@ public class Agent : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(LookingDestination, 0.3f);
+
 
     }
 }
