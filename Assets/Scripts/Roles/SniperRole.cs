@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SniperRole : AgentBehaviour {
@@ -58,6 +59,7 @@ public class SniperRole : AgentBehaviour {
     // Set up from a distance
     protected override void Positioning()
     {
+        Debug.Log(positioning);
 
         switch (positioning)
         {
@@ -86,17 +88,30 @@ public class SniperRole : AgentBehaviour {
         }
 
 
-        if (agent.AtDestination())
+        if (positioning == PositioningMethod.Stop)
         {
-            GoToGroupObjective();
-            StayInGroup();
+
+            if (Retreat())
+                return;
+
+            OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
+            if (enemy != null)
+            {
+                Stop();
+                return;
+            }
+
+           
+
+            if (GoToGroupObjective())
+                return;
+
             
+
+
         }
 
-        if (InObjectiveArea() && agent.InFieldOfVision(agent.Destination))
-        {
-            agent.Destination = transform.position;
-        }
+       
 
 
     }
@@ -150,4 +165,39 @@ public class SniperRole : AgentBehaviour {
     {
         return Vector3.Distance(transform.position, agent.AgentGroup.Objectives[0]) < longRange;
     }
+
+    // ============================================================================
+    // ============================================================================
+
+    private bool GoToGroupObjective()
+    {
+        ((AgentBehaviour)this).GoToGroupObjective();
+
+        StayInGroup();
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+
+        }
+
+        if (EnemiesAlmostNear())
+            Stop();
+
+        return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
+    private bool Retreat()
+    {
+        ((AgentBehaviour)this).Retreat();
+
+        if (agent.TargetAgent == null)
+            Stop();
+
+        if (!EnemiesAlmostNear())
+            Stop();
+
+        return positioning == PositioningMethod.Retreat;
+    }
+
 }

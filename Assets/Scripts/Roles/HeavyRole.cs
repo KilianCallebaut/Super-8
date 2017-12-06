@@ -29,7 +29,6 @@ public class HeavyRole : AgentBehaviour
         // Positions and shoots at the enemy closest to his visiondirection
         if (agent == null)
             agent = GetComponent<Agent>();
-
         Inspecting();
         Targetting();
         Positioning();
@@ -43,6 +42,7 @@ public class HeavyRole : AgentBehaviour
     // Goal: position so small flanking options + best area covering
     protected override void Positioning()
     {
+        Debug.Log(positioning);
         switch (positioning)
         {
             case PositioningMethod.GoToGroupObjective:
@@ -70,20 +70,19 @@ public class HeavyRole : AgentBehaviour
         }
 
 
-        if (agent.AtDestination())
-        {
-            GoToGroupObjective();
-            StayInGroup();
-
-        }
-
-        if (InObjectiveArea())
+        if (positioning == PositioningMethod.Stop)
         {
             OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
             if (enemy != null)
             {
                 Stop();
+                return;
             }
+            
+
+            if (GoToGroupObjective())
+                return;
+
         }
 
 
@@ -166,5 +165,21 @@ public class HeavyRole : AgentBehaviour
 
     }
 
-  
+    // ===================================================================
+    // ===================================================================
+
+    private bool GoToGroupObjective()
+    {
+        ((AgentBehaviour)this).GoToGroupObjective();
+
+        StayInGroup();
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+
+        }
+        return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
 }

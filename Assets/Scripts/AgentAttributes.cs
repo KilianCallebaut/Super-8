@@ -56,7 +56,7 @@ public class AgentAttributes {
     {
         this.speed = 2.0f;
         this.reachOfVision = 23.0f;
-        this.widthOfVision = 22.5f;
+        this.widthOfVision = 45f;
         
         this.reflex = 1.0f / 2.0f;
         this.agility = 1.0f;

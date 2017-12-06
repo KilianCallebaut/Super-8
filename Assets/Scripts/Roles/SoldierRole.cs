@@ -98,16 +98,13 @@ public class SoldierRole : AgentBehaviour {
 
         }
 
-        if (EnemiesNear())
-        {
-            agent.Destination = transform.position;
-        }
 
-        if (agent.AtDestination())
+
+        if (positioning == PositioningMethod.Stop)
         {
-            GoToGroupObjective();
-            StayInGroup();
             Retreat();
+
+            GoToGroupObjective();
         }
 
        
@@ -201,12 +198,36 @@ public class SoldierRole : AgentBehaviour {
 
     // Retreats to position further from target
     // For now go in exact opposite direction
-    private void Retreat()
+    private bool Retreat()
     {
-        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
-        var oppositeDirection = new Vector3(-direction.x, -direction.y);
-        agent.Destination = oppositeDirection + transform.position;
-    }    
+        ((AgentBehaviour)this).Retreat();
+
+        if (agent.TargetAgent == null)
+            Stop();
+
+        if (!EnemiesNear())
+            Stop();
+
+        return positioning == PositioningMethod.Retreat;
+    }
+
+    private bool GoToGroupObjective()
+    {
+        ((AgentBehaviour)this).GoToGroupObjective();
+
+        StayInGroup();
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+
+        }
+
+        if (EnemiesVeryNear())
+            Stop();
+
+        return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
 
 
     // For debugging

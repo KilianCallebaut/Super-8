@@ -30,6 +30,9 @@ public class Agent : MonoBehaviour
 
     // Agent's bonusses
     private float aimBonus = 0.0f;
+    private float aimZoneMin = 1.87f / 2.0f;
+    private float aimZoneMax = (1.87f / 2.0f) + 5.0f;
+    private float aimZone = 1.87f / 2.0f;
     private float aimIncrease = 0.1f;
     private float health = 0.0f;
     private bool shadow = false;
@@ -59,6 +62,7 @@ public class Agent : MonoBehaviour
         health = Attributes.maxHealth;
         See();
         Behaviour.Think();
+       
     }
 
     private void initialize()
@@ -86,7 +90,7 @@ public class Agent : MonoBehaviour
 			See();
 			Behaviour.Think();
 			Act();
-		}
+        }
     }
 
     private void See()
@@ -161,13 +165,33 @@ public class Agent : MonoBehaviour
     {
         if (TargetAgent != null && InFieldOfVision(TargetAgent.Enemy.Name))
         {
-            // Bonus for being more in the center
+            aimZone = aimZoneMax;
+            // Bonus for accuracy
+            // 
+            var aimBonusAcc = Attributes.accuracy / 10.0f;
+            aimZone -= (aimZoneMax - aimZoneMin) * (aimBonusAcc/2.0f);
+
+            // Bonus for distance
+            var aimBonusDist = 1.0f - (Vector3.Distance(transform.position, TargetAgent.LastPosition) / Attributes.reachOfVision);
+            aimZone = aimZone - (aimZoneMax - aimZoneMin) * aimBonusDist;
+
+            // Penalty for being away from center
+            // 30%
             Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position).normalized;
-            aimBonus = Vector2.Angle(enemyDirection, visionDirection) / Attributes.widthOfVision;
+            var aimPenaltyAng = Vector2.Angle(enemyDirection, visionDirection) / Attributes.widthOfVision;
+            aimZone += (aimZoneMax - aimZoneMin) * aimPenaltyAng;
 
             // Bonus for aiming longer before shooting
 
             // Bonus for standing still
+            // 20% 
+            var aimBonusStan = 0.0f;
+            if (Destination == transform.position)
+                aimBonusStan = 0.1f;
+
+            aimZone -= (aimZone - aimZoneMin) *(3.0f * aimBonusStan);
+
+
 
         }
     }
@@ -236,16 +260,8 @@ public class Agent : MonoBehaviour
     
     // Placeholder for movement
     private void MoveToDirection()
-    {
-      
-        if (transform.position != Destination) {
-            //transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
-            //experiment: use rigidbody2d for velocity instead
-            //GetComponent<Rigidbody2D>().velocity = (Destination-transform.position).normalized*Attributes.speed*Time.deltaTime;
-
-            unit.Destination = Destination;
-        }
-
+    {     
+        unit.Destination = Destination;
 
     }
 
@@ -277,10 +293,11 @@ public class Agent : MonoBehaviour
         {
             // Update direction
             Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
-            Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
-            float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
-            offSet -= aimBonus;
-			Vector3 shootingLocation = (Vector3) UnityEngine.Random.insideUnitCircle * offSet + TargetAgent.Enemy.Position;
+            //Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
+            //float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
+            float offSet = 1.87f/2.0f;
+            //offSet -= aimBonus;
+			Vector3 shootingLocation = (Vector3) UnityEngine.Random.insideUnitCircle * aimZone + TargetAgent.Enemy.Position;
 
 			weapon.setShootingDirection (shootingLocation);
             TargetAgent.AimTime = Time.time;
@@ -290,7 +307,6 @@ public class Agent : MonoBehaviour
             if (Shadow)
             {
                 Shadow = false;
-                Debug.Log("HERE AGENT");
             }
         } else
         {
@@ -352,7 +368,6 @@ public class Agent : MonoBehaviour
         {
             Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
             Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
-            float aimZone = Vector3.Distance(enemyDirection, shootingDirectionLimit) - aimBonus;
             var aimlimitleft = TargetAgent.LastPosition + new Vector3(-aimZone, 0);
             var aimlimitright = TargetAgent.LastPosition + new Vector3(aimZone, 0);
             var aimlimitup = TargetAgent.LastPosition + new Vector3(0, aimZone);

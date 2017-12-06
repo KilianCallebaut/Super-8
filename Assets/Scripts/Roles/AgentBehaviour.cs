@@ -264,13 +264,13 @@ public abstract class AgentBehaviour : MonoBehaviour {
                 {
                     if (flankingSide == 1)
                     {
-                        agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
+                        agent.Destination = ClosestPoint;
 
                         return 1;
                     }
                     else if (flankingSide == 2)
                     {
-                        agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
+                        agent.Destination = ClosestPoint2;
                         return 2;
 
                     }
@@ -278,12 +278,12 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
                 if (Vector3.Distance(ClosestPoint, transform.position) > Vector3.Distance(ClosestPoint2, transform.position))
                 {
-                    agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint2).normalized + ClosestPoint2;
+                    agent.Destination =  ClosestPoint2;
                     return 2;
                 }
                 else
                 {
-                    agent.Destination = (agent.TargetAgent.LastPosition - ClosestPoint).normalized + ClosestPoint;
+                    agent.Destination = ClosestPoint;
                     return 1;
                 }
             } 
@@ -316,7 +316,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
     // Retreats to position further from target
     // For now go in exact opposite direction
     
-    protected void Retreat()
+    public void Retreat()
     {
         if (agent.TargetAgent != null)
         {
