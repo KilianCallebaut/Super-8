@@ -220,14 +220,15 @@ public class SoldierRole : AgentBehaviour {
     // For now go in exact opposite direction
     private bool Retreat()
     {
-        ((AgentBehaviour)this).Retreat();
+        if (EnemiesNear())
+            ((AgentBehaviour)this).Retreat();
 
         if (agent.TargetAgent == null)
             Stop();
 
-        if (!EnemiesNear())
+        if (agent.AtDestination())
             Stop();
-
+            
         return positioning == PositioningMethod.Retreat;
     }
 

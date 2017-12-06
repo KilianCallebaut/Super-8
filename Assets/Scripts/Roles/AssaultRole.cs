@@ -73,8 +73,8 @@ public class AssaultRole : AgentBehaviour {
         if (agent.TargetAgent != null &&
             Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
             && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
-        { 
-            
+        {
+            agent.TargetAgent = null;
 
         }
 

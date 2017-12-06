@@ -34,6 +34,18 @@ public class AgentAttributes {
 
     public GameObject agentPrefab { get; private set; }
 
+    private float speedbuff;
+    public void speedProduct(float s)
+    {
+        if (s == 0.0f) {
+            speed = speed / speedbuff;
+            return;
+        }
+
+        speedbuff = s;
+        speed = speed * speedbuff;
+    }
+
 
     // Personalized agentattributes
     public AgentAttributes(float speed, float reachOfVision, float widthOfVision,

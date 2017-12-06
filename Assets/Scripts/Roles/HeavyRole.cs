@@ -16,7 +16,6 @@ public class HeavyRole : AgentBehaviour
 
     // Use this for initialization
     void Start () {
-		gameObject.GetComponent<Weapon> ().beHeavyMinigun ();
 	}
 	
 	// Update is called once per frame
@@ -72,12 +71,10 @@ public class HeavyRole : AgentBehaviour
 
         if (positioning == PositioningMethod.Stop)
         {
-            OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
-            if (enemy != null)
-            {
-                Stop();
+            if (Chasing())
                 return;
-            }
+            
+
             
 
             if (GoToGroupObjective())
@@ -169,9 +166,12 @@ public class HeavyRole : AgentBehaviour
         if (agent.TargetAgent != null && agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.Shoot();
+            agent.Attributes.speedProduct(0.5f) ;
         } else
         {
             agent.DontShoot();
+            agent.Attributes.speedProduct(0.0f);
+
         }
 
     }
@@ -189,7 +189,38 @@ public class HeavyRole : AgentBehaviour
             Stop();
 
         }
+
+        if (agent.TargetAgent != null && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        {
+            Chasing();
+        }
         return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
+    private bool Chasing()
+    {
+        ((AgentBehaviour)this).Chasing();
+
+        if (agent.TargetAgent == null)
+        {
+            Stop();
+            return false;
+        }
+
+        
+        if (agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name) && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= midRange)
+        {
+            Stop();
+            return false;
+        }
+
+        if (agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        {
+            Stop();
+        }
+
+        return positioning == PositioningMethod.Chasing;
 
     }
 

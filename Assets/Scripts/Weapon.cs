@@ -255,12 +255,12 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void beHeavyMinigun() {
-		shotsPerVolley = 10;
+		shotsPerVolley = 30;
 		volleysUntilReload = 10;
 		timeUntilFirstVolley = 5;
-		timeBetweenShots = 0.2f;
+		timeBetweenShots = 0.1f;
 		timeBetweenVolleys = 2;
-		spread = 30;
+		spread = 10;
 		reloadDuration = 10.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
@@ -283,12 +283,12 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void beSoldierRifle() {
-		shotsPerVolley = 3;
+		shotsPerVolley = 8;
 		volleysUntilReload = 3;
 		timeUntilFirstVolley = 2;
-		timeBetweenShots = 0.3f;
-		timeBetweenVolleys = 1.5f;
-		spread = 10;
+		timeBetweenShots = 0.1f;
+		timeBetweenVolleys = 1.0f;
+		spread = 5;
 		reloadDuration = 5.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;

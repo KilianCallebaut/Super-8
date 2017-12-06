@@ -34,6 +34,7 @@ public class Agent : MonoBehaviour
     private float aimZoneMax = (1.87f / 2.0f) + 5.0f;
     private float aimZone = 1.87f / 2.0f;
     private float aimIncrease = 0.1f;
+
     private float health = 0.0f;
     private bool shadow = false;
     public bool Shadow
