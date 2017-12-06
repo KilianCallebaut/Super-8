@@ -194,13 +194,16 @@ public abstract class AgentBehaviour : MonoBehaviour {
     // Going to group's objective
     public void GoToGroupObjective()
     {
-        if (agent.AgentGroup.Objectives.Count > 0)
-        {
-            positioning = PositioningMethod.GoToGroupObjective;
+		float destination_test = (agent.Destination - agent.AgentGroup.Objectives [0]).magnitude;
+		if (agent.AgentGroup.Objectives.Count > 0 && destination_test > agent.AgentGroup.Closeness) {
+			Debug.Log("Reevaluate destination");
+			float max_dist = agent.AgentGroup.Closeness;
+			Vector3 spread_distance = new Vector3 (Random.Range (-max_dist, max_dist), Random.Range (-max_dist, max_dist), 0);
 
-            agent.Destination = agent.AgentGroup.Objectives[0];
-        }
+			positioning = PositioningMethod.GoToGroupObjective;
 
+			agent.Destination = agent.AgentGroup.Objectives [0] + spread_distance;
+		}
     }
 
     // When he strays to far away from the group go to the leader
