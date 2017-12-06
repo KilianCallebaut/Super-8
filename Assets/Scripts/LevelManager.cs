@@ -21,6 +21,8 @@ public class LevelManager : Singleton<LevelManager> {
     public List<GameObject> Bullets { get; private set; } 
     public List<Vector3> Objectives { get; private set; }
 
+    public WinStatus WinStatusRef;
+
 	private GameObject tile_dump;
 	private GameObject team1_parent;
 	private GameObject team2_parent;
@@ -98,6 +100,17 @@ public class LevelManager : Singleton<LevelManager> {
     {
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
         ImportAgents(worldStart, coolAgents);
+        WinStatusRef.Reset();
+    }
+
+    public void DestroyEverything()
+    {
+        foreach (Agent agent in Agents)
+        {
+            Destroy(agent.gameObject);
+        }
+        Agents.Clear();
+        // groups are still out there, hopefully the game won't run long enough to have a memory fit
     }
 
     private void GetStartTiles()

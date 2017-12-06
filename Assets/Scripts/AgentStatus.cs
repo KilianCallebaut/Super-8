@@ -39,7 +39,7 @@ public class AgentStatus {
 	public bool FreeAgent { get; set; } // is the agent on the market? 
 
     public TrainingEnum Training = TrainingEnum.Dancing;
-    public RolesEnum Role = RolesEnum.Heavy;
+    public RolesEnum Role = RolesEnum.Shadow;
     public GroupsEnum Group = GroupsEnum.Albert;
 	public AgentAttributes Attributes { get; private set; }
     private TeamManager teamManager;
