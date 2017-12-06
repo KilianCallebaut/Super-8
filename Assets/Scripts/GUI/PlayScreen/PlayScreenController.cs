@@ -21,12 +21,15 @@ public class PlayScreenController : MonoBehaviour {
 
     public GameObject PlayerStrategyPrefab;
     public GameObject GroupStrategyPrefab;
-    public Transform PlayerStrategyContainer; // Players -> VerticalLayoutGroup
-    public Transform GroupStrategyContainer; // Players -> VerticalLayoutGroup
+    public GameObject GroupMarkerPrefab;
+    public Transform PlayerStrategyContainer;
+    public Transform GroupStrategyContainer;
+    public Transform GroupMarkerContainer;
 
     // maybe this is stupid, but it should work, and makes my life a bit easier so whatever
     private List<HashSet<AgentStatus>> groups;
-    private Dictionary<int, GroupStrategyController> group2controller;
+    private Dictionary<int, GroupStrategyController> group2strategy;
+    private Dictionary<int, GroupMarkerController> group2marker;
     private List<PlayerStrategyController> playerStrategyControllers;
 
     private TeamManager teamManager;
@@ -34,7 +37,8 @@ public class PlayScreenController : MonoBehaviour {
     public void Initialize(TeamManager teamManager) {
         this.teamManager = teamManager;
         groups = new List<HashSet<AgentStatus>>();
-        group2controller = new Dictionary<int, GroupStrategyController>();
+        group2strategy = new Dictionary<int, GroupStrategyController>();
+        group2marker = new Dictionary<int, GroupMarkerController>();
         playerStrategyControllers = new List<PlayerStrategyController>();
 
         for (int i = 0; i < 8; i++)
@@ -44,7 +48,14 @@ public class PlayScreenController : MonoBehaviour {
             GroupStrategyController groupStrategyController = groupStrategy.GetComponent<GroupStrategyController>();
             groupStrategyController.Initialize(this);
             groupStrategyController.transform.SetParent(GroupStrategyContainer);
-            group2controller[i] = groupStrategyController;
+            group2strategy[i] = groupStrategyController;
+
+            GameObject groupMarker = Instantiate(GroupMarkerPrefab);
+            GroupMarkerController groupMarkerController = groupMarker.GetComponent<GroupMarkerController>();
+            groupMarkerController.Initialize(this, i);
+            groupMarker.transform.SetParent(GroupMarkerContainer);
+            groupMarker.transform.localPosition = new Vector3(0, i * -30, 0);
+            group2marker[i] = groupMarkerController;
         }
 
 
@@ -70,10 +81,13 @@ public class PlayScreenController : MonoBehaviour {
         }
     }
 
+    /**
+     * Updates the status of groups, so that the appropriate elements are shown/hidden/updated
+     **/
     public void UpdateGroupStrategy(int index)
     {
-        group2controller[index].RefreshGroup(index, groups[index].Count, "");
-        // TODO: map markers
+        group2strategy[index].RefreshGroup(index, groups[index].Count, "");
+        group2marker[index].UpdateVisibility(groups[index].Count);
     }
 
     // gg unity
