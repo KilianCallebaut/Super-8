@@ -34,11 +34,10 @@ public class TestRotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((target.transform.position - transform.position).x > 0)
-			direction = -1;
-		else
-			direction = 1;
-		transform.localScale = new Vector3 (direction, 1, 1);
-		headTilt (target.transform.position);
+		Vector3 aimVector = (target.transform.position - transform.position).normalized;
+		Debug.DrawLine (transform.position, target.transform.position);
+
+		float angle = Vector3.Angle (Vector3.down, aimVector);
+		Debug.Log (angle);
 	}
 }

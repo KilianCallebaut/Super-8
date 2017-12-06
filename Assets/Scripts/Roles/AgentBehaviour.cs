@@ -11,9 +11,9 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected static float longRange = 15.0f;
     private float acceptingThreshold = 0.01f;
     private float extraOutOfVisionDegrees = 5.0f;
-    protected enum PositioningMethod { GoToGroupObjective, StayInGroup, Chasing,
+    public enum PositioningMethod { GoToGroupObjective, StayInGroup, Chasing,
     Flanking, HittingTheBack, Retreat, Stop}
-    protected PositioningMethod positioning = PositioningMethod.Stop;
+    public PositioningMethod positioning = PositioningMethod.Stop;
 
 
 
@@ -196,7 +196,6 @@ public abstract class AgentBehaviour : MonoBehaviour {
     {
 		float destination_test = (agent.Destination - agent.AgentGroup.Objectives [0]).magnitude;
 		if (agent.AgentGroup.Objectives.Count > 0 && destination_test > agent.AgentGroup.Closeness) {
-			Debug.Log("Reevaluate destination");
 			float max_dist = agent.AgentGroup.Closeness;
 			Vector3 spread_distance = new Vector3 (Random.Range (-max_dist, max_dist), Random.Range (-max_dist, max_dist), 0);
 

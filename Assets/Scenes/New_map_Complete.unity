@@ -88425,28 +88425,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88e991435f536c74b97e47bf301c6707, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &675536163 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1081360457507008, guid: 9d459e05e40452441a3338433ab096bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 778017796}
 --- !u!4 &675536164 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4195525744109376, guid: 9d459e05e40452441a3338433ab096bc,
     type: 2}
   m_PrefabInternal: {fileID: 778017796}
---- !u!114 &675536170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 675536163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a8b92b713f8ffe45ac8fd1699780017, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Destination: {x: 0, y: 0}
 --- !u!4 &715723246 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4724582149556164, guid: 32a5d3e2ace8a3f439fac3ed7a085dac,
@@ -88469,7 +88452,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4195525744109376, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.010151382
+      value: 0.01015138
       objectReference: {fileID: 0}
     - target: {fileID: 4195525744109376, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -88491,8 +88474,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114757690500794754, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
+    - target: {fileID: 1081360457507008, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1077416323
@@ -88623,6 +88609,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4766461178277986, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907098071282344, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.207
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173230469843262, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.029
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112820571754566, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112820571754566, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
   m_IsPrefabParent: 0
@@ -88667,7 +88673,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.9338235, g: 0.9012439, b: 0.6385705, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -89053,6 +89059,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1215042240103604, guid: 32a5d3e2ace8a3f439fac3ed7a085dac, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32a5d3e2ace8a3f439fac3ed7a085dac, type: 2}
   m_IsPrefabParent: 0
@@ -89083,7 +89093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0204154c3826f824e94c7ff5dc66aacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1081360457507008, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
+  agents:
+  - {fileID: 1081360457507008, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
+  - {fileID: 1624295641820786, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+  - {fileID: 1215042240103604, guid: 32a5d3e2ace8a3f439fac3ed7a085dac, type: 2}
   group: {fileID: 1273282103004620, guid: f47bfdcb54aabf047b11cc9ae6fdaf11, type: 2}
   numberOfMembers: 5
 --- !u!4 &1876116028

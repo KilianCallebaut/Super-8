@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 50129053685803308}
   - component: {fileID: 95118511236998912}
   - component: {fileID: 114791828460151022}
-  - component: {fileID: 114757690500794754}
+  - component: {fileID: 114904239964570892}
   m_Layer: 0
   m_Name: Meathead
   m_TagString: Agent
@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1761555025539228}
   m_LocalRotation: {x: -0, y: -0, z: -0.058769338, w: 0.9982716}
-  m_LocalPosition: {x: -0.12631798, y: 0.007528603, z: 0}
+  m_LocalPosition: {x: -0.126318, y: 0.007528603, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4195525744109376}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081360457507008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05373001, y: 0.16282654, z: 0.010151382}
+  m_LocalPosition: {x: -0.05373001, y: 0.16282654, z: 0.01015138}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4171960661893828}
@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1711884891711204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.28831804, y: -0.006281346, z: 0}
+  m_LocalPosition: {x: -0.288318, y: -0.006281346, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4195525744109376}
@@ -249,7 +249,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590119020911676}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.40031803, y: 0.54103684, z: 0}
+  m_LocalPosition: {x: -0.400318, y: 0.54103684, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4195525744109376}
@@ -287,7 +287,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14862537, y: 0.23779869}
+  m_Offset: {x: -0.18560219, y: -0.2899599}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -298,7 +298,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9999981, y: 1.7134018}
+  m_Size: {x: 0.6840172, y: 0.6578846}
   m_EdgeRadius: 0
 --- !u!61 &61769571123775538
 BoxCollider2D:
@@ -342,18 +342,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114757690500794754
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1081360457507008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a8b92b713f8ffe45ac8fd1699780017, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Destination: {x: 0, y: 0}
 --- !u!114 &114791828460151022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -367,6 +355,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunArm: {fileID: 1464915560323102}
   aimSpeed: 1
+--- !u!114 &114904239964570892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081360457507008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8b92b713f8ffe45ac8fd1699780017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Destination: {x: 0, y: 0}
 --- !u!212 &212029380530898784
 SpriteRenderer:
   m_ObjectHideFlags: 1
