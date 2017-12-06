@@ -331,6 +331,8 @@ public class Agent : MonoBehaviour
         }
         AgentGroup.DeleteMember(this);
         LevelManager.Instance.DeleteAgent(this);
+
+		Destroy (gameObject);
     }
 
    

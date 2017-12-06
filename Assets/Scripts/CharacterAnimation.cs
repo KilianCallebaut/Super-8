@@ -46,36 +46,20 @@ public class CharacterAnimation : MonoBehaviour {
 			// Check target
 			if (thisAgent.TargetAgent != null) {
 				animator.SetBool ("gotTarget", true);
-				aimTowards (gunArm, thisAgent.TargetAgent.LastPosition, 90);
-				headTilt (thisAgent.TargetAgent.LastPosition);
+				aimTowards (gunArm, thisAgent.TargetAgent.LastPosition);
 			} else {
 				animator.SetBool ("gotTarget", false);
 			}
 		}
 	}
 
-	void aimTowards(GameObject aimer, Vector3 target, float rotationOffset = 0){
+	void aimTowards(GameObject aimer, Vector3 target){
 		Vector3 aimVector = (target - gunArm.transform.position).normalized;
 		Debug.DrawLine (gunArm.transform.position, target);
 
 		float targetAngle = Vector3.Angle (Vector3.down, aimVector);
-		
-		Debug.Log (targetAngle);
+
 		animator.SetFloat ("Angle", targetAngle / 180);
-		//gunArm.transform.rotation = Quaternion.Euler (0f, 0f, targetAngle + 90);
-	}
-
-	void headTilt(Vector3 target){
-		Vector3 aimVector = (target - head.transform.position).normalized;
-		Debug.DrawLine (gunArm.transform.position, target);
-
-		float targetAngle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
-
-		if (direction > 0)
-			targetAngle += 180;
-
-		Quaternion q = Quaternion.AngleAxis(targetAngle, Vector3.forward);
-		head.transform.rotation = Quaternion.Slerp(head.transform.rotation, q, Time.deltaTime * aimSpeed);
 	}
 
 	void updateAnimationState(){

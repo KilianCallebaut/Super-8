@@ -194,10 +194,10 @@ public class LevelManager : Singleton<LevelManager> {
             // FOR DEBUGGING PURPOSES
             if (i < 2)
             {
-				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Shadow");
+				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Soldier");
             } else
             {
-				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Shadow");
+				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Soldier");
             }
 
             newAgent.name = "Agent_" + i + "_Team1";
@@ -217,7 +217,7 @@ public class LevelManager : Singleton<LevelManager> {
         {
 			GameObject character = agents [rnd.Next(0, agents.Length)];
 
-			Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Dummy");
+			Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Soldier");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;

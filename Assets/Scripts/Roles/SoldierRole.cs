@@ -203,9 +203,11 @@ public class SoldierRole : AgentBehaviour {
     // For now go in exact opposite direction
     private void Retreat()
     {
-        var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
-        var oppositeDirection = new Vector3(-direction.x, -direction.y);
-        agent.Destination = oppositeDirection + transform.position;
+		if (agent.TargetAgent != null) {
+			var direction = (agent.TargetAgent.LastPosition - transform.position).normalized;
+			var oppositeDirection = new Vector3 (-direction.x, -direction.y);
+			agent.Destination = oppositeDirection + transform.position;
+		}
     }    
 
 
