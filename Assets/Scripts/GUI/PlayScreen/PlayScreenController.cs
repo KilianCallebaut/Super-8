@@ -9,7 +9,7 @@ public class PlayScreenController : MonoBehaviour {
 
     public static readonly ReadOnlyCollection<string> GROUP_NAMES = new ReadOnlyCollection<string>(new[] {"Albert", "Bob", "Cooper", "Diane", "Ed", "F", "Gordon", "Hawk"});
     public static readonly ReadOnlyCollection<Color> GROUP_COLORS = new ReadOnlyCollection<Color>(new[] {
-        new Color(1f, 0.16f, 0.70f), // red
+        new Color(1f, 0.36f, 0.50f), // red
         new Color(1f, 0.85f, 0.70f), // yellow
         new Color(0.51f, 1f, 0.70f), // green
         new Color(0.70f, 1f, 0.85f), // teal
