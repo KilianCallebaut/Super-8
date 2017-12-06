@@ -5,22 +5,17 @@ using System.Linq;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager> {
-    [SerializeField]
-    private GameObject[] tilePrefabs;
 
     [SerializeField]
     private GameObject agent;
-
-	[SerializeField]
-	private Texture2D mapTexture;
+    
 
     [SerializeField]
     private GameObject group;
 
     public List<GameObject> Tiles { get; private set; }
-    public List<GameObject> StartTilesTeam1 { get; private set; }
-    public List<GameObject> StartTilesTeam2 { get; private set; }
-    public List<GameObject> WallTiles { get; private set; }
+    public List<Vector2> StartTilesTeam1 { get; private set; }
+    public List<Vector2> StartTilesTeam2 { get; private set; }
 
     public List<Agent> Agents { get; private set; }
     public List<GameObject> Bullets { get; private set; } 
@@ -29,6 +24,7 @@ public class LevelManager : Singleton<LevelManager> {
 	private GameObject tile_dump;
 	private GameObject team1_parent;
 	private GameObject team2_parent;
+    public int numberOfMembers = 1;
 
 	private Vector3 worldStart;
 
@@ -52,15 +48,6 @@ public class LevelManager : Singleton<LevelManager> {
         }
     }
 
-
-    public float TileSize
-    {
-        get
-        {
-            return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-        }
-    }
-
   
 
 
@@ -76,30 +63,7 @@ public class LevelManager : Singleton<LevelManager> {
 	
 	}
 		
-	private void readMapTexture () {
-		Color[] pixels = mapTexture.GetPixels (0, 0, mapTexture.width, mapTexture.height);
-		for (int y = 0; y < mapTexture.height; y++) {
-			for (int x = 0; x < mapTexture.width; x++) {
-				Color c = pixels [(y * mapTexture.width) + x];
-				GameObject tile = new GameObject ();
-				tile.transform.position = new Vector3 (x, y);
-				tile.transform.SetParent (tile_dump.transform);
-				if (c == Color.black) {
-					WallTiles.Add (tile);
-					tile.name = "Wall";
-				} else if (c == Color.blue) {
-					StartTilesTeam1.Add (tile);
-					tile.name = "Team 1";
-				} else if (c == Color.green) {
-					StartTilesTeam2.Add (tile);
-					tile.name = "Team 2";
-				} else {
-					Tiles.Add (tile);
-					tile.name = "Walkable";
-				}
-			}
-		}
-	}
+
 
     // For initialization
     private void initialize() {
@@ -114,13 +78,12 @@ public class LevelManager : Singleton<LevelManager> {
 		team2_parent.name = "Team_2";
 
         Tiles = new List<GameObject>();
-        StartTilesTeam1 = new List<GameObject>();
-        StartTilesTeam2 = new List<GameObject>();
+        StartTilesTeam1 = new List<Vector2>();
+        StartTilesTeam2 = new List<Vector2>();
 
-        WallTiles = new List<GameObject>();
         Agents = new List<Agent>();
 
-		readMapTexture();
+		GetStartTiles();
         Objectives = new List<Vector3>();
     }
 
@@ -128,72 +91,89 @@ public class LevelManager : Singleton<LevelManager> {
     public void Go()
     {
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
-        //CreateMap(worldStart);
         CreateAgents(worldStart);
     }
 
-    // Placeholder for reading file from map
-    private void readMap()
+
+
+    private void GetStartTiles()
     {
-        string path = "Assets/Maps/TempMap.txt";
-        string[] lines = System.IO.File.ReadAllLines(path);
-        int ymax = lines.Length;
-        int xmax = lines[0].Split().Length;
-
-        map = new int[xmax, ymax];
-
-        for(int y = 0; y<ymax; y++)
-        {
-            string[] values = lines[y].Split();
-
-            for(int x = 0; x<xmax; x++)
-            {                
-                map[x, y] = Int32.Parse(values[x]);
-            }
-
+        Node[,] grid = Grid.Instance.getGrid();
+        if (grid == null) {
+            Grid.Instance.Instantiate();
+            grid = Grid.Instance.getGrid();
         }
-    }
-
-    // Placeholder for mapcreator
-    private void CreateMap(Vector3 worldStart)
-    {
-        for (int x = 0; x < map.GetLength(0); x++)
-        {
-            for (int y = 0; y < map.GetLength(1); y++)
-            {
-                PlaceTile(x, y, worldStart, map[x, y]);
-            }
-        }
-
+        var startT1 = getStartTilesTeam(true, grid);
+        var startT2 = getStartTilesTeam(false, grid);
         
+
+        for( int x = 0; x < startT1.Count; x++)
+        {
+            for (int y = 0; y< startT1[0].Count; y++)
+            {
+                Node n = startT1[x][y];
+                if (n.walkable)
+                {
+                    StartTilesTeam1.Add(n.worldPosition);
+                    y += 4;
+                    if (y >= startT1[0].Count)
+                        break;
+                } 
+
+            }
+            x += 5;
+            if (x >= startT1.Count)
+                break;
+        }
+
+        for (int x = 0; x < startT2.Count; x++)
+        {
+            for (int y = 0; y < startT2[0].Count; y++)
+            {
+                Node n = startT2[x][y];
+                if (n.walkable)
+                {
+                    StartTilesTeam2.Add(n.worldPosition);
+                    y += 4;
+                    if (y >= startT2[0].Count)
+                        break;
+                }
+
+            }
+            x += 5;
+            if (x >= startT2.Count)
+                break;
+        }
+
+
     }
 
-    //Placeholder for tilecreation
-    private void PlaceTile(int x, int y, Vector3 worldStart, int type)
+    private List<List<Node>> getStartTilesTeam(bool team1, Node[,] grid)
     {
-        GameObject newTile = Instantiate(tilePrefabs[type]);
-        Vector3 tilePosition = new Vector3(worldStart.x + TileSize / 2 + (TileSize * x), worldStart.y - TileSize / 2 - (TileSize * y));
-        newTile.transform.position = tilePosition;
+        int tek = team1 ? 1 : -1;
+        List<List<Node>> res = new List<List<Node>>();
 
-        // differentiate playing field-stadium
-        if (type == 0 || type == 2)
+        for (int x = 0; x < grid.GetLength(0); x++)
         {
-            Tiles.Add(newTile);
-        }
+            List<Node> xrow = new List<Node>();
+            for (int y = 0; y< grid.GetLength(1); y++)
+            {
+                Node n = grid[x, y];
 
-        if (type == 2)
-        {
-            if (y > MaxYTiles / 2)
-                StartTilesTeam1.Add(newTile);
-            else
-                StartTilesTeam2.Add(newTile);
+                if (34 > tek*n.worldPosition.x && tek*n.worldPosition.x > 30 && Mathf.Abs(n.worldPosition.y) < 3)
+                {
+                    xrow.Add(n);
+                }
+               
+            }
+            if (xrow.Count>0)
+                res.Add(xrow);
         }
+        return res;
 
-        if (type == 3)
-        {
-            WallTiles.Add(newTile);
-        }
     }
+
+
 
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
@@ -203,10 +183,9 @@ public class LevelManager : Singleton<LevelManager> {
 		group1.Initialize ();
         group1.Objectives = Objectives;
         group1.name = "Group1";
-        for (int i = 0; i< StartTilesTeam1.Count ; i++) //
+        for (int i = 0; i< numberOfMembers ; i++) //
         {
             Agent newAgent;
-
             // FOR DEBUGGING PURPOSES
             if (i < 2)
             {
@@ -217,7 +196,7 @@ public class LevelManager : Singleton<LevelManager> {
             }
 
             newAgent.name = "Agent_" + i + "_Team1";
-            newAgent.transform.position = StartTilesTeam1[i].transform.position;
+            newAgent.transform.position = StartTilesTeam1[i];
             newAgent.Team = 1;
             Agents.Add(newAgent);
 			newAgent.transform.SetParent (team1_parent.transform);
@@ -229,12 +208,12 @@ public class LevelManager : Singleton<LevelManager> {
 		group2.Initialize ();
         group2.name = "Group2";
 
-        for (int i = 0; i < StartTilesTeam2.Count -2 ; i++) //
+        for (int i = 0; i < numberOfMembers ; i++) //
         {
 
             Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
             newAgent.name = "Agent_" + i + "_Team2";
-            newAgent.transform.position = StartTilesTeam2[i].transform.position;
+            newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
             Agents.Add(newAgent);
 			newAgent.transform.SetParent (team2_parent.transform);
@@ -261,8 +240,7 @@ public class LevelManager : Singleton<LevelManager> {
         }
 
         Destroy(deletedAgent.gameObject);
-
-
+        
     }
 
     // Temporary method for adding objective for 1 team
@@ -360,15 +338,33 @@ public class LevelManager : Singleton<LevelManager> {
             if (spotted) {
                 ShadowMap.Remove(checkedAgent);
                 checkedAgent.Shadow = false;
+                Debug.Log("HERE LEVEL MANAGER");
             }
-
             return spotted;
         }
 
         return false;
-
     }
 
+
+    private void OnDrawGizmosSelected()
+    {
+        foreach (Vector2 v in StartTilesTeam1)
+        {
+
+            Gizmos.color = Color.red;
+
+            Gizmos.DrawCube(v, Vector3.one * (0.3f - .1f));
+        }
+
+        foreach (Vector2 v in StartTilesTeam2)
+        {
+
+            Gizmos.color = Color.red;
+
+            Gizmos.DrawCube(v, Vector3.one * (0.3f - .1f));
+        }
+    }
 
 
 }

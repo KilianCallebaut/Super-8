@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShadowRole : AgentBehaviour {
 
+    int flankingSide = 0;
+
     // Use this for initialization
     void Start () {
 		
@@ -17,14 +19,21 @@ public class ShadowRole : AgentBehaviour {
     // Move to enemy's back, stay in back of group, keep overview
     public override void Think()
     {
+        
+
         // Positions and shoots at the enemy closest to his visiondirection
         if (agent == null)
             agent = GetComponent<Agent>();
-
         
+
         Inspecting();
         Targetting();
+
         Positioning();
+        
+
+        Engaging();
+
     }
 
     // Checks flanks when nog target
@@ -47,41 +56,50 @@ public class ShadowRole : AgentBehaviour {
     // Stays in group, goes to enemy flank
     protected override void Positioning()
     {
-
-        if (EnemiesVeryNear())
+        Debug.Log(positioning);
+        switch (positioning)
         {
-            Retreat();
-            return;
-        }
+            case PositioningMethod.GoToGroupObjective:
+                GoToGroupObjective();
+                break;
+            case PositioningMethod.HittingTheBack:
+                HittingTheBack();
+                break;
+            case PositioningMethod.Flanking:
+                flankingSide = Flanking(flankingSide);
+                break;
+            case PositioningMethod.Retreat:
+                Retreat();
+                break;
+            case PositioningMethod.StayInGroup:
+                StayInGroup();
+                break;
+            case PositioningMethod.Chasing:
+                Chasing();
+                break;
+            default:
+                Stop();
+                break;
 
-        if (EnemiesNear() && !agent.Shadow)
+        }
+        if (positioning == PositioningMethod.Stop)
         {
-            Retreat();
-            return;
+            if (HittingTheBack())
+                return;
+            if (GoToGroupObjective())
+                return;
+
         }
-
-        if (agent.TargetAgent != null)
-        {
-            Stop();
-        }
-
-        if (agent.AtDestination())
-        {
-            GoToGroupObjective();
-            StayInGroup();
-            HittingTheBack();
-            
-        }
-
-        
-
-
 
     }
 
     // Prefers targets further away
     protected override void Targetting()
     {
+        if (!agent.Shadow && !InAnyEnemyFieldOfVision())
+        {
+            agent.Shadow = true;
+        }
 
         if (agent.seenOtherAgents.Count > 0)
         {
@@ -92,13 +110,10 @@ public class ShadowRole : AgentBehaviour {
             {
                 agent.Shadow = false;
             }
-            else if (!agent.Shadow)
-            {
-                agent.Shadow = true;
-            }
 
-            Engaging();
         }
+        
+
     }
 
     // Go after closest agent that is closer than a threshold
@@ -126,8 +141,7 @@ public class ShadowRole : AgentBehaviour {
     // For now always when agent has a target
     private void Engaging()
     {
-
-        if (!agent.Shadow && agent.TargetAgent != null)
+        if (!agent.Shadow )
         {
             agent.Shoot();
         }
@@ -136,4 +150,56 @@ public class ShadowRole : AgentBehaviour {
             agent.DontShoot();
         }
     }
+
+    // --------------------------------------------------------------
+    // --------------------------------------------------------------
+    // Positioning methods
+
+
+    private bool GoToGroupObjective()
+    {
+        ((AgentBehaviour) this).GoToGroupObjective();
+        
+        StayInGroup();
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+            
+        }
+        return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
+    private bool StayInGroup()
+    {
+        ((AgentBehaviour)this).StayInGroup();
+
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+
+        }
+        return positioning == PositioningMethod.StayInGroup;
+
+    }
+
+    private bool HittingTheBack()
+    {
+        Debug.Log("Hittingback " + agent.Shadow + agent.TargetAgent);
+
+        ((AgentBehaviour)this).HittingTheBack();
+
+        if (agent.TargetAgent == null)
+        {
+            Stop();
+        }
+
+        if (!agent.Shadow)
+            Stop();
+
+        
+        return positioning == PositioningMethod.HittingTheBack;
+
+    }
+
 }

@@ -7,7 +7,7 @@ using UnityEngine;
  * */
 public class SoldierRole : AgentBehaviour {
 
-
+    int flankingSide = 0;
 
     // Use this for initialization
     void Start()
@@ -61,8 +61,9 @@ public class SoldierRole : AgentBehaviour {
         {
 
             Prioritizing();
-            Engaging();
         }
+        Engaging();
+
     }
 
 
@@ -71,6 +72,32 @@ public class SoldierRole : AgentBehaviour {
     // Since the only thing that is really meant to change here is the destination, we can order
     protected override void Positioning()
     {
+        switch (positioning)
+        {
+            case PositioningMethod.GoToGroupObjective:
+                GoToGroupObjective();
+                break;
+            case PositioningMethod.HittingTheBack:
+                HittingTheBack();
+                break;
+            case PositioningMethod.Flanking:
+                flankingSide = Flanking(flankingSide);
+                break;
+            case PositioningMethod.Retreat:
+                Retreat();
+                break;
+            case PositioningMethod.StayInGroup:
+                StayInGroup();
+                break;
+            case PositioningMethod.Chasing:
+                Chasing();
+                break;
+            default:
+                Stop();
+                break;
+
+        }
+
         if (EnemiesNear())
         {
             agent.Destination = transform.position;

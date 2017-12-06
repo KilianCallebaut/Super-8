@@ -26,6 +26,7 @@ public class Agent : MonoBehaviour
     public Group AgentGroup { get; set; }
 
     private GameObject bullet;
+    private Unit unit;
 
     // Agent's bonusses
     private float aimBonus = 0.0f;
@@ -45,7 +46,6 @@ public class Agent : MonoBehaviour
             if (value == true)
             {
                 LevelManager.Instance.ShadowMap.Add(this, new Dictionary<Agent, int>());
-
             }
             else
                 LevelManager.Instance.ShadowMap.Remove(this);
@@ -67,7 +67,7 @@ public class Agent : MonoBehaviour
 
         weapon = ObjectManager.AddStandardWeapon(this);
 		gameObject.AddComponent<DamageRecipient>();
-        
+        unit = gameObject.GetComponent<Unit>();
 
 
         Destination = transform.position;
@@ -111,10 +111,7 @@ public class Agent : MonoBehaviour
     {
         MoveToDirection();
         RotateToDirection();
-
-
-       
-
+        
     }
 
     // Percepts
@@ -219,7 +216,16 @@ public class Agent : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Stop();
+        Agent isagent = collision.gameObject.GetComponent<Agent>();
+        if (isagent != null && isagent.Team == Team)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider);
+
+        }
+        else
+        {
+            Stop();
+        }
     }
     
 
@@ -232,10 +238,12 @@ public class Agent : MonoBehaviour
     private void MoveToDirection()
     {
       
-        if (transform.position != Destination) { 
-            transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
-			//experiment: use rigidbody2d for velocity instead
-			//GetComponent<Rigidbody2D>().velocity = (Destination-transform.position).normalized*Attributes.speed*Time.deltaTime;
+        if (transform.position != Destination) {
+            //transform.position = Vector2.MoveTowards(transform.position, Destination, Attributes.speed * Time.deltaTime);
+            //experiment: use rigidbody2d for velocity instead
+            //GetComponent<Rigidbody2D>().velocity = (Destination-transform.position).normalized*Attributes.speed*Time.deltaTime;
+
+            unit.Destination = Destination;
         }
 
 
@@ -261,7 +269,7 @@ public class Agent : MonoBehaviour
 
     // Agent Actions
 
-        // Letting agent shoot
+    // Letting agent shoot
     public void Shoot()
     {
 
@@ -280,7 +288,13 @@ public class Agent : MonoBehaviour
 			weapon.startShooting ();
 
             if (Shadow)
+            {
                 Shadow = false;
+                Debug.Log("HERE AGENT");
+            }
+        } else
+        {
+            DontShoot();
         }
 
         
@@ -320,7 +334,7 @@ public class Agent : MonoBehaviour
     {
         //Debug.Log(AtDestination());
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(Destination, 0.4f);
+        Gizmos.DrawSphere(Destination, 0.1f);
 
         // For debugging purposes, shows field of vision
         Debug.DrawLine(new Vector3(5.0f, 160f, 0f), new Vector3(105.0f, 160f, 0f)) ;

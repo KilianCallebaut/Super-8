@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SniperRole : AgentBehaviour {
-  
-    
+
+    int flankingSide = 0;
+
 
     // Use this for initialization
     void Start () {
@@ -24,6 +25,8 @@ public class SniperRole : AgentBehaviour {
         Inspecting();
         Targetting();
         Positioning();
+        Engaging();
+
     }
 
     // Screens in front of him
@@ -48,16 +51,40 @@ public class SniperRole : AgentBehaviour {
         {
 
             Prioritizing();
-            Engaging();
         }
+
     }
 
     // Set up from a distance
     protected override void Positioning()
     {
-       
 
-     
+        switch (positioning)
+        {
+            case PositioningMethod.GoToGroupObjective:
+                GoToGroupObjective();
+                break;
+            case PositioningMethod.HittingTheBack:
+                HittingTheBack();
+                break;
+            case PositioningMethod.Flanking:
+                flankingSide = Flanking(flankingSide);
+                break;
+            case PositioningMethod.Retreat:
+                Retreat();
+                break;
+            case PositioningMethod.StayInGroup:
+                StayInGroup();
+                break;
+            case PositioningMethod.Chasing:
+                Chasing();
+                break;
+            default:
+                Stop();
+                break;
+
+        }
+
 
         if (agent.AtDestination())
         {
@@ -71,11 +98,6 @@ public class SniperRole : AgentBehaviour {
             agent.Destination = transform.position;
         }
 
-
-        if (EnemiesAlmostNear())
-        {
-            Retreat();
-        }
 
     }
 

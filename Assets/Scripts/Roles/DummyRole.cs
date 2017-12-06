@@ -32,7 +32,7 @@ public class DummyRole : AgentBehaviour {
 
     protected override void Positioning()
     {
-        agent.Destination = new Vector3(30, 19);
+        agent.Destination = new Vector3(0, 0);
     }
 
     protected override void Targetting()

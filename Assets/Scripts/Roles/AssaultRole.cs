@@ -64,8 +64,10 @@ public class AssaultRole : AgentBehaviour {
         if (agent.seenOtherAgents.Count > 0)
         {
             Prioritizing();
-            Engaging();
         }
+
+        Engaging();
+
     }
 
     // When spotting an agent that's close enough approach otherwise avoid
@@ -73,22 +75,46 @@ public class AssaultRole : AgentBehaviour {
     // Goal: Avoiding line of fire by taking evading route
     protected override void Positioning()
     {
-        if (agent.TargetAgent != null)
+        switch (positioning)
         {
-            Stop();
+            case PositioningMethod.GoToGroupObjective:
+                GoToGroupObjective();
+                break;
+            case PositioningMethod.HittingTheBack:
+                HittingTheBack();
+                break;
+            case PositioningMethod.Flanking:
+                Flanking(flankingSide);
+                break;
+            case PositioningMethod.Retreat:
+                Retreat();
+                break;
+            case PositioningMethod.StayInGroup:
+                StayInGroup();
+                break;
+            case PositioningMethod.Chasing:
+                Chasing();
+                break;
+            default:
+                Stop();
+                break;
+
         }
 
-        if (agent.AtDestination())
+
+        if (positioning == PositioningMethod.Stop)
         {
-            GoToGroupObjective();
-            StayInGroup();
-
-            Chasing();
-
             if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
             {
-                flankingSide = Flanking(flankingSide);
+                if (Flanking(flankingSide))
+                    return;
             }
+
+            if (Chasing())
+                return;
+
+            if (GoToGroupObjective())
+                return;
             
         }
 
@@ -141,7 +167,58 @@ public class AssaultRole : AgentBehaviour {
         }
     }
 
+    // --------------------------------------------------------------
+    // --------------------------------------------------------------
 
+    private bool GoToGroupObjective()
+    {
+        ((AgentBehaviour)this).GoToGroupObjective();
 
-   
+        StayInGroup();
+        if (agent.TargetAgent != null)
+        {
+            Stop();
+
+        }
+        return positioning == PositioningMethod.GoToGroupObjective;
+
+    }
+
+    private bool Chasing()
+    {
+        ((AgentBehaviour)this).Chasing();
+
+        if (agent.TargetAgent == null)
+        {
+            Stop();
+        }
+
+        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
+        {
+            Stop();
+        }
+
+        return positioning == PositioningMethod.Chasing;
+
+    }
+
+    private bool Flanking(int flankingSide)
+    {
+        flankingSide = ((AgentBehaviour)this).Flanking(flankingSide);
+
+        if (agent.TargetAgent == null)
+            Stop();
+
+        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) > flankThreshold)
+        {
+            Stop();
+        }
+
+        if (flankingSide == 0)
+            Stop();
+
+        return positioning == PositioningMethod.Flanking;
+
+    }
+
 }
