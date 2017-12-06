@@ -42,11 +42,14 @@ public class ShadowRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
+            if (agent.Destination == transform.position)
+                LookAround();
         }
 
         if (agent.TargetAgent != null)
         {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
+         
         }
 
        
@@ -96,7 +99,9 @@ public class ShadowRole : AgentBehaviour {
     // Prefers targets further away
     protected override void Targetting()
     {
-        if (!agent.Shadow && !InAnyEnemyFieldOfVision())
+        if (agent.TargetAgent != null)
+        Debug.Log(InEnemyBack(agent.TargetAgent.Enemy));
+        if (!agent.Shadow && !InAnyEnemyFieldOfVision() && !EnemiesNear())
         {
             agent.Shadow = true;
         }
@@ -185,9 +190,9 @@ public class ShadowRole : AgentBehaviour {
 
     private bool HittingTheBack()
     {
-        Debug.Log("Hittingback " + agent.Shadow + agent.TargetAgent);
 
-        ((AgentBehaviour)this).HittingTheBack();
+
+        flankingSide = ((AgentBehaviour)this).HittingTheBack(flankingSide);
 
         if (agent.TargetAgent == null)
         {

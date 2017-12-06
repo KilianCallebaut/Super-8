@@ -17,7 +17,7 @@ public class Agent : MonoBehaviour
 
     // Percepts
     public Dictionary<string, OtherAgent> seenOtherAgents { get; private set; }
-    public Vector3 direction { get; private set; }
+    public Vector3 direction { get;  set; }
     public Vector3 visionDirection { get; private set; }
 
     // Agent info
@@ -95,12 +95,6 @@ public class Agent : MonoBehaviour
 
     private void See()
     {
-        // update direction 
-        if (!AtDestination())
-        { 
-            var heading = (Destination - transform.position);
-            direction = heading / heading.magnitude;
-        }
 
 
         // See enemies
@@ -246,10 +240,7 @@ public class Agent : MonoBehaviour
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider);
 
         }
-        else
-        {
-            Stop();
-        }
+        
     }
     
 

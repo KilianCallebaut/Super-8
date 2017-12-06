@@ -41,14 +41,19 @@ public class AssaultRole : AgentBehaviour {
     // Only meant to change the LookingDestination
     protected override void Inspecting()
     {
+
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
+            if (agent.Destination == transform.position)
+                LookAround();
         }
 
         if (agent.TargetAgent != null)
         {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
+
+           
         }
     }
 
@@ -81,7 +86,7 @@ public class AssaultRole : AgentBehaviour {
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack();
+                HittingTheBack(flankingSide);
                 break;
             case PositioningMethod.Flanking:
                 Flanking(flankingSide);

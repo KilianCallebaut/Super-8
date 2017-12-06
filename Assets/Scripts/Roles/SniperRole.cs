@@ -36,11 +36,15 @@ public class SniperRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
+
+            if (agent.Destination == transform.position)
+                LookAround();
         }
 
         if (agent.TargetAgent != null)
         {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
+           
         }
     }
 
@@ -67,7 +71,7 @@ public class SniperRole : AgentBehaviour {
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack();
+                HittingTheBack(flankingSide);
                 break;
             case PositioningMethod.Flanking:
                 flankingSide = Flanking(flankingSide);

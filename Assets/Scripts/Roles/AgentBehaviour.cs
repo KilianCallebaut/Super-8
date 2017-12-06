@@ -297,12 +297,15 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
 
     // Go to location in the agent's back
-    public void HittingTheBack()
+    public int HittingTheBack(int flankingSide)
     {
         if (agent.TargetAgent != null && agent.Shadow == true)
         {
+            if (InEnemyFieldOfVision(agent.TargetAgent.Enemy))
+                return Flanking(flankingSide);
+                
             positioning = PositioningMethod.HittingTheBack;
-            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
+            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.VisionDirection;
 
             var range = midRange;
 
@@ -313,7 +316,9 @@ public abstract class AgentBehaviour : MonoBehaviour {
             }
             agent.Destination = oppositeDirection * range + agent.TargetAgent.LastPosition;
 
+            return 0;
         }
+        return 0;
     }
 
 

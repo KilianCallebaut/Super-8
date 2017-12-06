@@ -42,12 +42,15 @@ public class SoldierRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
+            if (agent.Destination == transform.position)
+                LookAround();
         }
 
         if (agent.TargetAgent != null)
         {
             turningDestination = Vector3.zero;
             agent.LookingDestination = agent.TargetAgent.LastPosition;
+
         }
     }
 
@@ -79,7 +82,7 @@ public class SoldierRole : AgentBehaviour {
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack();
+                HittingTheBack(flankingSide);
                 break;
             case PositioningMethod.Flanking:
                 flankingSide = Flanking(flankingSide);

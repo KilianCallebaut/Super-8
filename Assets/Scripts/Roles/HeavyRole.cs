@@ -49,7 +49,7 @@ public class HeavyRole : AgentBehaviour
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack();
+                HittingTheBack(flankingSide);
                 break;
             case PositioningMethod.Flanking:
                 flankingSide = Flanking(flankingSide);
@@ -111,11 +111,14 @@ public class HeavyRole : AgentBehaviour
         if (agent.TargetAgent == null && !agent.AtDestination())
         {
             agent.LookingDestination = agent.Destination;
+            if (agent.Destination == transform.position)
+                LookAround();
         }
 
         if (agent.TargetAgent != null)
         {
             agent.LookingDestination = agent.TargetAgent.LastPosition;
+         
         }
     }
 
