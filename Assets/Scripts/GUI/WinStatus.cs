@@ -6,10 +6,9 @@ using UnityEngine.UI;
 public class WinStatus : MonoBehaviour {
 
 	public Text WinText;
-	public GameObject LevManager;
+	public LevelManager LevelManagerRef;
+    public Canvas MenuCanvasRef;
 
-
-	private LevelManager levelManager;
 	private bool winConditionMet = false;
 
 	private CapturePointScript[] capturePoints;
@@ -17,17 +16,21 @@ public class WinStatus : MonoBehaviour {
 
 	void Start()
 	{
-		levelManager = LevManager.GetComponent<LevelManager> ();
 		capturePoints = FindObjectsOfType (typeof(CapturePointScript)) as CapturePointScript[];
 		if (captureText != null)
 			captureText.gameObject.SetActive (true);
 	}
 
+    public void Reset()
+    {
+        winConditionMet = false;
+    }
+
 	IEnumerator CheckWinCondition()
 	{
 		int aliveTeam1 = 0;
 		int aliveTeam2 = 0;
-		foreach (var agent in levelManager.Agents) {
+		foreach (var agent in LevelManagerRef.Agents) {
 			if (agent.Team == 1)
 				aliveTeam1 += 1;
 			else if (agent.Team == 2)
@@ -38,18 +41,30 @@ public class WinStatus : MonoBehaviour {
 			WinText.text = "YOU LOSE";
 			WinText.gameObject.SetActive (true);
 			winConditionMet = true;
-		} else if (aliveTeam2 == 0|| captureProgress.x >= 100.0f) {
+            Invoke("BackToMenu", 1);
+        } else if (aliveTeam2 == 0|| captureProgress.x >= 100.0f) {
 			WinText.text = "YOU WIN";
 			WinText.gameObject.SetActive (true);
 			winConditionMet = true;
-		}
+            Invoke("BackToMenu", 1);
+        }
 
-		yield return new WaitForSeconds(1);
+
+        yield return new WaitForSeconds(1);
 	}
 
-	void FixedUpdate()
+    void BackToMenu()
+    {
+        LevelManagerRef.DestroyEverything();
+        MenuCanvasRef.gameObject.SetActive(true);
+        WinText.text = "";
+        WinText.gameObject.SetActive(false);
+        // do something with the level?
+    }
+
+    void FixedUpdate()
 	{
-		if (!winConditionMet && levelManager.Agents.Count > 0)
+		if (!winConditionMet && LevelManagerRef.Agents.Count > 0)
 			StartCoroutine (CheckWinCondition());
 	}
 

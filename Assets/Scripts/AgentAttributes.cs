@@ -51,6 +51,19 @@ public class AgentAttributes {
 
     }
 
+    public AgentAttributes(AgentAttributes attributes, GameObject agentPrefab)
+    {
+        this.speed = attributes.speed;
+        this.reachOfVision = attributes.reachOfVision;
+        this.widthOfVision = attributes.widthOfVision;
+        this.reflex = attributes.reflex;
+        this.agility = attributes.agility;
+        this.accuracy = attributes.accuracy;
+        this.maxHealth = attributes.maxHealth;
+        this.agentPrefab = agentPrefab;
+
+    }
+
     // Default/debugger agentattributes
     public AgentAttributes(GameObject agentPrefab)
     {
