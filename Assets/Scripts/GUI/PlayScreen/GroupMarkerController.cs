@@ -38,7 +38,20 @@ public class GroupMarkerController : MonoBehaviour {
         Scene scene = SceneManager.GetActiveScene();
         GameObject map = scene.GetRootGameObjects().FirstOrDefault(go => go.name == "Map");
 
-        return objective + map.transform.position;
+        //hardcoded offset from debuggin (I hate unity)
+        objective.x += 1.6f; 
+        objective.y += 1;
+
+        // more cheeky hardcoded normalization knowing that the map is +-36 wide +-22 high
+        Vector3 fuckMax = c.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        float widthRatio = 36 / fuckMax.x;
+        float heightRatio = 22 / fuckMax.y;
+        objective.x *= widthRatio;
+        objective.y *= heightRatio;
+
+        Debug.DrawLine(objective, Vector3.zero);
+        Debug.Log(objective);
+        return objective;
     }
 
     public void SendObjectiveToLevelManager()
