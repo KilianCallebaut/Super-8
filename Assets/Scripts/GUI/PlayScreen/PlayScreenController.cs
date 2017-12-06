@@ -19,6 +19,7 @@ public class PlayScreenController : MonoBehaviour {
         new Color(0.70f, 0.70f, 0.70f)  // white
     });
 
+    public GameObject CanvasRef;
     public GameObject PlayerStrategyPrefab;
     public GameObject GroupStrategyPrefab;
     public GameObject GroupMarkerPrefab;
@@ -52,9 +53,7 @@ public class PlayScreenController : MonoBehaviour {
 
             GameObject groupMarker = Instantiate(GroupMarkerPrefab);
             GroupMarkerController groupMarkerController = groupMarker.GetComponent<GroupMarkerController>();
-            groupMarkerController.Initialize(this, i);
-            groupMarker.transform.SetParent(GroupMarkerContainer);
-            groupMarker.transform.localPosition = new Vector3(0, i * -30, 0);
+            groupMarkerController.Initialize(this, i, GroupMarkerContainer, new Vector3(0, 100 + i * -35, 0));
             group2marker[i] = groupMarkerController;
         }
 

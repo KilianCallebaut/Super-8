@@ -291,7 +291,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 139906757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2999916, y: 119.2, z: 0}
+  m_LocalPosition: {x: 0.2999916, y: 160.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 996933734}
@@ -1239,6 +1239,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224922215160798172, guid: 86cb540e6874ee640ac64ae1b44d5e98,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 29.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1437871298509538, guid: 86cb540e6874ee640ac64ae1b44d5e98, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86cb540e6874ee640ac64ae1b44d5e98, type: 2}
   m_IsPrefabParent: 0
@@ -1532,7 +1541,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 780788868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.450012, y: 193.8, z: 0}
+  m_LocalPosition: {x: 49.450012, y: 234.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 741380906}
@@ -1677,7 +1686,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 859322658}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 171, z: 0}
+  m_LocalPosition: {x: 0, y: 212, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 424528322}
@@ -1822,7 +1831,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 902940097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 540, y: 206, z: 0}
+  m_LocalPosition: {x: 540, y: 247, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 363706026}
@@ -2260,7 +2269,7 @@ Prefab:
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 109.999985
       objectReference: {fileID: 0}
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
@@ -2300,17 +2309,17 @@ Prefab:
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 109.999985
       objectReference: {fileID: 0}
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
@@ -2340,7 +2349,7 @@ Prefab:
     - target: {fileID: 224146528676202746, guid: f74a319a205044406be37ecec3ead716,
         type: 2}
       propertyPath: m_Pivot.y
-      value: -5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1983035935057006, guid: f74a319a205044406be37ecec3ead716, type: 2}
       propertyPath: m_IsActive
@@ -3175,7 +3184,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1712705138}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.29986572, y: 171, z: 0}
+  m_LocalPosition: {x: 0.29986572, y: 212, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1632282098}
@@ -3251,6 +3260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a422fdce968044e92ea5b64fa21979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasRef: {fileID: 902940097}
   PlayerStrategyPrefab: {fileID: 1093527194372318, guid: 8cba87aa4bb141e43991d5eca2f11285,
     type: 2}
   GroupStrategyPrefab: {fileID: 1437871298509538, guid: 86cb540e6874ee640ac64ae1b44d5e98,
