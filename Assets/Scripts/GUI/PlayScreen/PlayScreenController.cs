@@ -30,7 +30,7 @@ public class PlayScreenController : MonoBehaviour {
     public Button PlayButton;
 
     [SerializeField]
-    private GameObject agentPrefab;
+    private GameObject[] agentPrefabs;
     [SerializeField]
     private GameObject groupPrefab;
 
@@ -149,6 +149,7 @@ public class PlayScreenController : MonoBehaviour {
     public List<Agent> GenerateAgents()
     {
         List<Agent> agentList = new List<Agent>();
+        System.Random rnd = new System.Random();
         for (int i = 0; i < groups.Count; i++)
         {
             HashSet<AgentStatus> agents = groups[i];
@@ -162,7 +163,7 @@ public class PlayScreenController : MonoBehaviour {
 
             foreach (AgentStatus agentStatus in agents)
             {
-                Agent newAgent = agentStatus.CreateAgent(groupComp, agentPrefab);
+                Agent newAgent = agentStatus.CreateAgent(groupComp, agentPrefabs[rnd.Next(0, agentPrefabs.Length)]);
                 newAgent.Team = 1;
                 groupComp.AddMember(newAgent);
                 agentList.Add(newAgent);

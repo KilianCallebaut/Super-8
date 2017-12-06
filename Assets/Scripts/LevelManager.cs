@@ -195,10 +195,11 @@ public class LevelManager : Singleton<LevelManager> {
         group2.Initialize();
         group2.name = "Group2";
 
+        System.Random rnd = new System.Random();
         for (int i = 0; i < numberOfMembers; i++) //
         {
-
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
+            GameObject character = agents[rnd.Next(0, agents.Length)];
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Dummy");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;

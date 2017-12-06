@@ -3337,8 +3337,10 @@ MonoBehaviour:
   GroupStrategyContainer: {fileID: 224858497393039542}
   GroupMarkerContainer: {fileID: 224978656862707166}
   PlayButton: {fileID: 114605720345297082}
-  agentPrefab: {fileID: 1379835529334146, guid: 856398582af6f05408c3020254e260eb,
-    type: 2}
+  agentPrefabs:
+  - {fileID: 1624295641820786, guid: 77a84795a1eb6654bb6da81b676147ad, type: 2}
+  - {fileID: 1081360457507008, guid: 9d459e05e40452441a3338433ab096bc, type: 2}
+  - {fileID: 1215042240103604, guid: 32a5d3e2ace8a3f439fac3ed7a085dac, type: 2}
   groupPrefab: {fileID: 1273282103004620, guid: f47bfdcb54aabf047b11cc9ae6fdaf11,
     type: 2}
 --- !u!114 &114234912909451584
