@@ -1,32 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GroupMarkerController : MonoBehaviour {
 
     private PlayScreenController playScreen;
+    private GameObject container;
     private Vector3 initialPosition;
 
     private bool markerIsActive = false;
-    private bool markerIsPlaced = false;
 
     public void Initialize(PlayScreenController playScreen, int groupIndex, Transform parent, Vector3 initialPosition)
     {
         this.playScreen = playScreen;
         this.initialPosition = initialPosition;
+        this.container = parent.gameObject;
         transform.SetParent(parent);
         transform.localPosition = initialPosition;
         Image img = GetComponent<Image>();
         img.color = PlayScreenController.GROUP_COLORS[groupIndex];
     }
 
+    public Vector3 ToWorldSpace()
+    {
+        Vector3 screenSpace = transform.localPosition;
+        Rect containerRect = container.GetComponent<RectTransform>().rect;
+        screenSpace.x *= Screen.height / containerRect.height; // not sure about this
+        screenSpace.y *= Screen.height / containerRect.height;
+
+        Camera c = Camera.main;
+        Vector3 objective = c.ScreenToWorldPoint(screenSpace);
+
+        Scene scene = SceneManager.GetActiveScene();
+        GameObject map = scene.GetRootGameObjects().FirstOrDefault(go => go.name == "Map");
+
+        return objective + map.transform.position;
+    }
+
     public void SendObjectiveToLevelManager()
     {
-        if (!markerIsPlaced)
-            return;
-
         //LevelManager actualLevelManager = LevelManager.GetComponent<LevelManager>();
         Camera c = Camera.main;
         Vector3 objective = c.ScreenToWorldPoint(transform.position);
@@ -59,6 +75,13 @@ public class GroupMarkerController : MonoBehaviour {
         markerIsActive = true;
     }
 
+    public bool MarkerIsInBounds()
+    {
+        Vector3 pos = transform.localPosition;
+        Rect bounds = container.GetComponent<RectTransform>().rect;
+        return !(pos.x < 0 || pos.y < 0 || pos.x > bounds.width || pos.y > bounds.height);
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // left click
@@ -75,9 +98,11 @@ public class GroupMarkerController : MonoBehaviour {
             {
                 if (markerIsActive)
                 {
-                    // TODO: if out of bounds, reset to initial position
                     markerIsActive = false;
-                    markerIsPlaced = true;
+                    if (!MarkerIsInBounds())
+                        transform.localPosition = initialPosition;
+                    else
+                        markerIsActive = false;
                 } else
                 {
                     markerIsActive = true;

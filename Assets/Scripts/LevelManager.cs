@@ -94,7 +94,11 @@ public class LevelManager : Singleton<LevelManager> {
         CreateAgents(worldStart);
     }
 
-
+    public void RealGo(List<Agent> coolAgents)
+    {
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
+        ImportAgents(worldStart, coolAgents);
+    }
 
     private void GetStartTiles()
     {
@@ -173,7 +177,36 @@ public class LevelManager : Singleton<LevelManager> {
 
     }
 
+    
+    private void ImportAgents(Vector3 worldStart, List<Agent> coolAgents)
+    {
+        for (int i = 0; i < coolAgents.Count; i++)
+        {
+            Agent coolAgent = coolAgents[i];
+            coolAgent.transform.position = StartTilesTeam1[i];
+            coolAgent.Team = 1;
+            Agents.Add(coolAgent);
+            coolAgent.transform.SetParent(team1_parent.transform);
+        }
 
+        // Team 2 is unchanged from CreateAgents
+        GameObject groupObj2 = Instantiate(group);
+        Group group2 = groupObj2.AddComponent<Group>();
+        group2.Initialize();
+        group2.name = "Group2";
+
+        for (int i = 0; i < numberOfMembers; i++) //
+        {
+
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
+            newAgent.name = "Agent_" + i + "_Team2";
+            newAgent.transform.position = StartTilesTeam2[i];
+            newAgent.Team = 2;
+            Agents.Add(newAgent);
+            newAgent.transform.SetParent(team2_parent.transform);
+            group2.AddMember(newAgent);
+        }
+    }
 
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)

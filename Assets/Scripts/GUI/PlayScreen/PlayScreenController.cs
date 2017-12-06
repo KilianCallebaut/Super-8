@@ -20,12 +20,19 @@ public class PlayScreenController : MonoBehaviour {
     });
 
     public GameObject CanvasRef;
+    public LevelManager LevelManagerRef;
     public GameObject PlayerStrategyPrefab;
     public GameObject GroupStrategyPrefab;
     public GameObject GroupMarkerPrefab;
     public Transform PlayerStrategyContainer;
     public Transform GroupStrategyContainer;
     public Transform GroupMarkerContainer;
+    public Button PlayButton;
+
+    [SerializeField]
+    private GameObject agentPrefab;
+    [SerializeField]
+    private GameObject groupPrefab;
 
     // maybe this is stupid, but it should work, and makes my life a bit easier so whatever
     private List<HashSet<AgentStatus>> groups;
@@ -53,12 +60,15 @@ public class PlayScreenController : MonoBehaviour {
 
             GameObject groupMarker = Instantiate(GroupMarkerPrefab);
             GroupMarkerController groupMarkerController = groupMarker.GetComponent<GroupMarkerController>();
-            groupMarkerController.Initialize(this, i, GroupMarkerContainer, new Vector3(0, 100 + i * -35, 0));
+            float containerWidth = GroupMarkerContainer.GetComponent<RectTransform>().rect.width;
+            float containerHeight = GroupMarkerContainer.GetComponent<RectTransform>().rect.height;
+            groupMarkerController.Initialize(this, i, GroupMarkerContainer, new Vector3(containerWidth / 2, 2 * containerHeight / 3 + i * -35, 0));
             group2marker[i] = groupMarkerController;
         }
 
-
         RenderPlayers();
+
+        PlayButton.onClick.AddListener(HitPlay);
 	}
 
     public void SetGroupForAgent(AgentStatus agent, int index)
@@ -134,5 +144,37 @@ public class PlayScreenController : MonoBehaviour {
         }
 
         UpdateAllGroupStrategies();
+    }
+
+    public List<Agent> GenerateAgents()
+    {
+        List<Agent> agentList = new List<Agent>();
+        for (int i = 0; i < groups.Count; i++)
+        {
+            HashSet<AgentStatus> agents = groups[i];
+            if (agents.Count == 0) continue;
+
+            GameObject groupObj = Instantiate(groupPrefab);
+            Group groupComp = groupObj.AddComponent<Group>();
+            groupComp.Initialize();
+            groupComp.Objectives.Add(group2marker[i].ToWorldSpace());
+            groupComp.name = GROUP_NAMES[i];
+
+            foreach (AgentStatus agentStatus in agents)
+            {
+                Agent newAgent = agentStatus.CreateAgent(groupComp, agentPrefab);
+                newAgent.Team = 1;
+                groupComp.AddMember(newAgent);
+                agentList.Add(newAgent);
+            }
+        }
+
+        return agentList;
+    }
+
+    void HitPlay()
+    {
+        LevelManagerRef.RealGo(GenerateAgents());
+        CanvasRef.SetActive(false); // yeah
     }
 }
