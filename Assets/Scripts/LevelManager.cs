@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager> {
 
     [SerializeField]
-    private GameObject agent;
+    private GameObject[] agents;
     
 
     [SerializeField]
@@ -216,16 +216,21 @@ public class LevelManager : Singleton<LevelManager> {
 		group1.Initialize ();
         group1.Objectives = Objectives;
         group1.name = "Group1";
+
+		System.Random rnd = new System.Random();
+
         for (int i = 0; i< numberOfMembers ; i++) //
         {
             Agent newAgent;
+
+			GameObject character = agents [rnd.Next(0, agents.Length)];
             // FOR DEBUGGING PURPOSES
             if (i < 2)
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
+				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Shadow");
             } else
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
+				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Shadow");
             }
 
             newAgent.name = "Agent_" + i + "_Team1";
@@ -243,8 +248,9 @@ public class LevelManager : Singleton<LevelManager> {
 
         for (int i = 0; i < numberOfMembers ; i++) //
         {
+			GameObject character = agents [rnd.Next(0, agents.Length)];
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Dummy");
+			Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Dummy");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
@@ -271,9 +277,6 @@ public class LevelManager : Singleton<LevelManager> {
                 a.TargetAgent = null;
             }
         }
-
-        Destroy(deletedAgent.gameObject);
-        
     }
 
     // Temporary method for adding objective for 1 team
