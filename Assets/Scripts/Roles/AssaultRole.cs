@@ -17,7 +17,6 @@ public class AssaultRole : AgentBehaviour {
   
     // Use this for initialization
     void Start () {
-		gameObject.GetComponent<Weapon> ().beAssaultShotgun ();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +44,7 @@ public class AssaultRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
-            if (agent.Destination == transform.position)
+            if (agent.AtDestination())
                 LookAround();
         }
 
@@ -71,6 +70,13 @@ public class AssaultRole : AgentBehaviour {
             Prioritizing();
         }
 
+        if (agent.TargetAgent != null &&
+            Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
+            && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        { 
+            
+
+        }
 
     }
 
@@ -162,7 +168,7 @@ public class AssaultRole : AgentBehaviour {
     // For now always when agent has a target
     private void Engaging()
     {
-        if (agent.TargetAgent != null)
+        if (agent.TargetAgent != null && agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.Shoot();
         } else
@@ -200,7 +206,7 @@ public class AssaultRole : AgentBehaviour {
 
         if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
         {
-            Stop();
+            flankingSide = ((AgentBehaviour)this).Flanking(flankingSide);
         }
 
         return positioning == PositioningMethod.Chasing;
@@ -210,7 +216,6 @@ public class AssaultRole : AgentBehaviour {
     private bool Flanking(int flankingSide)
     {
         flankingSide = ((AgentBehaviour)this).Flanking(flankingSide);
-        Debug.Log(positioning == PositioningMethod.Flanking);
         if (agent.TargetAgent == null)
         {
             Stop();
@@ -218,7 +223,9 @@ public class AssaultRole : AgentBehaviour {
         }
 
         if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) > flankThreshold)
+        {
             Stop();
+        }
         
 
         if (flankingSide == 0)

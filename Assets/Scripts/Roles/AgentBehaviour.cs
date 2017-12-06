@@ -6,8 +6,8 @@ using UnityEngine;
 public abstract class AgentBehaviour : MonoBehaviour {
 
     protected Agent agent;
-    protected static float closeRange = 2.0f;
-    protected static float midRange = 5.0f;
+    protected static float closeRange = 3.0f;
+    protected static float midRange = 8.0f;
     protected static float longRange = 15.0f;
     private float acceptingThreshold = 0.01f;
     private float extraOutOfVisionDegrees = 5.0f;
@@ -152,6 +152,8 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected void CheckFlanks()
     {
         Vector3 forward = agent.direction;
+        Debug.DrawLine(transform.position, forward + transform.position);
+        Debug.DrawLine(transform.position, -forward + transform.position);
         Vector3 left = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * forward;
         Vector3 right = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * forward;
         
@@ -299,13 +301,17 @@ public abstract class AgentBehaviour : MonoBehaviour {
     // Go to location in the agent's back
     public int HittingTheBack(int flankingSide)
     {
-        if (agent.TargetAgent != null && agent.Shadow == true)
+        if (agent.TargetAgent != null )
         {
-            if (InEnemyFieldOfVision(agent.TargetAgent.Enemy))
-                return Flanking(flankingSide);
-                
+            if (InEnemyFieldOfVision(agent.TargetAgent.Enemy) && Vector3.Distance(agent.TargetAgent.Enemy.Position, transform.position) < longRange)
+            {
+                flankingSide = Flanking(flankingSide);
+                positioning = PositioningMethod.HittingTheBack;
+                return flankingSide;
+            }
+
             positioning = PositioningMethod.HittingTheBack;
-            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.VisionDirection;
+            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
 
             var range = midRange;
 

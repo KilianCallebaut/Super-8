@@ -29,6 +29,8 @@ public class SoldierRole : AgentBehaviour {
         Inspecting();
         Targetting();
         Positioning();
+        Engaging();
+
 
 
     }
@@ -42,7 +44,7 @@ public class SoldierRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
-            if (agent.Destination == transform.position)
+            if (agent.AtDestination())
                 LookAround();
         }
 
@@ -65,8 +67,14 @@ public class SoldierRole : AgentBehaviour {
 
             Prioritizing();
         }
-        Engaging();
 
+        if (agent.TargetAgent != null 
+            && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
+            && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        {
+            agent.TargetAgent = null;
+
+        }
     }
 
 

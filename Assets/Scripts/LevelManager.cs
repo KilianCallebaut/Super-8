@@ -215,7 +215,7 @@ public class LevelManager : Singleton<LevelManager> {
         for (int i = 0; i < numberOfMembers ; i++) //
         {
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Assault");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
@@ -260,10 +260,7 @@ public class LevelManager : Singleton<LevelManager> {
         {
             Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
 
-            if (a.Shadow)
-            {
-                return CheckShadow(seeer, name);
-            }
+           
 
             Vector3 objectPosition = a.transform.position;
             Vector3 seeerPosition = seeer.transform.position;
@@ -275,6 +272,10 @@ public class LevelManager : Singleton<LevelManager> {
             if (distanceToObject < seeer.Attributes.reachOfVision && Vector3.Angle(directionToObject, seeer.visionDirection) < seeer.Attributes.widthOfVision
                 && Vector3.Angle(directionToObject, seeer.visionDirection) > -seeer.Attributes.widthOfVision && !BehindObject(seeer, a.transform.position))
             {
+                if (a.Shadow && !CheckShadow(seeer, name))
+                {
+                    return false;
+                }
                 return true;
             }
             return false;
@@ -338,6 +339,7 @@ public class LevelManager : Singleton<LevelManager> {
             }
 
             bool spotted = seenList[checker] > SpottingChance;
+            Debug.Log(spotted + " " + seenList[checker]);
 
             if (spotted) {
                 ShadowMap.Remove(checkedAgent);

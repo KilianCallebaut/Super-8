@@ -42,7 +42,7 @@ public class ShadowRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             CheckFlanks();
-            if (agent.Destination == transform.position)
+            if (agent.AtDestination())
                 LookAround();
         }
 
@@ -111,13 +111,18 @@ public class ShadowRole : AgentBehaviour {
             if (agent.TargetAgent == null) 
                 Prioritizing();
 
-            if (agent.TargetAgent != null && InEnemyBack(agent.TargetAgent.Enemy))
-            {
-                agent.Shadow = false;
-            }
+           
 
         }
-        
+
+        if (agent.TargetAgent != null &&
+    Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
+    && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        {
+            agent.TargetAgent = null;
+
+        }
+
 
     }
 
@@ -146,7 +151,7 @@ public class ShadowRole : AgentBehaviour {
     // For now always when agent has a target
     private void Engaging()
     {
-        if (!agent.Shadow )
+        if (!agent.Shadow && agent.TargetAgent != null && agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.Shoot();
         }
@@ -197,11 +202,12 @@ public class ShadowRole : AgentBehaviour {
         if (agent.TargetAgent == null)
         {
             Stop();
+            return false;
         }
+        
 
-        if (!agent.Shadow)
-            Stop();
-
+        if (InEnemyBack(agent.TargetAgent.Enemy))
+            agent.Shadow = false;
         
         return positioning == PositioningMethod.HittingTheBack;
 

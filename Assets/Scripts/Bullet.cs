@@ -19,6 +19,12 @@ public class Bullet : AbstractProjectile {
 				Destroy (this.gameObject);
 			}
 		}
+
+        if (g.tag == "Obstacles")
+        {
+            Debug.Log(g.tag);
+            Destroy(this);
+        }
 	}
 	protected override void bulletUpdate (float dTime) {
         dTrav += dTime;

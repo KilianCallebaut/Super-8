@@ -100,6 +100,14 @@ public class HeavyRole : AgentBehaviour
             Prioritizing();
         }
 
+        if (agent.TargetAgent != null 
+            && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
+            && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        {
+            agent.TargetAgent = null;
+
+        }
+
     }
 
 
@@ -111,7 +119,7 @@ public class HeavyRole : AgentBehaviour
         if (agent.TargetAgent == null && !agent.AtDestination())
         {
             agent.LookingDestination = agent.Destination;
-            if (agent.Destination == transform.position)
+            if (agent.AtDestination())
                 LookAround();
         }
 
@@ -158,7 +166,7 @@ public class HeavyRole : AgentBehaviour
     // For now always when agent has a target
     private void Engaging()
     {
-        if (agent.TargetAgent != null)
+        if (agent.TargetAgent != null && agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.Shoot();
         } else

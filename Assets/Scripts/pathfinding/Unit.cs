@@ -56,7 +56,7 @@ public class Unit : MonoBehaviour {
 					currentWaypoint = path [targetIndex];
 				}
 				transform.position = Vector2.MoveTowards (transform.position, transform.position - (pos - (Vector3) currentWaypoint) , speed * Time.deltaTime);
-                GetComponent<Agent>().direction = transform.position - (pos - (Vector3)currentWaypoint);
+                GetComponent<Agent>().direction = (transform.position - (pos - (Vector3)currentWaypoint) - transform.position).normalized;
 
                 yield return null;
 

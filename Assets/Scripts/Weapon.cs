@@ -115,7 +115,9 @@ public class Weapon : MonoBehaviour {
 			//TODO: calculate spread
 			float actualSpread = calculateSpread(i, projectilesPerShot);
             //Vector3 direction = new Vector3 (Mathf.Cos (actualSpread+shotDirection), Mathf.Sin (actualSpread+shotDirection), 0.0f);
-            Vector3 direction = shotDirection;
+            
+            Vector3 direction = Quaternion.Euler(0.0f, 0.0f, actualSpread)* shotDirection  ;
+
 			GameObject g = Instantiate (projectileType, direction*projectileSpawnDistanceFromCenter+center+transform.position, Quaternion.identity);
             
             AbstractProjectile a = g.GetComponent<AbstractProjectile> ();
@@ -244,7 +246,7 @@ public class Weapon : MonoBehaviour {
 		timeUntilFirstVolley = 0;
 		timeBetweenShots = 0;
 		timeBetweenVolleys = 0.8f;
-		spread = (2 * Mathf.PI / 360) * 10;
+		spread = 10;
 		reloadDuration = 3.0f;
 		spreadMode = SPREAD_MODE_RANDOM_EQUAL;
 		projectilesPerShot = 1;
@@ -258,7 +260,7 @@ public class Weapon : MonoBehaviour {
 		timeUntilFirstVolley = 5;
 		timeBetweenShots = 0.2f;
 		timeBetweenVolleys = 2;
-		spread = (2 * Mathf.PI / 360) * 30;
+		spread = 30;
 		reloadDuration = 10.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
@@ -272,10 +274,10 @@ public class Weapon : MonoBehaviour {
 		timeUntilFirstVolley = 3;
 		timeBetweenShots = 0.5f;
 		timeBetweenVolleys = 2;
-		spread = (2 * Mathf.PI / 360) * 45;
+		spread = 45;
 		reloadDuration = 5.0f;
 		spreadMode = SPREAD_MODE_EVEN;
-		projectilesPerShot = 11;
+		projectilesPerShot = 5;
 		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
 		projectileType = Resources.Load ("SGBullet") as GameObject;
 	}
@@ -286,7 +288,7 @@ public class Weapon : MonoBehaviour {
 		timeUntilFirstVolley = 2;
 		timeBetweenShots = 0.3f;
 		timeBetweenVolleys = 1.5f;
-		spread = (2 * Mathf.PI / 360) * 10;
+		spread = 10;
 		reloadDuration = 5.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
@@ -300,7 +302,7 @@ public class Weapon : MonoBehaviour {
 		timeUntilFirstVolley = 10;
 		timeBetweenShots = 0;
 		timeBetweenVolleys = 5;
-		spread = (2 * Mathf.PI / 360) * 1;
+		spread = 1;
 		reloadDuration = 10.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
