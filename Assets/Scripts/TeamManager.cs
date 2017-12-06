@@ -10,6 +10,7 @@ public class TeamManager : MonoBehaviour {
 	public const int MAX_TEAM_SIZE = 12;
 
     public PlayersScreenController PlayersScreen;
+    public PlayScreenController PlayScreen;
 	public Text TeamNameValue;
 	public Text CostValue;
 	public Text NoPlayersValue;
@@ -41,16 +42,17 @@ public class TeamManager : MonoBehaviour {
         // this shit is temporary
         for (int i = 0; i < 8; ++i)
         {
-            agents.Add(new AgentStatus(false, true));
+            agents.Add(new AgentStatus(this, false, true));
         }
         for (int i = 0; i < 2; ++i)
         {
-            agents.Add(new AgentStatus(false, false));
+            agents.Add(new AgentStatus(this, false, false));
         }
 
 		NoPlayersValue.text = agents.Count.ToString();
 
         PlayersScreen.Initialize(this);
+        PlayScreen.Initialize(this);
     }
 
     public ReadOnlyCollection<AgentStatus> ReadAgents()
@@ -86,6 +88,7 @@ public class TeamManager : MonoBehaviour {
 		NoPlayersValue.text = agents.Count.ToString();
 
         if (updatePlayersScreen) PlayersScreen.AddPlayerBox(agent, false);
+        PlayScreen.RenderPlayers();
     }
 
     public void RemoveAgent(AgentStatus agent, bool updatePlayersScreen)
@@ -94,6 +97,13 @@ public class TeamManager : MonoBehaviour {
 		NoPlayersValue.text = agents.Count.ToString();
 
         if (updatePlayersScreen) PlayersScreen.RemovePlayerBox(agent, false);
+        PlayScreen.RenderPlayers();
+    }
+
+    // god I wish there was easy way to events
+    public void NotifyActiveChange(AgentStatus agent)
+    {
+        PlayScreen.RenderPlayers();
     }
 
 

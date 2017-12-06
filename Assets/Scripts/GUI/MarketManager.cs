@@ -13,7 +13,7 @@ public class MarketManager : MonoBehaviour {
 		freeAgents = new List<AgentStatus> ();
 
 		for (int i = 0; i < 20; i++) {
-			freeAgents.Add (new AgentStatus (true, true));
+			freeAgents.Add (new AgentStatus (TeamManagerRef, true, true));
 		}
 
 		MarketTable.AddFreeAgents (freeAgents);
