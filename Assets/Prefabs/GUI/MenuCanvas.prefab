@@ -3331,7 +3331,7 @@ MonoBehaviour:
     type: 2}
   GroupStrategyPrefab: {fileID: 1437871298509538, guid: 86cb540e6874ee640ac64ae1b44d5e98,
     type: 2}
-  GroupMarkerPrefab: {fileID: 1983035935057006, guid: f74a319a205044406be37ecec3ead716,
+  GroupMarkerPrefab: {fileID: 1983035935057006, guid: 382eb530cc06a43478b929c9975909ac,
     type: 2}
   PlayerStrategyContainer: {fileID: 224381778635563448}
   GroupStrategyContainer: {fileID: 224858497393039542}
