@@ -14,8 +14,8 @@ public class PlayersScreenController : MonoBehaviour {
 
     public void Initialize(TeamManager teamManager)
     {
-        activeGrid = transform.Find("ActiveGrid");
-        deactiveGrid = transform.Find("DeactiveGrid");
+        activeGrid = transform.Find("ActivePanel").transform.Find("ActiveGrid");
+        deactiveGrid = transform.Find("DeactivePanel").transform.Find("DeactiveGrid");
         agent2playerBox = new Dictionary<AgentStatus, PlayerBoxController>();
 
         this.teamManager = teamManager;
