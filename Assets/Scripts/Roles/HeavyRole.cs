@@ -33,6 +33,18 @@ public class HeavyRole : AgentBehaviour
         Positioning();
         Engaging();
 
+        if (agent.weapon.state == 2)
+        {
+            agent.Attributes.speedProduct(0.5f);
+
+            agent.Attributes.agilityProduct(0.5f);
+
+        } else
+        {
+            agent.Attributes.speedProduct(0.0f);
+
+            agent.Attributes.agilityProduct(0.0f);
+        }
 
     }
 
@@ -114,9 +126,12 @@ public class HeavyRole : AgentBehaviour
         if (agent.TargetAgent == null && !agent.AtDestination())
         {
             agent.LookingDestination = agent.Destination;
-            if (agent.AtDestination())
-                LookAround();
+
+            
         }
+
+        if (agent.AtDestination())
+            LookAround();
 
         if (agent.TargetAgent != null)
         {
@@ -207,7 +222,7 @@ public class HeavyRole : AgentBehaviour
         }
 
         
-        if (agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name) && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= midRange)
+        if (agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name) && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= 9.0f)
         {
             Stop();
             return false;

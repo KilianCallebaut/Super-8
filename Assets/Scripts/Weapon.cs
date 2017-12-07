@@ -162,7 +162,7 @@ public class Weapon : MonoBehaviour {
 		return ret;
 	}
 
-	int state = 0;
+	public int state = 0;
 	float remainingTime;
 	// Update is called once per frame
 	void Update () {
@@ -256,7 +256,7 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void beHeavyMinigun() {
-		shotsPerVolley = 30;
+		shotsPerVolley = 40;
 		volleysUntilReload = 10;
 		timeUntilFirstVolley = 5;
 		timeBetweenShots = 0.1f;
@@ -272,11 +272,11 @@ public class Weapon : MonoBehaviour {
 	public void beAssaultShotgun() {
 		shotsPerVolley = 2;
 		volleysUntilReload = 3;
-		timeUntilFirstVolley = 3;
+		timeUntilFirstVolley = 1;
 		timeBetweenShots = 0.5f;
 		timeBetweenVolleys = 2;
-		spread = 45;
-		reloadDuration = 5.0f;
+		spread = 20;
+		reloadDuration = 4.0f;
 		spreadMode = SPREAD_MODE_EVEN;
 		projectilesPerShot = 5;
 		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);
@@ -290,7 +290,7 @@ public class Weapon : MonoBehaviour {
 		timeBetweenShots = 0.1f;
 		timeBetweenVolleys = 1.0f;
 		spread = 0;
-		reloadDuration = 5.0f;
+		reloadDuration = 4.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
 		optimalRangeHint = 200 / (spread*Mathf.Rad2Deg);

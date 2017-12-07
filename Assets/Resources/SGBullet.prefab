@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a468571c0917e489b540fbf6945007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vel: 30
+  vel: 50
   travMax: 5
   damage: 1
 --- !u!212 &212599635054679962

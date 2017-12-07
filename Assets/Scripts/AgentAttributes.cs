@@ -50,6 +50,22 @@ public class AgentAttributes {
         }
     }
 
+    private float agilitybuff = 1.0f;
+    public void agilityProduct(float s)
+    {
+        agility = agility / agilitybuff;
+
+        if (s == 0.0f)
+        {
+            agilitybuff = 1.0f;
+        }
+        else
+        {
+            agilitybuff = s;
+            agility = agility * speedbuff;
+        }
+    }
+
     // Gear
     public void healthGear(float h)
     {
@@ -66,6 +82,10 @@ public class AgentAttributes {
         this.speed -= h;
     }
 
+    public void scopeGear(float s)
+    {
+        this.reachOfVision += s;
+    }
 
     // Personalized agentattributes
     public AgentAttributes(float speed, float reachOfVision, float widthOfVision,

@@ -19,6 +19,7 @@ public class Agent : MonoBehaviour
     public Dictionary<string, OtherAgent> seenOtherAgents { get; private set; }
     public Vector3 direction { get;  set; }
     public Vector3 visionDirection { get; private set; }
+    public Vector3 lastPos { get; set; }
 
     // Agent info
     public int Team { get; set; }
@@ -30,8 +31,8 @@ public class Agent : MonoBehaviour
 
     // Agent's bonusses
     private float aimBonus = 0.0f;
-    private float aimZoneMin = 1.87f / 2.0f;
-    private float aimZoneMax = (1.87f / 2.0f) + 8.0f;
+    private float aimZoneMin = 0.7f;
+    private float aimZoneMax = 0.7f + 8.0f;
     private float aimZone = 1.87f / 2.0f;
     private float aimIncrease = 0.1f;
 
@@ -79,6 +80,7 @@ public class Agent : MonoBehaviour
         //visionDirection = gameObject.GetComponent<Rigidbody2D>().transform.forward;
         direction = new Vector3(-1f, 0f, 0f);
         visionDirection = direction;
+        lastPos = transform.position;
 
     }
     
@@ -91,6 +93,8 @@ public class Agent : MonoBehaviour
 			See();
 			Behaviour.Think();
 			Act();
+            lastPos = transform.position;
+
         }
     }
 
@@ -176,7 +180,6 @@ public class Agent : MonoBehaviour
             var aimPenaltyAng = Vector2.Angle(enemyDirection, visionDirection) / Attributes.widthOfVision;
             aimZone += (aimZone - aimZoneMin) * aimPenaltyAng;
 
-            // Bonus for aiming longer before shooting
 
 
             // Bonus for standing still
@@ -216,7 +219,7 @@ public class Agent : MonoBehaviour
     public bool AtDestination()
     {
 
-        return Vector2.Distance(transform.position,Destination) < 0.6f;
+        return Vector2.Distance(transform.position,Destination) < 0.8f ;
     }
 
     // Checks if the agent is looking at its targetdirection
@@ -290,16 +293,13 @@ public class Agent : MonoBehaviour
 
         if (TargetAgent != null)
         {
+            
             // Update direction
             Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position);
-            //Vector3 shootingDirectionLimit = Quaternion.Euler(0, 0, Attributes.accuracy) * enemyDirection;
-            //float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
-            float offSet = 1.87f/2.0f;
-            //offSet -= aimBonus;
+          
 			Vector3 shootingLocation = (Vector3) UnityEngine.Random.insideUnitCircle * aimZone + TargetAgent.Enemy.Position + TargetAgent.Enemy.Direction;
 
 			weapon.setShootingDirection (shootingLocation);
-            TargetAgent.AimTime = Time.time;
 
 			weapon.startShooting ();
 

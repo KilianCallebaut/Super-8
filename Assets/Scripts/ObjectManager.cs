@@ -40,6 +40,7 @@ public class ObjectManager : Singleton<ObjectManager> {
             case "Assault":
                 agent.Behaviour = agent.gameObject.AddComponent<AssaultRole>();
                 weapon.beAssaultShotgun();
+                agent.Attributes.speedProduct(1.5f);
                 break;
             case "Soldier":
                 agent.Behaviour = agent.gameObject.AddComponent<SoldierRole>();
@@ -49,7 +50,8 @@ public class ObjectManager : Singleton<ObjectManager> {
             case "Sniper":
                 agent.Behaviour = agent.gameObject.AddComponent<SniperRole>();
                 weapon.beSniperRifle();
-                agent.Attributes.accuracyGear(3.0f);
+                agent.Attributes.accuracyGear(8.0f);
+                agent.Attributes.scopeGear(2.0f);
                 break;
             case "Shadow":
                 agent.Behaviour = agent.gameObject.AddComponent<ShadowRole>();

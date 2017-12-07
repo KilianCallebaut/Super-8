@@ -98,7 +98,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
     protected bool InEnemyBack(OtherAgent Enemy)
     {
         var directionToPlayer = (transform.position - Enemy.Position).normalized;
-        if (Vector3.Angle(directionToPlayer, -Enemy.Direction) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
+        if (Vector3.Angle(directionToPlayer, -Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees)
         {
             return true;
         }
@@ -291,13 +291,13 @@ public abstract class AgentBehaviour : MonoBehaviour {
                 {
                     if (flankingSide == 1)
                     {
-                        agent.Destination = ClosestPoint;
+                        agent.Destination = ClosestPoint + (agent.TargetAgent.LastPosition - ClosestPoint).normalized;
 
                         return 1;
                     }
                     else if (flankingSide == 2)
                     {
-                        agent.Destination = ClosestPoint2;
+                        agent.Destination = ClosestPoint2 + (agent.TargetAgent.LastPosition - ClosestPoint2).normalized;
                         return 2;
 
                     }
@@ -305,12 +305,12 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
                 if (Vector3.Distance(ClosestPoint, transform.position) > Vector3.Distance(ClosestPoint2, transform.position))
                 {
-                    agent.Destination =  ClosestPoint2;
+                    agent.Destination = ClosestPoint2 + (agent.TargetAgent.LastPosition - ClosestPoint2).normalized;
                     return 2;
                 }
                 else
                 {
-                    agent.Destination = ClosestPoint;
+                    agent.Destination = ClosestPoint + (agent.TargetAgent.LastPosition - ClosestPoint).normalized;
                     return 1;
                 }
             } 
@@ -328,12 +328,12 @@ public abstract class AgentBehaviour : MonoBehaviour {
             
 
             positioning = PositioningMethod.HittingTheBack;
-            if (Vector3.Angle(agent.TargetAgent.Enemy.Direction, (transform.position - agent.TargetAgent.LastPosition ).normalized) < 90.0f)
+            if (Vector3.Angle(agent.TargetAgent.Enemy.VisionDirection, (transform.position - agent.TargetAgent.LastPosition ).normalized) < 90.0f)
             {
                 HittingTheSide();
                 return;
             }
-            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
+            Vector3 oppositeDirection = -agent.TargetAgent.Enemy.VisionDirection;
 
             var range = midRange;
 
@@ -353,11 +353,11 @@ public abstract class AgentBehaviour : MonoBehaviour {
     {
         if (agent.TargetAgent != null)
         {
-            Vector3 sideDirection = Quaternion.Euler(0,0,90.0f)*agent.TargetAgent.Enemy.Direction;
-            if (Vector3.Distance(transform.position, Quaternion.Euler(0, 0, 90.0f) * agent.TargetAgent.Enemy.Direction + agent.TargetAgent.LastPosition) >
-                Vector3.Distance(transform.position, Quaternion.Euler(0, 0, -90.0f) * agent.TargetAgent.Enemy.Direction + agent.TargetAgent.LastPosition) )
+            Vector3 sideDirection = Quaternion.Euler(0,0,90.0f)*agent.TargetAgent.Enemy.VisionDirection;
+            if (Vector3.Distance(transform.position, Quaternion.Euler(0, 0, 90.0f) * agent.TargetAgent.Enemy.VisionDirection + agent.TargetAgent.LastPosition) >
+                Vector3.Distance(transform.position, Quaternion.Euler(0, 0, -90.0f) * agent.TargetAgent.Enemy.VisionDirection + agent.TargetAgent.LastPosition) )
             {
-                sideDirection = Quaternion.Euler(0, 0, -90.0f) * agent.TargetAgent.Enemy.Direction;
+                sideDirection = Quaternion.Euler(0, 0, -90.0f) * agent.TargetAgent.Enemy.VisionDirection;
             }
 
             var range = midRange;

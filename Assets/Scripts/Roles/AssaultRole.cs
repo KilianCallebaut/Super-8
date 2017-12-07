@@ -10,7 +10,7 @@ using UnityEngine;
 public class AssaultRole : AgentBehaviour {
 
     private float chaseThreshold = 15.0f;
-    private float flankThreshold = longRange;
+    private float flankThreshold = midRange;
     private float inAreaThreshold = 4.0f;
     // 1 -> left, 2 -> right, 0 -> not flanking
     private int flankingSide = 0;
@@ -203,8 +203,12 @@ public class AssaultRole : AgentBehaviour {
             Stop();
             return false;
         }
+        if (Vector3.Distance(agent.TargetAgent.LastPosition, transform.position)< closeRange)
+        {
+            Stop();
 
-        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
+        }
+        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) > flankThreshold)
         {
             flankingSide = ((AgentBehaviour)this).Flanking(flankingSide);
         }
@@ -222,7 +226,7 @@ public class AssaultRole : AgentBehaviour {
             return false;
         }
 
-        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) > flankThreshold)
+        if (Vector3.Distance(transform.position, agent.TargetAgent.LastPosition) < flankThreshold)
         {
             Stop();
         }
