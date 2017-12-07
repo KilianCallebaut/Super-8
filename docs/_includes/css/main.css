@@ -155,7 +155,7 @@ background: #2C1812;  /* fallback for old browsers */
   display: block;
   width: auto;
   height: auto;
-  max-width: 800px;
+  max-width: 500px;
 }
 
 .main-shadow {
@@ -231,6 +231,10 @@ footer {
 }
 
 .contributor__contact {
+  text-align: center;
+}
+
+.contributor li {
   text-align: center;
 }
 
