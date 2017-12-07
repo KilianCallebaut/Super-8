@@ -29,6 +29,9 @@ public class Agent : MonoBehaviour
     private GameObject bullet;
     private Unit unit;
 
+	private Animator animator;
+	private bool isDead;
+
     // Agent's bonusses
     private float aimBonus = 0.0f;
     private float aimZoneMin = 0.7f;
@@ -82,12 +85,21 @@ public class Agent : MonoBehaviour
         visionDirection = direction;
         lastPos = transform.position;
 
+		isDead = false;
+		animator = GetComponent<Animator> ();
+
     }
     
     // Update is called once per frame
     void Update() {
+		if (isDead)
+			return;
+
 		int dam = GetComponent<DamageRecipient> ().damageReceived;
 		if (health <= dam) {
+			animator.SetBool("isDying", true);
+			animator.SetLayerWeight (1, 0);
+			isDead = true;
 			Die ();
 		} else {
 			See();
@@ -327,7 +339,7 @@ public class Agent : MonoBehaviour
     }
 
     // Placeholder for dying
-    private void Die()
+    public void Die()
     {
         foreach(OtherAgent oa in seenOtherAgents.Values)
         {
@@ -335,6 +347,8 @@ public class Agent : MonoBehaviour
         }
         AgentGroup.DeleteMember(this);
         LevelManager.Instance.DeleteAgent(this);
+
+		Destroy (gameObject);
     }
 
    

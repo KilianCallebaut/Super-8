@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager> {
 
     [SerializeField]
-    private GameObject agent;
+    private GameObject[] agents;
     
 
     [SerializeField]
@@ -24,10 +24,12 @@ public class LevelManager : Singleton<LevelManager> {
     public List<GameObject> Bullets { get; private set; } 
     public List<Vector3> Objectives { get; private set; }
 
+    public WinStatus WinStatusRef;
+
 	private GameObject tile_dump;
 	private GameObject team1_parent;
 	private GameObject team2_parent;
-    private int numberOfMembers = 1;
+    public int numberOfMembers = 1;
 
 	private Vector3 worldStart;
 
@@ -97,7 +99,22 @@ public class LevelManager : Singleton<LevelManager> {
         CreateAgents(worldStart);
     }
 
+    public void RealGo(List<Agent> coolAgents)
+    {
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
+        ImportAgents(worldStart, coolAgents);
+        WinStatusRef.Reset();
+    }
 
+    public void DestroyEverything()
+    {
+        foreach (Agent agent in Agents)
+        {
+            Destroy(agent.gameObject);
+        }
+        Agents.Clear();
+        // groups are still out there, hopefully the game won't run long enough to have a memory fit
+    }
 
     private void GetStartTiles()
     {
@@ -176,7 +193,37 @@ public class LevelManager : Singleton<LevelManager> {
 
     }
 
+    
+    private void ImportAgents(Vector3 worldStart, List<Agent> coolAgents)
+    {
+        for (int i = 0; i < coolAgents.Count; i++)
+        {
+            Agent coolAgent = coolAgents[i];
+            coolAgent.transform.position = StartTilesTeam1[i];
+            coolAgent.Team = 1;
+            Agents.Add(coolAgent);
+            coolAgent.transform.SetParent(team1_parent.transform);
+        }
 
+        // Team 2 is unchanged from CreateAgents
+        GameObject groupObj2 = Instantiate(group);
+        Group group2 = groupObj2.AddComponent<Group>();
+        group2.Initialize();
+        group2.name = "Group2";
+
+        System.Random rnd = new System.Random();
+        for (int i = 0; i < numberOfMembers; i++) //
+        {
+            GameObject character = agents[rnd.Next(0, agents.Length)];
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Dummy");
+            newAgent.name = "Agent_" + i + "_Team2";
+            newAgent.transform.position = StartTilesTeam2[i];
+            newAgent.Team = 2;
+            Agents.Add(newAgent);
+            newAgent.transform.SetParent(team2_parent.transform);
+            group2.AddMember(newAgent);
+        }
+    }
 
     // Placeholder for agent spawning
     private void CreateAgents(Vector3 worldStart)
@@ -186,16 +233,22 @@ public class LevelManager : Singleton<LevelManager> {
 		group1.Initialize ();
         group1.Objectives = Objectives;
         group1.name = "Group1";
+
+		System.Random rnd = new System.Random();
+
         for (int i = 0; i< numberOfMembers ; i++) //
         {
             Agent newAgent;
+
+			GameObject character = agents [rnd.Next(0, agents.Length)];
             // FOR DEBUGGING PURPOSES
             if (i < 2)
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Assault");
+
+				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Soldier");
             } else
             {
-                newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
+				newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Soldier");
             }
 
             newAgent.name = "Agent_" + i + "_Team1";
@@ -217,8 +270,9 @@ public class LevelManager : Singleton<LevelManager> {
 
         for (int i = 0; i < numberOfMembers ; i++) //
         {
-
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Soldier");
+			GameObject character = agents [rnd.Next(0, agents.Length)];
+            
+			Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(character), "Soldier");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
@@ -245,9 +299,6 @@ public class LevelManager : Singleton<LevelManager> {
                 a.TargetAgent = null;
             }
         }
-
-        Destroy(deletedAgent.gameObject);
-        
     }
 
     // Temporary method for adding objective for 1 team

@@ -272,6 +272,7 @@ public class SoldierRole : AgentBehaviour {
     }
 
 
+
     // For debugging
     private void OnDrawGizmosSelected()
     {
