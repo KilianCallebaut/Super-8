@@ -1,0 +1,143 @@
+---
+---
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  <meta name="keywords" content="{{ site.keywords }}">
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="combo.css">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.plyr.io/2.0.13/plyr.css">
+  {% if site.favicon %}<link rel="shortcut icon" href="{{ site.favicon }}" type="image/x-icon">{% endif %}
+  {% if site.touch_icon %}<link rel="apple-touch-icon" href="{{ site.touch_icon }}">{% endif %}
+  <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <ul class="header-list">
+            <li class="header-list__item">
+              <a href="#">Start</a>
+            </li>
+          {% assign nodes = site.posts | where:'type','content' | reverse %}
+          {% for node in nodes %}
+            {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
+            <li class="p-{{id}} header-list__item"><a href="#{{id}}">{{node.title}}</a></li>
+          {% endfor %}
+            <li class="header-list__item header-list__item--right"><a href="#team">Team</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="logo-container">
+      <img src="img/logo.png" class="logo">
+    </div>
+    <div class="main-shadow">
+      <div class="container {{ page.style }}">
+
+
+        {% assign lines = site.posts | where:'type','line' | reverse %}
+        {% assign line_index = 0 %}
+        {% for page in lines %}
+          {% include cols.html %}
+          <div class="row">
+            <hr>
+          </div>
+        {% endfor %}
+        {% include cols.html %}
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div id="footer" class="text-white">
+      <div class="container contributions">
+        <div class="row">
+          <div class="twelve columns contributions__title">
+            <h4>Team contributions</h4>
+            <a id="team" class="anchor"></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns contributor ">
+            <div class="contributor__title">
+              <div class="contributor__name">Joakim Adrup</div>
+              <div class="contributor__contact">
+              </div>
+            </div>
+            <ul>
+              <li>Sprite art</li>
+              <li>Animation</li>
+            </ul>
+          </div>
+          <div class="six columns contributor">
+            <div class="contributor__title">
+              <div class="contributor__name">Kilian Callebaut</div>
+              <div class="contributor__contact">
+              </div>
+            </div>
+            <ul>
+              <li>Project leader</li>
+              <li>Game design</li>
+              <li>AI programming</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns contributor">
+            <div class="contributor__title">
+              <div class="contributor__name">Tobias Hindersson</div>
+              <div class="contributor__contact">
+                <a href="mailto:tobiashindersson@hotmail.com">E-mail</a> |
+                <a href="https://www.linkedin.com/in/tobias-hindersson-2a172741/">LinkedIn</a>
+              </div>
+            </div>
+            <ul>
+              <li>GUI</li>
+              <li>Web</li>
+            </ul>
+          </div>
+          <div class="six columns contributor">
+            <div class="contributor__title">
+              <div class="contributor__name">Erik Ledin</div>
+              <div class="contributor__contact">
+              </div>
+            </div>
+            <ul>
+              <li>Level design</li>
+              <li>Pathfinding programming</li>
+              <li>Reporter</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns contributor">
+            <div class="contributor__title">
+              <div class="contributor__name">Simon Ragnesand</div>
+              <div class="contributor__contact">
+              </div>
+            </div>
+            <ul>
+              <li>Game mechanics programming</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.plyr.io/2.0.13/plyr.js"></script>
+  <script>plyr.setup();</script>
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!--<script src="site.js"></script>-->
+</html>

@@ -1,0 +1,40 @@
+<div class="row">
+  {% assign posts = site.posts | reverse %}
+  <div class="col1 six columns">
+    {% for page in posts %}
+      {% if forloop.index <= line_index %}
+        {% continue %}
+      {% endif %}
+      {% if page.type == 'line' %}
+        {% break %}
+      {% endif %}
+      {% capture even_cycle %}{% cycle 'col1_even', 'col1_odd' %}{% endcapture %}
+      {% if even_cycle == 'col1_even' %}
+        {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
+        <section class="p-{{id}}">
+          <a class="anchor" id="{{id}}"></a>
+          {{ page.content }}
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="col2 six columns">
+    {% for page in posts %}
+      {% if forloop.index <= line_index %}
+        {% continue %}
+      {% endif %}
+      {% if page.type == 'line' %}
+        {% assign line_index = forloop.index %}
+        {% break %}
+      {% endif %}
+      {% capture odd_cycle %}{% cycle 'col2_even', 'col2_odd' %}{% endcapture %}
+      {% if odd_cycle == 'col2_odd' %}
+        {% capture id %}{{ page.id | remove:'/' | downcase }}{% endcapture %}
+        <section class="p-{{id}}">
+          <a class="anchor" id="{{id}}"></a>
+          {{ page.content }}
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
