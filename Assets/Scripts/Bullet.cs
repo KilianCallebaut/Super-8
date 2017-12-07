@@ -20,11 +20,6 @@ public class Bullet : AbstractProjectile {
 			}
 		}
 
-        if (g.tag == "Obstacles")
-        {
-            Debug.Log(g.tag);
-            Destroy(this);
-        }
 	}
 	protected override void bulletUpdate (float dTime) {
         dTrav += dTime;

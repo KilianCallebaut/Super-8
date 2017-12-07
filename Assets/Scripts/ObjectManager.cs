@@ -35,6 +35,7 @@ public class ObjectManager : Singleton<ObjectManager> {
             case "Heavy":
                 agent.Behaviour = agent.gameObject.AddComponent<HeavyRole>();
                 weapon.beHeavyMinigun();
+                agent.Attributes.healthGear(10.0f);
                 break;
             case "Assault":
                 agent.Behaviour = agent.gameObject.AddComponent<AssaultRole>();
@@ -43,10 +44,12 @@ public class ObjectManager : Singleton<ObjectManager> {
             case "Soldier":
                 agent.Behaviour = agent.gameObject.AddComponent<SoldierRole>();
                 weapon.beSoldierRifle();
+                agent.Attributes.heavyGear(0.5f);
                 break;
             case "Sniper":
                 agent.Behaviour = agent.gameObject.AddComponent<SniperRole>();
                 weapon.beSniperRifle();
+                agent.Attributes.accuracyGear(3.0f);
                 break;
             case "Shadow":
                 agent.Behaviour = agent.gameObject.AddComponent<ShadowRole>();
@@ -65,8 +68,8 @@ public class ObjectManager : Singleton<ObjectManager> {
     {
         var agentSpawn = Instantiate(attributes.agentPrefab);
         Agent agentScript = agentSpawn.AddComponent<Agent>() as Agent;
-        setRole(agentScript, role);
         agentScript.Attributes = attributes;
+        setRole(agentScript, role);
         return agentScript;
     }
     /*

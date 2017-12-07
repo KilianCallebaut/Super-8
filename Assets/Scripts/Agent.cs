@@ -31,7 +31,7 @@ public class Agent : MonoBehaviour
     // Agent's bonusses
     private float aimBonus = 0.0f;
     private float aimZoneMin = 1.87f / 2.0f;
-    private float aimZoneMax = (1.87f / 2.0f) + 5.0f;
+    private float aimZoneMax = (1.87f / 2.0f) + 8.0f;
     private float aimZone = 1.87f / 2.0f;
     private float aimIncrease = 0.1f;
 
@@ -168,23 +168,29 @@ public class Agent : MonoBehaviour
 
             // Bonus for distance
             var aimBonusDist = 1.0f - (Vector3.Distance(transform.position, TargetAgent.LastPosition) / Attributes.reachOfVision);
-            aimZone = aimZone - (aimZoneMax - aimZoneMin) * aimBonusDist;
+            aimZone = aimZone - (aimZone - aimZoneMin) * aimBonusDist;
 
             // Penalty for being away from center
             // 30%
             Vector3 enemyDirection = (TargetAgent.Enemy.Position - transform.position).normalized;
             var aimPenaltyAng = Vector2.Angle(enemyDirection, visionDirection) / Attributes.widthOfVision;
-            aimZone += (aimZoneMax - aimZoneMin) * aimPenaltyAng;
+            aimZone += (aimZone - aimZoneMin) * aimPenaltyAng;
 
             // Bonus for aiming longer before shooting
+
 
             // Bonus for standing still
             // 20% 
             var aimBonusStan = 0.0f;
             if (Destination == transform.position)
-                aimBonusStan = 0.1f;
+                aimBonusStan = 0.3f;
 
-            aimZone -= (aimZone - aimZoneMin) *(3.0f * aimBonusStan);
+            aimZone -= (aimZone - aimZoneMin) * aimBonusStan;
+
+            if (aimZone < aimZoneMin)
+                aimZone = aimZoneMin;
+
+
 
 
 
@@ -209,7 +215,8 @@ public class Agent : MonoBehaviour
     // Checks if the agent is at its destination
     public bool AtDestination()
     {
-        return transform.position == Destination;
+
+        return Vector2.Distance(transform.position,Destination) < 0.6f;
     }
 
     // Checks if the agent is looking at its targetdirection
@@ -218,7 +225,7 @@ public class Agent : MonoBehaviour
         var TargetDirection = (LookingDestination - transform.position).normalized;
 
         float ang = Vector3.Angle(TargetDirection, visionDirection);
-        if (ang < 0.5)
+        if (ang < 1.0f)
         {
             return true;
         }
@@ -289,7 +296,7 @@ public class Agent : MonoBehaviour
             //float offSet = Vector3.Distance(enemyDirection, shootingDirectionLimit);
             float offSet = 1.87f/2.0f;
             //offSet -= aimBonus;
-			Vector3 shootingLocation = (Vector3) UnityEngine.Random.insideUnitCircle * aimZone + TargetAgent.Enemy.Position;
+			Vector3 shootingLocation = (Vector3) UnityEngine.Random.insideUnitCircle * aimZone + TargetAgent.Enemy.Position + TargetAgent.Enemy.Direction;
 
 			weapon.setShootingDirection (shootingLocation);
             TargetAgent.AimTime = Time.time;

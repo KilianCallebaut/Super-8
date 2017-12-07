@@ -48,7 +48,8 @@ public class Weapon : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        projectileType = (GameObject) Resources.Load("Bullet");
+        if(projectileType == null)
+            projectileType = (GameObject) Resources.Load("Bullet");
     }
 
 	public void startShooting() {
@@ -288,7 +289,7 @@ public class Weapon : MonoBehaviour {
 		timeUntilFirstVolley = 2;
 		timeBetweenShots = 0.1f;
 		timeBetweenVolleys = 1.0f;
-		spread = 5;
+		spread = 0;
 		reloadDuration = 5.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;
 		projectilesPerShot = 1;
@@ -299,9 +300,9 @@ public class Weapon : MonoBehaviour {
 	public void beSniperRifle() {
 		shotsPerVolley = 1;
 		volleysUntilReload = 3;
-		timeUntilFirstVolley = 10;
+		timeUntilFirstVolley = 3;
 		timeBetweenShots = 0;
-		timeBetweenVolleys = 5;
+		timeBetweenVolleys = 3;
 		spread = 1;
 		reloadDuration = 10.0f;
 		spreadMode = SPREAD_MODE_RANDOM_NORMAL;

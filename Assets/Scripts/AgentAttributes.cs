@@ -34,16 +34,36 @@ public class AgentAttributes {
 
     public GameObject agentPrefab { get; private set; }
 
-    private float speedbuff;
+    // Bonusses & boosts
+    private float speedbuff = 1.0f;
     public void speedProduct(float s)
     {
-        if (s == 0.0f) {
-            speed = speed / speedbuff;
-            return;
-        }
+        speed = speed / speedbuff;
 
-        speedbuff = s;
-        speed = speed * speedbuff;
+        if (s == 0.0f)
+        {
+            speedbuff = 1.0f;
+        } else
+        {
+            speedbuff = s;
+            speed = speed * speedbuff;
+        }
+    }
+
+    // Gear
+    public void healthGear(float h)
+    {
+        this.maxHealth += h;
+    }
+
+    public void accuracyGear(float a)
+    {
+        this.accuracy += a;
+    }
+
+    public void heavyGear(float h)
+    {
+        this.speed -= h;
     }
 
 

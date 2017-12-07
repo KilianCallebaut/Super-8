@@ -70,9 +70,9 @@ public class AssaultRole : AgentBehaviour {
             Prioritizing();
         }
 
-        if (agent.TargetAgent != null &&
-            Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
-            && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        if (agent.TargetAgent != null
+          && agent.InFieldOfVision(agent.TargetAgent.LastPosition)
+          && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.TargetAgent = null;
 
@@ -92,7 +92,7 @@ public class AssaultRole : AgentBehaviour {
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack(flankingSide);
+                HittingTheBack();
                 break;
             case PositioningMethod.Flanking:
                 Flanking(flankingSide);

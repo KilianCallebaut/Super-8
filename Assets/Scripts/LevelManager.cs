@@ -13,6 +13,9 @@ public class LevelManager : Singleton<LevelManager> {
     [SerializeField]
     private GameObject group;
 
+    [SerializeField]
+    public List<GameObject> LongRangeSpotsMid;
+
     public List<GameObject> Tiles { get; private set; }
     public List<Vector2> StartTilesTeam1 { get; private set; }
     public List<Vector2> StartTilesTeam2 { get; private set; }
@@ -215,7 +218,7 @@ public class LevelManager : Singleton<LevelManager> {
         for (int i = 0; i < numberOfMembers ; i++) //
         {
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Heavy");
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Shadow");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
@@ -292,7 +295,6 @@ public class LevelManager : Singleton<LevelManager> {
     {
         try
         {
-            Agent a = LevelManager.Instance.Agents.Find(x => x.name == name);
             Vector3 objectPosition = p;
             Vector3 seeerPosition = seeer.transform.position;
 
@@ -301,7 +303,7 @@ public class LevelManager : Singleton<LevelManager> {
             Vector3 directionToObject = (objectPosition - seeerPosition) / distanceToObject;
 
             if (distanceToObject < seeer.Attributes.reachOfVision && Vector3.Angle(directionToObject, seeer.visionDirection) < seeer.Attributes.widthOfVision
-                && Vector3.Angle(directionToObject, seeer.visionDirection) > -seeer.Attributes.widthOfVision && !BehindObject(seeer, a.transform.position))
+                && Vector3.Angle(directionToObject, seeer.visionDirection) > -seeer.Attributes.widthOfVision && !BehindObject(seeer, p))
             {
                 return true;
             }
@@ -318,6 +320,12 @@ public class LevelManager : Singleton<LevelManager> {
     public bool BehindObject(Agent seeer, Vector3 a)
     {
         return Physics2D.Linecast(seeer.transform.position, a, LayerMask.GetMask("Walls"));
+    }
+
+    // Checks if the position is behind an object
+    public bool BehindObject(Vector3 seeer, Vector3 a)
+    {
+        return Physics2D.Linecast(seeer, a, LayerMask.GetMask("Walls"));
     }
 
     public Dictionary<Agent, Dictionary<Agent, int>> ShadowMap = new Dictionary<Agent, Dictionary<Agent, int>>();
@@ -344,7 +352,7 @@ public class LevelManager : Singleton<LevelManager> {
             if (spotted) {
                 ShadowMap.Remove(checkedAgent);
                 checkedAgent.Shadow = false;
-                Debug.Log("HERE LEVEL MANAGER");
+
             }
             return spotted;
         }

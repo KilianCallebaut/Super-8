@@ -7,12 +7,13 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
     protected Agent agent;
     protected static float closeRange = 3.0f;
-    protected static float midRange = 8.0f;
+    protected static float midRange = 5.0f;
     protected static float longRange = 15.0f;
     private float acceptingThreshold = 0.01f;
     private float extraOutOfVisionDegrees = 5.0f;
     protected enum PositioningMethod { GoToGroupObjective, StayInGroup, Chasing,
-    Flanking, HittingTheBack, Retreat, Stop}
+    Flanking, HittingTheBack, Retreat, Stop, MoveToLocationWhereTargetIsVisible,
+    MoveToLocationWhereObjectiveIsVisible, GetOverview}
     protected PositioningMethod positioning = PositioningMethod.Stop;
 
 
@@ -67,7 +68,7 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
 
         if (Vector3.Angle(directionToPlayer, Enemy.VisionDirection) < agent.Attributes.widthOfVision + extraOutOfVisionDegrees 
-            && !LevelManager.Instance.BehindObject(agent, agent.TargetAgent.LastPosition) && Vector3.Distance(transform.position, Enemy.Position) < agent.Attributes.reachOfVision)
+            && !LevelManager.Instance.BehindObject(agent, Enemy.Position) && Vector3.Distance(transform.position, Enemy.Position) < agent.Attributes.reachOfVision)
         {
             return true;
         }
@@ -134,6 +135,8 @@ public abstract class AgentBehaviour : MonoBehaviour {
         return agent.seenOtherAgents.Any(x => ((Vector3.Distance(x.Value.Position, transform.position) < longRange) && (x.Value.Team != agent.Team)));
 
     }
+
+    
 
     // --------------------------------------------------------------
     // --------------------------------------------------------------
@@ -219,6 +222,25 @@ public abstract class AgentBehaviour : MonoBehaviour {
         }
     }
 
+    public void GetOverview()
+    {
+        if (agent.InFieldOfVision(agent.AgentGroup.Objectives[0]))
+        {
+            positioning = PositioningMethod.GetOverview;
+            var opDir = -(agent.AgentGroup.Objectives[0] - transform.position).normalized;
+            var range = 0.0f;
+            var newpos = opDir * range + transform.position;
+
+            while (!LevelManager.Instance.BehindObject(newpos, agent.AgentGroup.Objectives[0]) && range < longRange)
+            {
+                range += 0.1f;
+                newpos = opDir * range + transform.position;
+            }
+            agent.Destination = newpos;
+        }
+
+    }
+
     // Dealing with enemies
 
     // Chasing placeholder
@@ -299,38 +321,61 @@ public abstract class AgentBehaviour : MonoBehaviour {
 
 
     // Go to location in the agent's back
-    public int HittingTheBack(int flankingSide)
+    public void HittingTheBack()
     {
         if (agent.TargetAgent != null )
         {
-            if (InEnemyFieldOfVision(agent.TargetAgent.Enemy) && Vector3.Distance(agent.TargetAgent.Enemy.Position, transform.position) < longRange)
-            {
-                flankingSide = Flanking(flankingSide);
-                positioning = PositioningMethod.HittingTheBack;
-                return flankingSide;
-            }
+            
 
             positioning = PositioningMethod.HittingTheBack;
+            if (Vector3.Angle(agent.TargetAgent.Enemy.Direction, (transform.position - agent.TargetAgent.LastPosition ).normalized) < 90.0f)
+            {
+                HittingTheSide();
+                return;
+            }
             Vector3 oppositeDirection = -agent.TargetAgent.Enemy.Direction;
 
             var range = midRange;
 
             // ToDo: avoid setting locations where there are walls
-            while (Physics2D.Linecast(agent.Destination, agent.TargetAgent.LastPosition, LayerMask.GetMask("Walls")) && range > 0.0f)
+            while (Physics2D.Linecast(agent.Destination, agent.TargetAgent.LastPosition, LayerMask.GetMask("Walls")) && range > closeRange)
             {
                 range -= 0.1f;
+                agent.Destination = oppositeDirection * range + agent.TargetAgent.LastPosition;
             }
             agent.Destination = oppositeDirection * range + agent.TargetAgent.LastPosition;
 
-            return 0;
+            
         }
-        return 0;
+    }
+
+    private void HittingTheSide()
+    {
+        if (agent.TargetAgent != null)
+        {
+            Vector3 sideDirection = Quaternion.Euler(0,0,90.0f)*agent.TargetAgent.Enemy.Direction;
+            if (Vector3.Distance(transform.position, Quaternion.Euler(0, 0, 90.0f) * agent.TargetAgent.Enemy.Direction + agent.TargetAgent.LastPosition) >
+                Vector3.Distance(transform.position, Quaternion.Euler(0, 0, -90.0f) * agent.TargetAgent.Enemy.Direction + agent.TargetAgent.LastPosition) )
+            {
+                sideDirection = Quaternion.Euler(0, 0, -90.0f) * agent.TargetAgent.Enemy.Direction;
+            }
+
+            var range = midRange;
+
+            // ToDo: avoid setting locations where there are walls
+            while (Physics2D.Linecast(agent.Destination, agent.TargetAgent.LastPosition, LayerMask.GetMask("Walls")) && range > closeRange)
+            {
+                range -= 0.1f;
+                agent.Destination = sideDirection * range + agent.TargetAgent.LastPosition;
+            }
+            agent.Destination = sideDirection * range + agent.TargetAgent.LastPosition;
+        }
     }
 
 
     // Retreats to position further from target
     // For now go in exact opposite direction
-    
+
     public void Retreat()
     {
         if (agent.TargetAgent != null)
@@ -343,7 +388,69 @@ public abstract class AgentBehaviour : MonoBehaviour {
             agent.Destination = oppositeDirection*retreatDistance + transform.position;
         }
     }
-    
+
+    public void MoveToLocationWhereTargetIsVisible()
+    {
+        if (agent.TargetAgent != null && !agent.InFieldOfVision(agent.TargetAgent.Enemy.Name))
+        {
+            positioning = PositioningMethod.MoveToLocationWhereTargetIsVisible;
+            var length = 0.0f;
+            while (length <midRange)
+            {
+
+                var sidestepLeft = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * agent.visionDirection * length + transform.position;
+                var sidestepRight = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * agent.visionDirection * length + transform.position;
+                var gunLocLeft = sidestepLeft + agent.transform.Find("arm_left").gameObject.transform.position + agent.transform.Find("arm_left/gun").gameObject.transform.position;
+                var gunLocRight = sidestepRight + agent.transform.Find("arm_left").gameObject.transform.position + agent.transform.Find("arm_left/gun").gameObject.transform.position;
+
+                if ( !Physics2D.Linecast(gunLocLeft, agent.TargetAgent.LastPosition, LayerMask.GetMask("Walls")))
+                {
+                    agent.Destination = sidestepLeft;
+                    break;
+                } else if (!Physics2D.Linecast(gunLocRight, agent.TargetAgent.LastPosition, LayerMask.GetMask("Walls")))
+                {
+                    agent.Destination = sidestepRight;
+                    break;
+                }
+                length += 0.3f;
+
+            }
+            Debug.Log(agent.Destination + "" + length);
+
+        }
+    }
+
+    public void MoveToLocationWhereObjectiveIsVisible()
+    {
+        if (!agent.InFieldOfVision(agent.AgentGroup.Objectives[0]))
+        {
+            positioning = PositioningMethod.MoveToLocationWhereObjectiveIsVisible;
+
+            var length = 1.0f;
+            var objective = agent.AgentGroup.Objectives[0];
+            while (true)
+            {
+                var sidestepLeft = Quaternion.Euler(0, 0, agent.Attributes.widthOfVision) * agent.visionDirection * length + transform.position;
+                var sidestepRight = Quaternion.Euler(0, 0, -agent.Attributes.widthOfVision) * agent.visionDirection * length + transform.position;
+
+                if (Random.Range(0.0f, 2.0f) > 1.0f && !Physics2D.Linecast(agent.Destination, objective, LayerMask.GetMask("Walls")))
+                {
+                    agent.Destination = sidestepLeft;
+                    break;
+                }
+                else if (Random.Range(0.0f, 2.0f) <= 1.0f && !Physics2D.Linecast(agent.Destination, objective, LayerMask.GetMask("Walls")))
+                {
+                    agent.Destination = sidestepRight;
+                    break;
+                }
+                length++;
+
+            }
+        }
+    }
+
+  
+
 
     // --------------------------------------------------------------
     // --------------------------------------------------------------

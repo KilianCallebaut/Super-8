@@ -99,8 +99,7 @@ public class ShadowRole : AgentBehaviour {
     // Prefers targets further away
     protected override void Targetting()
     {
-        if (agent.TargetAgent != null)
-        Debug.Log(InEnemyBack(agent.TargetAgent.Enemy));
+
         if (!agent.Shadow && !InAnyEnemyFieldOfVision() && !EnemiesNear())
         {
             agent.Shadow = true;
@@ -115,9 +114,9 @@ public class ShadowRole : AgentBehaviour {
 
         }
 
-        if (agent.TargetAgent != null &&
-    Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
-    && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        if (agent.TargetAgent != null
+           && agent.InFieldOfVision(agent.TargetAgent.LastPosition)
+           && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.TargetAgent = null;
 
@@ -197,7 +196,7 @@ public class ShadowRole : AgentBehaviour {
     {
 
 
-        flankingSide = ((AgentBehaviour)this).HittingTheBack(flankingSide);
+        ((AgentBehaviour)this).HittingTheBack();
 
         if (agent.TargetAgent == null)
         {

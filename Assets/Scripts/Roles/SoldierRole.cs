@@ -68,8 +68,8 @@ public class SoldierRole : AgentBehaviour {
             Prioritizing();
         }
 
-        if (agent.TargetAgent != null 
-            && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
+        if (agent.TargetAgent != null
+            && agent.InFieldOfVision(agent.TargetAgent.LastPosition)
             && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.TargetAgent = null;
@@ -90,7 +90,7 @@ public class SoldierRole : AgentBehaviour {
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack(flankingSide);
+                HittingTheBack();
                 break;
             case PositioningMethod.Flanking:
                 flankingSide = Flanking(flankingSide);
@@ -220,7 +220,7 @@ public class SoldierRole : AgentBehaviour {
     // For now go in exact opposite direction
     private bool Retreat()
     {
-        if (EnemiesNear())
+        if (EnemiesNear() || GetComponent<DamageRecipient>().damageReceived/agent.Attributes.maxHealth >= 0.75f)
             ((AgentBehaviour)this).Retreat();
 
         if (agent.TargetAgent == null)
@@ -261,7 +261,7 @@ public class SoldierRole : AgentBehaviour {
         }
 
         OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
-        if (enemy != null && Vector3.Distance(enemy.Position, transform.position) < longRange)
+        if (enemy != null && Vector3.Distance(enemy.Position, transform.position) < midRange)
         {
             Stop();
         }

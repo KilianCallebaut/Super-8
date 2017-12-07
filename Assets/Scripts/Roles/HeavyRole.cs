@@ -48,7 +48,7 @@ public class HeavyRole : AgentBehaviour
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack(flankingSide);
+                HittingTheBack();
                 break;
             case PositioningMethod.Flanking:
                 flankingSide = Flanking(flankingSide);
@@ -75,8 +75,6 @@ public class HeavyRole : AgentBehaviour
                 return;
             
 
-            
-
             if (GoToGroupObjective())
                 return;
 
@@ -97,9 +95,9 @@ public class HeavyRole : AgentBehaviour
             Prioritizing();
         }
 
-        if (agent.TargetAgent != null 
-            && Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
-            && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        if (agent.TargetAgent != null
+           && agent.InFieldOfVision(agent.TargetAgent.LastPosition)
+           && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.TargetAgent = null;
 
@@ -215,10 +213,7 @@ public class HeavyRole : AgentBehaviour
             return false;
         }
 
-        if (agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
-        {
-            Stop();
-        }
+        
 
         return positioning == PositioningMethod.Chasing;
 

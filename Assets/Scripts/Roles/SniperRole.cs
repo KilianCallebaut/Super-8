@@ -37,8 +37,7 @@ public class SniperRole : AgentBehaviour {
         {
             CheckFlanks();
 
-            if (agent.AtDestination())
-                LookAround();
+            
         }
 
         if (agent.TargetAgent != null)
@@ -58,9 +57,9 @@ public class SniperRole : AgentBehaviour {
             Prioritizing();
         }
 
-        if (agent.TargetAgent != null &&
-    Vector2.Distance(agent.TargetAgent.LastPosition, transform.position) <= closeRange
-    && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        if (agent.TargetAgent != null 
+            && agent.InFieldOfVision(agent.TargetAgent.LastPosition) 
+            && !agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
         {
             agent.TargetAgent = null;
 
@@ -79,7 +78,7 @@ public class SniperRole : AgentBehaviour {
                 GoToGroupObjective();
                 break;
             case PositioningMethod.HittingTheBack:
-                HittingTheBack(flankingSide);
+                HittingTheBack();
                 break;
             case PositioningMethod.Flanking:
                 flankingSide = Flanking(flankingSide);
@@ -93,6 +92,12 @@ public class SniperRole : AgentBehaviour {
             case PositioningMethod.Chasing:
                 Chasing();
                 break;
+            case PositioningMethod.MoveToLocationWhereTargetIsVisible:
+                MoveToLocationWhereTargetIsVisible();
+                break;
+            case PositioningMethod.GetOverview:
+                GetOverview();
+                break;
             default:
                 Stop();
                 break;
@@ -103,23 +108,18 @@ public class SniperRole : AgentBehaviour {
         if (positioning == PositioningMethod.Stop)
         {
 
+            if (Chasing())
+                return;
+
             if (Retreat())
                 return;
-
-            OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
-            if (enemy != null)
-            {
-                Stop();
-                return;
-            }
-
-           
+            
 
             if (GoToGroupObjective())
                 return;
 
-            
-
+            if (GetOverview())
+                return;
 
         }
 
@@ -185,19 +185,35 @@ public class SniperRole : AgentBehaviour {
     {
         ((AgentBehaviour)this).GoToGroupObjective();
 
-        StayInGroup();
+        if (Mathf.Abs(agent.AgentGroup.Objectives[0].y) <5.0f)
+        {
+            Vector3 dest = LevelManager.Instance.LongRangeSpotsMid[0].transform.position;
+            foreach (GameObject g in LevelManager.Instance.LongRangeSpotsMid)
+            {
+                if (Vector2.Distance(g.transform.position, transform.position) < Vector2.Distance(dest, transform.position))
+                    dest = g.transform.position;
+            }
+            agent.Destination = dest;
+        }
+
+        
         if (agent.TargetAgent != null)
         {
             Stop();
-
         }
 
         if (EnemiesAlmostNear())
             Stop();
 
+        if (agent.InFieldOfVision(agent.AgentGroup.Objectives[0]) && Vector2.Distance(transform.position, agent.AgentGroup.Objectives[0]) < longRange)
+        {
+            Stop();
+        }
+
         return positioning == PositioningMethod.GoToGroupObjective;
 
     }
+
 
     private bool Retreat()
     {
@@ -206,10 +222,54 @@ public class SniperRole : AgentBehaviour {
         if (agent.TargetAgent == null)
             Stop();
 
-        if (!EnemiesAlmostNear())
+        if (!EnemiesNear())
             Stop();
 
         return positioning == PositioningMethod.Retreat;
     }
 
+ 
+
+    
+    private bool GetOverview()
+    {
+
+        if (agent.AtDestination() && Vector2.Distance(transform.position, agent.AgentGroup.Objectives[0]) < longRange)
+        {
+            ((AgentBehaviour)this).GetOverview();
+        }
+
+        if (agent.AtDestination())
+        {
+            agent.direction = (agent.AgentGroup.Objectives[0] - transform.position).normalized;
+
+        }
+        if (agent.TargetAgent != null)
+            Stop();
+
+        return positioning == PositioningMethod.GetOverview;
+    }
+
+    private bool Chasing()
+    {
+        ((AgentBehaviour)this).Chasing();
+
+        if (agent.TargetAgent == null)
+        {
+            Stop();
+            return false;
+        }
+
+
+        if (agent.seenOtherAgents.ContainsKey(agent.TargetAgent.Enemy.Name))
+        {
+            Stop();
+            return false;
+        }
+
+
+
+        return positioning == PositioningMethod.Chasing;
+
+    }
 }

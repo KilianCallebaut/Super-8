@@ -27,8 +27,10 @@ public abstract class AbstractProjectile : MonoBehaviour {
 	protected abstract void bulletUpdate (float dTime);
 
 	void OnTriggerEnter2D(Collider2D c) {
+
         if (c.tag == "Obstacles")
             Destroy(this.gameObject);
+
         Agent collider = c.gameObject.GetComponent<Agent>();
 		if ((collider != null && collider.Team == ignoreCollisionsWith.Team) 
             || c.gameObject.GetComponent<AbstractProjectileCollidable>() == null)
