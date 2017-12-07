@@ -261,7 +261,7 @@ public class SoldierRole : AgentBehaviour {
         }
 
         OtherAgent enemy = agent.seenOtherAgents.Where(x => x.Value.Team != agent.Team).FirstOrDefault().Value;
-        if (enemy != null && Vector3.Distance(enemy.Position, transform.position) < midRange)
+        if (enemy != null && Vector3.Distance(enemy.Position, transform.position) < 10.0f)
         {
             Stop();
         }

@@ -218,7 +218,7 @@ public class LevelManager : Singleton<LevelManager> {
         for (int i = 0; i < numberOfMembers ; i++) //
         {
 
-            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Sniper");
+            Agent newAgent = ObjectManager.spawnAgent(new AgentAttributes(agent), "Soldier");
             newAgent.name = "Agent_" + i + "_Team2";
             newAgent.transform.position = StartTilesTeam2[i];
             newAgent.Team = 2;
